@@ -1,0 +1,36 @@
+# Normalize line endings on commit so the tree stays LF in the blob store.
+# docs/LLM_ACCESS.md is the only CRLF file in the tree today; 27 are LF.
+* text=auto eol=lf
+
+# Explicit: these are text, always diffs as text.
+*.md   text
+*.txt  text
+*.py   text
+*.json text
+*.jsonl text
+*.yml  text
+*.yaml text
+*.toml text
+*.cfg  text
+*.ini  text
+*.sql  text
+*.sh   text eol=lf
+*.html text diff=html
+*.css  text
+*.js   text
+
+# Never text-normalize: SQLite DBs, images, video, fixtures, secrets.
+*.db       binary
+*.sqlite   binary
+*.sqlite3  binary
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.mp4      binary
+*.mov      binary
+*.webm     binary
+*.pdf      binary
+
+# Let git detect fixtures as text for diffs but force them if binary.
+fixtures/** text=auto

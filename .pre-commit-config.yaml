@@ -1,0 +1,10 @@
+﻿repos:
+  - repo: local
+    hooks:
+      - id: deadmon-docs-check
+        name: docs-check (ADR links, glossary uniqueness, no line-number citations)
+        entry: python tools/check_docs.py
+        language: system
+        pass_filenames: false
+        files: '(^|/)(AGENTS\.md|GLOSSARY\.md|\.gitignore)$|^docs/adr/'
+

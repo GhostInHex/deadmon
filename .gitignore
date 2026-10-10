@@ -1,0 +1,227 @@
+# deadmon
+# Docs-only today; the Python build (Slice 1+) lands on Oct 10-12.
+# Rules are written so the hackathon evidence artifacts stay COMMITTED.
+
+# ---- Secrets (docs/LLM_ACCESS.md (key + budget section), docs/SPONSORS.md (Entire section)) -------------
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+secrets.yaml
+secrets.yml
+
+# ---- Python --------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ---- Virtualenvs ---------------------------------------------------------
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+__pypackages__/
+
+# ---- Tooling caches ------------------------------------------------------
+.pytest_cache/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.dmypy.json
+.hypothesis/
+.pyre/
+.pytype/
+
+# ---- Coverage ------------------------------------------------------------
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.cover
+
+# ---- Notebooks / REPL scratch -------------------------------------------
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+.python_history
+
+# ---- SQLite state (docs/PRD.md (State lives in SQLite), PLAN.md (Slice 1)) --------------------------
+# The DB is mutable runtime state; DDL stays in *.sql / migrations/.
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+*.db-journal
+deadmon*.db
+data/deadmon*.db
+
+# ---- HTTP / page cache ("cache aggressively", docs/PRD.md (Scraping posture)) ---------------
+cache/
+.cache/
+http_cache/
+requests_cache.sqlite
+
+# ---- Logs (heal log is a DB view, docs/PRD.md (Story 19, heal log)-60) ------------------------
+logs/
+*.log
+nohup.out
+*.stackdump
+core
+
+# ---- Runtime output: runs, snapshots, backfill scratch -----------------
+# fixtures/ is NOT here - see the KEEP block at the bottom.
+snapshots/
+runs/
+out/
+output/
+artifacts/
+tmp/
+temp/
+work/
+.runs/
+
+# ---- Heal loop working files -------------------------------------------
+# The diff lives on the heal event (ADR-0014:18), not in the repo.
+*.diff
+*.patch
+heals/*.patch
+proposals/*.patch
+*.bak
+*.orig
+*.rej
+
+# ---- Scheduler locks / pids -------------------------------------------
+*.pid
+heal.lock
+scheduler.lock
+.scout.lock
+
+# ---- OS junk ------------------------------------------------------------
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+DumpStack.log.tmp
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon
+.DocumentRevisions-V100
+.fseventsd
+.TemporaryItems
+.VolumeIcon.icns
+
+# ---- Editors / IDEs ----------------------------------------------------
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.iml
+*.iws
+.history/
+*.code-workspace
+*.swp
+*.swo
+*~
+
+# ---- neatlogs / Entire local state ------------------------------------
+# Entire stores checkpoints on the entire/checkpoints/v1 branch (refs,
+# not working-tree files), so no rule is needed for it.
+.neatlogs/
+.entire/
+.neatlogs-local/
+
+# ---- Browser automation (NOT currently in the stack - docs/PRD.md (Scraping posture) says
+# HTTP-first; kept in case Slice 4 needs a real page render) ------------
+.playwright/
+ms-playwright/
+playwright-report/
+test-results/
+blob-report/
+puppeteer/.cache/
+chrome-profile*/
+chromium-user-data*/
+.selenium/
+
+# ---- Node (docs/PRD.md (Dashboard) forbids a SPA framework - contingency only) ------
+# Remove this whole block if JS never lands.
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp.*
+
+# ---- Raw screen recordings (only the cut matters) ----------------------
+*.mov
+*.mkv
+*.flv
+*.avi
+*.wmv
+*.m4v
+*.screenflow/
+.obs/
+recordings/
+"Screen Recording"*
+
+# =========================================================================
+# KEEP - the hackathon evidence set. Negations win over anything above.
+# (PLAN.md (evidence checklist)-64 evidence checklist, "judges explicitly ask for these")
+# =========================================================================
+
+# .scratch/ is the issue tracker of record (docs/agents/issue-tracker.md)
+# with Status lines, comments and answers appended over time - unversioned
+# it is worthless. A broad scratch* rule in a template would eat it.
+!.scratch/
+
+# Fixtures: the versioned, never-overwritten known-good corpus
+# (ADR-0015:5,11; docs/PRD.md (Test seams),125). This is the test corpus and the
+# Slice 4 validation target - it must survive.
+!fixtures/
+!fixtures/**
+
+# Adapter allowlist declarations are source code (ADR-0018:13)
+!scraper/allowlists/
+!scraper/allowlists/**
+
+# Evidence: trace screenshots, entire-graph, the demo video
+# (PLAN.md (evidence checklist)-64, docs/SPONSORS.md (Entire)). Never a blanket *.png / *.mp4 rule -
+# these are 25% of the marks.
+!docs/evidence/
+!docs/evidence/**
+
+# cfo.ai business plan - path is fixed at docs/docs/SPONSORS.md (cfo.ai section)
+!docs/business-plan.md
+
+# Lockfiles and requirements are code
+!requirements*.txt
+!pyproject.toml
