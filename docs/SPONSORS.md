@@ -109,12 +109,52 @@ submission - pricing tiers, costs, revenue logic, runway. Ours:
 - **Community** - dev clubs & college communities: shared profile + weekly
   digest (~₹399–499/mo)
 - **Pro** - power users (later)
-- **Costs:** free-tier models → near-zero inference; free-tier hosting;
-  Telegram free. **The story is margin, not scale.**
+- **Costs:** free-tier models → near-zero inference; hosting is one small
+  box-scale bill (demo window rides the $25 AWS allowance); Telegram free.
+  **The story is margin, not scale.**
 
 **Setup:** sign up at https://cfo.ai, ask Ari to model the plan above
 (pricing, costs, revenue, runway), export/save it into the repo
 (`docs/business-plan.md`), and cover it in the demo video (2:00–2:45 mark).
+
+## AWS allowance - demo hosting (partner, not a mandatory tool)
+
+**What it is:** **not spend credits.** A $25 infrastructure allowance for the
+first 350 checked-in teams, delivered through a restricted AWS login (IAM
+user, console plus CLI/SDK keys). No credit card, no new AWS account. The
+private access link expires in 24 hours and opens the same allocation each
+time; only the team leader receives it.
+
+**Rules that bind the project:**
+
+- **Region us-east-1 only** - all other regions unavailable. The
+  pre-provisioned Hackathon_VPC is the only place instances can run; you
+  cannot create your own VPC.
+- **Approved services: EC2, Lambda, IAM roles, and load balancers only.**
+  No Lightsail, no RDS, no ECS/EKS - which independently confirms the PRD's
+  SQLite-on-one-box state model (PRD, "State lives in SQLite").
+- **One EC2 instance per IAM user, shared by the team.** Terminate the
+  existing instance before launching a replacement or AWS/Aivar automation
+  terminates the new one.
+- **EBS volumes must be 50 GB or less.**
+- **Stop resources when finished.** The access page does not meter spending,
+  so the console is the only budget view - check it.
+- **Keep CLI/SDK keys out of Git, screenshots, and public chats.**
+
+**Role in deadmon:** demo-period home for the Scout + dashboard. One box,
+one process, SQLite on EBS, systemd service, repo cloned. A t3.micro or
+t3.nano fits: roughly $7.5/mo compute plus under $1/mo storage, so $25 buys
+about two months always-on - enough for the recorded demo and the
+submission's demo link. After the event the allowance ends and the instance
+is terminated; the long-term home is the operator's own machine or a small
+VPS, which the PRD already permits ("deployed or runnable with one
+command").
+
+**Setup:** claim via the leader's private access link - "Reveal AWS access"
+- sign in as the IAM user shown (console), or expand "CLI / SDK
+credentials" on the access page for the access key ID and secret. For CLI:
+`aws configure` with region `us-east-1` and the keys kept in `~/.aws` or the
+gitignored `.env` - never in the tree.
 
 ## Sponsor & partner sites
 
@@ -124,7 +164,7 @@ submission - pricing tiers, costs, revenue logic, runway. Ours:
 | neatHack page | https://neatlogs.com/hackathon | Challenge statement, marking scheme, deadlines |
 | Entire (sponsor) | https://entire.io | Session checkpoints; CLI install |
 | cfo.ai (sponsor) | https://cfo.ai | Ari, the AI CFO; business plan |
-| AWS (partner) | - | 5,000 credits for the first 350 checked-in teams - do web check-in early |
+| AWS (partner) | - | $25 infrastructure allowance for the first 350 checked-in teams - do web check-in early; it is a restricted IAM login, not spend credits - claim within 24h |
 | Crustdata (partner) | - | 5,000 credits per participant |
 | Dodo Payments (partner) | - | Prize credits for top 3 only: $5k (1st) / $3k (2nd) / $1k (3rd) |
 

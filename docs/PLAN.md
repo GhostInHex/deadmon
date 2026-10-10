@@ -6,7 +6,7 @@ Companion to `deadmon-prd.md`. Solo build, free tiers only. All repo commits mus
 
 ## Pre-event (now → Sat Oct 10, 9:00 AM IST) - no project code yet
 
-- [ ] Register on Luma (team name), join Discord, complete web check-in early (first 350 checked-in teams get 5,000 AWS credits)
+- [ ] Register on Luma (team name), join Discord, complete web check-in early (first 350 checked-in teams get the **$25 AWS allowance**, not money credits - a restricted IAM login, us-east-1, EC2/Lambda/IAM/LBs only; see docs/SPONSORS.md (AWS allowance). Claim it while the link lasts)
 - [ ] Create accounts: neatlogs (confirm free-tier trace retention), Entire (entire.io), cfo.ai
 - [ ] Create Telegram bot via BotFather, save token (allowed pre-work, not project code)
 - [ ] Get free API keys: Gemini AI Studio (or chosen free model), Tavily or SerpApi free tier (fallback enrichment only)
