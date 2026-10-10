@@ -69,6 +69,18 @@ appears — filename, provenance row, test name — so no test result is ever mi
 recorded evidence. When it lands, its provenance row must say `test double, not a
 recording` in the Source column, because every row above it holds a live URL.
 
+### The `unverified` double (ticket 04)
+
+| File | Source | Recorded | Purpose |
+|---|---|---|---|
+| `hackathons-unverified.json` | **test double, not a recording** — built 2026-10-11 from `hackathons-open.json` (unmodified): 3 real records with `end_date`, `regnRequirements.end_regn_dt` and `start_regn_dt` set to `"TBA"`; a `_double` banner inside the file names its provenance | 2026-10-11 | 3 candidates whose registration close is unusable — the `unverified` verdict |
+
+Every other row in this README holds a live URL. This one does not, and must never be
+read as recorded evidence: **`unverified` is not recordable from this platform** (above),
+so the third verdict is exercised by this declared double and nothing else. The double
+carries `"kind": "test double, not a recording"` in its own contents so the file labels
+itself wherever it is opened.
+
 **Use Unstop first.** It is a public JSON endpoint — no browser, no hydration wait, no
 selector fragility. Devfolio is not (see below), and shipping Slice 1 on the platform
 that works beats shipping it on the one that fights you.
