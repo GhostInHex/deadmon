@@ -11,6 +11,64 @@ a page adds a new version beside the old one.
 |---|---|---|---|
 | `hackathons-open.json` | `GET unstop.com/api/public/opportunity/search-result?opportunity=hackathons&oppstatus=open&per_page=25` | 2026-10-11 | 25 live hackathons, 295 KB |
 
+### The other two verdicts, recorded live
+
+Verification has to prove `closed` and `unverified` from recorded pages, not invented
+ones (ticket [02](../../.scratch/slice-1/issues/02-record-unstop-fixture-versions.md)).
+Two versions were recorded beside the healthy one on 2026-10-11. Neither was edited,
+re-keyed or pretty-printed, and `hackathons-open.json` is untouched — the known-good
+baseline a proposal must still reproduce.
+
+| File | Source | Recorded | Purpose |
+|---|---|---|---|
+| `hackathons-closed.json` | `GET unstop.com/api/public/opportunity/search-result?opportunity=hackathons&oppstatus=closed&per_page=25` | 2026-10-11 | 24 hackathons, 267 KB — `closed` via **registration already passed** |
+| `hackathons-past.json` | `GET unstop.com/api/public/opportunity/search-result?opportunity=hackathons&oppstatus=past&per_page=25` | 2026-10-11 | 25 hackathons, 207 KB — `closed` via **the event being over** |
+
+**What is now provable from recorded fixtures.** `closed` is covered, both ways
+verification defines it. `hackathons-closed.json` closes every candidate because
+registration already passed — `end_regn_dt` runs 2026-09-17 → 2026-10-10, every one in
+the past, while `end_date` runs 2026-10-11 → 2026-11-14. `hackathons-past.json` closes
+every candidate because the event is over — `end_date` runs 2021-11-12 → 2025-03-27,
+every one past. With the healthy fixture, `live` and `closed` are both exercisable from
+recorded pages. **`unverified` is not, and cannot be.** See below.
+
+Five requests were made in total, ~2 seconds apart, with a normal browser user-agent;
+only the two responses in the table were kept. What a reader would otherwise get wrong
+about them:
+
+- **`oppstatus=closed` does not return `status: "CLOSED"`.** All 24 records still say
+  `status: "LIVE"` and `regn_open: 1`. The only thing separating them from the healthy
+  page is that `end_regn_dt` has already passed. An adapter that switches on `status` or
+  `regn_open` calls all 24 `live` and is wrong 24 times over.
+- **`oppstatus=past` is not a distinct filter.** Any value the route does not recognise
+  falls back to the unfiltered list: `past`, `all` and `draft` each returned the same
+  first page (269 pages, 6720 total) and differed only in the `oppstatus` string echoed
+  inside the pagination URLs. What makes the file a `closed` fixture is its content, not
+  the parameter — although in it 8 of 25 records *do* carry `regn_open: 0`.
+- **That fallback list is not date-sorted.** Page 1 interleaves 2021 with 2026, so a
+  page is not a date range and paging is not a time filter.
+- **`hackathons-closed.json` holds 24 records** although `per_page=25` asked for 25.
+  That is what the endpoint served, not a truncated download.
+- **The three pages share zero titles** between `open` and the other two, so the
+  fallback is not a superset of the open page.
+- Some records in `hackathons-past.json` have `end_regn_dt` **after** `end_date`. Both
+  parse, both are past, the verdict is still `closed`.
+
+**`unverified` could not be recorded live, and no parameter asks for it.** The verdict
+means the date is unusable — absent, `"TBA"`, or unparseable — and Unstop does not serve
+that shape for `opportunity=hackathons`. Across 100 records sampled from every status the
+route accepts (`open`, `closed`, and two pages of the unfiltered fallback), every record
+carried an ISO-8601 `end_date` and a `regnRequirements.end_regn_dt` with a `+05:30`
+offset: zero absent, zero unparseable, and the route never returned a placeholder or an
+error body where a record should be. This is a limitation of the platform, not of the
+recording pass — do not hand-edit a fixture to fake it, and do not treat the healthy
+fixture as an approximate one. **Cover `unverified` with a declared test double
+instead** — `fixtures/unstop/hackathons-unverified.json`, built from the recorded payload
+with `end_date` and `end_regn_dt` set to `"TBA"`. Name it as a double wherever it
+appears — filename, provenance row, test name — so no test result is ever mistaken for
+recorded evidence. When it lands, its provenance row must say `test double, not a
+recording` in the Source column, because every row above it holds a live URL.
+
 **Use Unstop first.** It is a public JSON endpoint — no browser, no hydration wait, no
 selector fragility. Devfolio is not (see below), and shipping Slice 1 on the platform
 that works beats shipping it on the one that fights you.
