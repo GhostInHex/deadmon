@@ -7,8 +7,8 @@ row work.
 
 **Blocked by:** 01 (the candidate record shape).
 
-**Status:** claimed
-**Triage:** ready-for-agent
+**Status:** resolved
+**Triage:** done
 
 - [x] All 25 candidates in the known-good fixture are extracted
 - [x] Registration close is read from the registration-requirements block, never from the top-level event date, which carries a different meaning
@@ -61,5 +61,5 @@ adapter yields, so ticket 02's traps cannot become a broken test.
    future close extracts exactly as its healthy twin.
 
 Validation: `py -m pytest -q` → **24 passed** (8 contract tests from ticket 01 +
-16 here). `py tools/check_docs.py` → ok (45 terms). Commit: `__SHA_03__`.
+16 here). `py tools/check_docs.py` → ok (45 terms). Commit: `bbb7fb4`.
 
