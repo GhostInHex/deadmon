@@ -12,6 +12,7 @@ row work.
 
 - [ ] All 25 candidates in the known-good fixture are extracted
 - [ ] Registration close is read from the registration-requirements block, never from the top-level event date, which carries a different meaning
+- [ ] The adapter never decides liveness from the platform's status or registration-open flags — recorded closed pages still carry both set to live; only the registration-close date distinguishes them
 - [ ] The source URL is the absolute form the fixture provides, not the relative path
 - [ ] Dates carry a `+05:30` offset and are normalised to UTC at extraction
 - [ ] Mode is read from the platform's region field and is one of online, hybrid, offline

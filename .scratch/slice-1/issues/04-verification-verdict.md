@@ -16,6 +16,7 @@ corpus afterwards rather than blocking this ticket.
 - [ ] A verdict is live only when the candidate's source responds, its registration close parses to a real future date in a known timezone, and a mode is present
 - [ ] A verdict is unverified when the source is unreachable, blocked or rate-limited, or when the date is unusable
 - [ ] A verdict is closed when registration has passed or the event was cancelled
+- [ ] The stage never decides a verdict from the platform's status or registration-open flags — both still read "live" on records whose registration has closed; only the registration-close date decides
 - [ ] Verification never infers, defaults, or carries forward a deadline it did not read
 - [ ] An unverified verdict is re-verified on the next crawl, never cached as fact, and never promoted without a fresh check
 - [ ] A closed verdict is terminal but keeps its row, leaves the feed, and cancels any unsent alert
