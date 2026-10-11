@@ -267,7 +267,7 @@
   margin: 0;
 }
 
-.stat__figure--signal { color: var(--color-signal); }
+.stat__figure--signal { color: var(--color-signal-deep); }
 
 .stat__label {
   font-family: var(--webfont-mono);
@@ -517,7 +517,7 @@
   margin: 0;
 }
 
-.tier__amount--signal { color: var(--color-signal); }
+.tier__amount--signal { color: var(--color-signal-deep); }
 
 .tier__unit {
   font-family: var(--webfont-mono);
@@ -639,6 +639,7 @@
    -------------------------------------------------------------------------- */
 
 .band--warm .mono-label,
+.band--warm .stat__label,
 .tier--feature .mono-label,
 .tier--feature .tier__unit {
   color: var(--color-ink-muted);
