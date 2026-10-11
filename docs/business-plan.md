@@ -2,11 +2,19 @@
 
 Prepared with cfo.ai Ari · 12 October 2026 (IST)
 
-**Status:** proposed plan, not observed financial performance. All amounts are INR. Forecast: October 2026–September 2028; September 2026 is an estimated opening point. Public repository documentation supplies product context, not proof of implementation, customers or cash. No credentials or private repository access are included.
+Updated 12 October 2026, 00:54 IST · repository reassessment at commit `8374bae`
+
+**Status:** proposed plan, not observed financial performance. All amounts are INR. Forecast: October 2026–September 2028; September 2026 is an estimated opening point. The public repository now contains implementation code as well as documentation. Static review establishes a fixture-backed prototype, not a working live monitoring service, paying customers or a verified cash balance. Financial assumptions and forecast amounts are unchanged from the original plan. No credentials or private repository access are included.
 
 ## 1. The business
 
-Deadmon is a scheduled hackathon-discovery agent: it crawls listings, verifies that deadlines and eligibility remain valid, filters for a profile, and sends dashboard/Telegram alerts. Its proposed differentiator is a traced, sandbox-validated scraper repair loop. The public README says implementation code has been removed and the repository currently contains documentation and specs.
+Deadmon’s intended product is a scheduled hackathon-discovery agent: discover listings, verify deadlines and eligibility, filter for a profile, and deliver dashboard/Telegram alerts. Its proposed differentiator is a traced, sandbox-validated scraper repair loop.
+
+**What exists now:** the earlier documentation-only description is outdated. The reviewed repository contains a Python Unstop adapter, candidate and verdict contracts, verification rules, SQLite storage, crawl tracing, a Python dashboard and read-only JSON feed. It also contains Next.js landing, dashboard and pricing pages, deployment configuration, and the business plan. The intended architecture is Python/SQLite on EC2 plus Next.js on Vercel, with the Python HTML dashboard retained as a demo fallback.
+
+**What this proves:** an implemented, fixture-backed prototype. The current runner reads recorded JSON payloads, processes them once and serves the dashboard; it does not establish fresh daily crawling. Its verification call uses a default that assumes sources respond rather than performing a live source-response check. A future deadline in a recorded fixture is therefore not proof that the primary page is still live. Scheduled refresh, subscriber-specific eligibility, Telegram delivery, end-to-end self-healing and paid onboarding remain unestablished by this review. The Unstop adapter is the only implemented platform adapter identified; Devfolio fixtures are not a working Devfolio adapter.
+
+Code inspection is not a production deployment check. The missing frontend API module noted below also means the reviewed checkout needs repair and a clean build before frontend readiness can be claimed.
 
 The initial paying buyer is a college developer club/community admin who hand-curates deadline digests. Students use Free; clubs pay for the saved weekly curation effort. This buyer and proposed revenue logic come from the PRD, not customer interviews.
 
@@ -14,17 +22,21 @@ The initial paying buyer is a college developer club/community admin who hand-cu
 
 | Tier | Proposed monthly price | Offer | Status |
 |---|---:|---|---|
-| Free | ₹0 | One alert profile and dashboard | Specified in PRD |
-| Community | ₹449 | Shared club profile and weekly digest | Within PRD ₹399–499 range; unvalidated |
-| Pro | ₹99 | More profiles and exports | Ari proposal; later product experiment |
+| Free | ₹0 | Intended one individual alert profile and dashboard | PRD offer; current implementation is a single-subscriber fixture demo |
+| Community | ₹449 | Club-admin subscription: shared club profile and weekly digest | Within PRD ₹399–499 range; proposed, not operational or demand-validated |
+| Pro | ₹99 | Individual subscription: additional personal profiles and exports, excluding the club package | Recommended entitlement distinction; later product experiment |
 
-Do not sell "never misses a deadline" as a service guarantee. Explain verification freshness, unverified listings and failed-platform coverage clearly.
+**Fix the packaging:** the reviewed pricing page says ₹99 Pro includes “Everything in Community,” while Community costs ₹449. At these proposed prices, distinguish an individual Pro subscription from the club-admin Community subscription. Pro should not promise the complete club package. This is a recommended correction to the offer, not an implemented product change or a change to the forecast prices.
 
-Paid launch is assumed October 2026 for Community and January 2027 for Pro. These dates depend on shipping the needed profile, authentication and billing capabilities; the hackathon scope explicitly excludes multi-user accounts, a public API and broader alert channels. Keep those ambitions out of the hackathon build. A free user and Pro account are distinct modeled populations; there is no verified conversion funnel.
+Do not sell "never misses a deadline" as a service guarantee. Explain verification freshness, unverified listings and failed-platform coverage clearly. For the current demo, label fixture-derived verdicts as such rather than implying the primary source was just checked live.
+
+The **unchanged financial model** assumes paid launch in October 2026 for Community and January 2027 for Pro. Those are scenario inputs, not release commitments or evidence that the product is ready to collect revenue. Actual paid launch should depend on capability gates: scheduled live collection, genuine source verification, reliable delivery, subscriber isolation, the promised digest/profile features, and billing. If these gates delay launch, revise the launch dates and recalculate revenue and cash; the published figures below would no longer describe that delayed case.
+
+The PRD places multi-user accounts, a public API and broader alert channels outside the hackathon MVP. Keep scope controlled rather than claiming the full paid offering has shipped. A Free user and Pro account are distinct modeled populations; there is no verified conversion funnel.
 
 ## 3. Editable planning inputs
 
-All inputs below are estimates, except the source's Community price range and feature descriptions. They are visible in the saved cfo.ai plan.
+All inputs below are estimates, except the source’s Community price range and feature descriptions. They are visible in the saved cfo.ai plan.
 
 | Input | Free | Community | Pro |
 |---|---:|---:|---:|
@@ -45,6 +57,8 @@ Fractional accounts are expected values, not literal users or signed customers. 
 - Debt, sponsorship, prizes and fundraising: ₹0. No sponsor credits treated as guaranteed funding.
 
 Founder living expenses are excluded until pay is entered. An unpaid-founder surplus is not fully loaded economic profit. Model free-tier limits and human maintenance effort before scaling; "free inference" does not mean a free business.
+
+**Cost evidence correction:** the reviewed normal fixture-crawl path makes no model inference call. That supports a narrow statement about that code path, not a measured zero total crawl cost. The pricing page’s “measured” economics and “inference dominates cost” language are not established by the reviewed evidence: processor fees, delivery reserves and forecast results remain estimates. The EC2/Vercel split introduces two deployments and an API boundary even if temporary free-tier allowances cover the bills. Retain the hosting and crawl/AI reserves until actual production requests, quotas, repairs and human maintenance effort have been measured. No financial input is reduced to zero by this update.
 
 ## 4. How the forecast works
 
@@ -92,6 +106,18 @@ Recommendation: focus Community first. Get 3 paid club pilots before investing i
 
 ## 7. Launch validation and risk controls
 
+### Implementation priorities from the repository reassessment
+
+1. **Restore the missing frontend API module and prove a clean build.** `apps/web/src/app/dashboard/page.tsx` imports `@/lib/api`, but no corresponding module was present in the reviewed checkout. Direct checks for `src/lib/api.ts`, `src/lib/api.tsx` and `src/lib/api/index.ts` returned not found. A screenshot does not establish that a clean checkout builds.
+2. **Replace fixture-only input with live collection and scheduled refresh.** Retain fixtures as regression tests and a labeled demo fallback, not as current-market data. Handle platform limits, response failures, freshness and retries explicitly.
+3. **Make the liveness check real.** Pass actual source-response evidence into verification; do not let a default “responds” value create a live-verification claim. Show when each source was fetched and what could not be verified.
+4. **Demonstrate the differentiator and delivery.** Establish repair detection → patch proposal → sandbox validation → commit → backfill, and Telegram delivery, with trace/commit evidence and failure paths. Architecture decisions alone do not establish these workflows work.
+5. **Separate demo deployment from production.** `deploy/deadmon.service` invokes the runner with `--reset`; remove that history reset from a durable production service. The feed/trace endpoints are unauthenticated: choose a deliberate access and network-exposure policy before deployment for real users. Do not assume “read-only” means all data is safe to expose.
+6. **Correct customer-facing claims.** Separate individual Pro from Community entitlements; distinguish proposed unit economics from measured costs; describe only implemented platform coverage and alert/repair capabilities as available.
+7. **Publish one reproducible test result.** The reviewed README reports 109 offline tests, while ADR-0020 reports 111. Neither count was independently executed in this review. Run the suite on a clean checkout and align the docs with the result.
+
+### Commercial validation and financial controls
+
 - Interview 10 club admins; test ₹399, ₹449 and ₹499 offers, without assuming any has been validated.
 - Target 3 paid pilots and measure digest usage, weekly active users, churn, manual curation time saved and willingness to renew.
 - Instrument requests, inference usage, retries, repair success and human maintenance time; cap the repair budget.
@@ -103,42 +129,45 @@ Recommendation: focus Community first. Get 3 paid club pilots before investing i
 
 ## 8. Hackathon-ready demo wording
 
-> "Ari modeled Free, Community at ₹449 and a later ₹99 Pro tier. Shared crawls keep infrastructure costs modest, but unpaid founder time is the hidden subsidy. Under our draft acquisition assumptions, the base cash flow turns positive in December; slower sales plus ₹10,000 founder pay exhaust ₹25,000 of starting cash in November. These are editable hypotheses—we'll validate them with three paid club pilots."
+> “Deadmon now has a fixture-backed Python discovery pipeline, storage, tracing and dashboard code, with a Next.js frontend in progress. Live refresh, Telegram delivery and the complete repair loop still need to be demonstrated. Ari modeled Community at ₹449 and a later ₹99 individual Pro tier. Under our draft acquisition assumptions, base cash flow turns positive in December; slower sales plus ₹10,000 founder pay exhaust ₹25,000 of starting cash in November. These are hypotheses, not traction—we’ll validate them with three paid club pilots.”
 
-## 9. What was checked
+## 9. What was checked — and what remains unverified
 
-All 25 opening/forecast month values for revenue, operating cash surplus and closing cash in each of the three scenarios were compared with a separate reconstruction from the assumptions. They agree within rounding. The first Pro month and pre-launch zeroes were checked; downside founder payroll is ₹10,000/month. January–March 2027 revenue is ₹27,032.59 and quarter-end cash is ₹31,741.79, matching the monthly calculations. Opening cash remains ₹25,000 across scenarios.
+**Original model checks:** all 25 opening/forecast month values for revenue, operating cash surplus and closing cash in each of the three scenarios were compared with a separate reconstruction from the assumptions. They agree within rounding. The first Pro month and pre-launch zeroes were checked; downside founder payroll is ₹10,000/month. January–March 2027 revenue is ₹27,032.59 and quarter-end cash is ₹31,741.79, matching the monthly calculations. Opening cash remains ₹25,000 across scenarios.
 
-The cfo.ai cash simulator renders in light and dark themes. Its extra-spending control is a local preview until Apply is selected; buttons and clicks were not exercised during rendering checks. Market demand, live implementation, actual costs, real customers and bank balances remain unverified.
+The cfo.ai cash simulator renders in light and dark themes. Its extra-spending control is a local preview until Apply is selected; buttons and clicks were not exercised during rendering checks. These were checks of the original saved model and simulator; this file update did not rerun them or change their financial inputs.
+
+**Repository reassessment:** source-tree and static code inspection at commit `8374bae533758270becfa4926151f879c3f30ba3`, covering the Python runner, Unstop adapter, verification, storage, tracing, dashboard, Next.js pages, deployment configuration and business-plan documentation. Implementation code is present. No Python test suite, Next.js production build, live crawl, Telegram delivery, repair execution or public deployment was run during this review.
+
+The repository’s business-plan note reports a separate reconstruction of the 18 published financial outcomes, reproducing them within rounding. That is a reported arithmetic check, not independent proof of customer demand. It was not rerun as part of this file update.
+
+Market demand, actual operating costs, real customers, bank balances and production service reliability remain unverified. The financial forecast still relies on the original estimates.
 
 ## 10. Source documents
 
-- [Public repository / README](https://github.com/GhostInHex/deadmon): product positioning, documentation-only status and hackathon deliverable.
-- [PRD](https://github.com/GhostInHex/deadmon/blob/main/docs/PRD.md): feature scope, Community price range, buyer and revenue logic, constraints.
-- [Build plan](https://github.com/GhostInHex/deadmon/blob/main/docs/PLAN.md): phased implementation, demo requirements and later Community tier.
+The repository reassessment is pinned to commit `8374bae533758270becfa4926151f879c3f30ba3`; later changes may resolve or alter these findings.
 
-Sources accessed 11 October 2026 UTC / 12 October 2026 IST. Prices and forecast estimates are proposals by Ari, not external market evidence. This file is a static snapshot of the saved plan; later edits in cfo.ai will not update it automatically.
+- [README](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/README.md): updated implementation status and reported test count.
+- [PRD](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/docs/PRD.md): feature scope, Community price range, buyer and revenue logic.
+- [Build plan](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/docs/PLAN.md): phased delivery, demo requirements and later Community tier.
+- [Crawl runner](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/src/deadmon/crawl.py): fixture processing, feed serving and verification call.
+- [Unstop adapter](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/src/deadmon/adapters/unstop.py): recorded-payload input, not live transport.
+- [Verification](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/src/deadmon/verification.py): verdict logic and default source-response behavior.
+- [Next.js dashboard](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/apps/web/src/app/dashboard/page.tsx): API-client import and intended feed integration.
+- [Pricing page](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/apps/web/src/app/pricing/page.tsx): published draft tiers, entitlement conflict and cost claims.
+- [Deployment service](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/deploy/deadmon.service): startup reset and serving configuration.
+- [Dashboard architecture decision](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/docs/adr/0020-dashboard-moves-to-nextjs.md): EC2/Vercel split and reported test count.
+- [Repository business plan](https://github.com/GhostInHex/deadmon/blob/8374bae533758270becfa4926151f879c3f30ba3/docs/business-plan.md): original plan plus implementation-status and arithmetic-check notes.
 
----
+Repository evidence reviewed 11 October 2026 UTC / 12 October 2026 IST. Revision prepared 12 October 2026 at 00:54 IST. Prices and forecast estimates are proposals by Ari, not external market evidence. This file is a static snapshot of the saved plan; later edits in cfo.ai will not update it automatically. The original assumptions and scenario figures have deliberately been preserved.
 
-## Note added at commit time
+## 11. Change summary
 
-Two things above are now out of date, and both are because the plan was written
-against the README as it stood on 11 October, before Slice 1 landed:
+- Replaced the obsolete documentation-only description with the implemented prototype’s actual scope.
+- Distinguished recorded-fixture verdicts from live verification, and planned alerts/repair from established capabilities.
+- Added the missing frontend-module finding, live-refresh and verification requirements, demo-only reset warning and test-count discrepancy.
+- Distinguished the recommended individual Pro package from the higher-priced club package, without changing prices.
+- Removed the implication that free-tier hosting or no inference call proves measured zero operating cost.
+- Made paid launch capability-gated while leaving the model’s October/January assumptions explicitly provisional.
+- Kept all financial assumptions, formulas and forecast figures unchanged; no GitHub changes or model-input edits were made by this file update.
 
-1. **"Implementation code has been removed / documentation only"** — no longer
-   true. The crawl pipeline runs: 111 offline tests, one crawl command, a
-   dashboard, and a deploy. See `README.md` and `docs/adr/0020-*`.
-2. **Repository URL** is `github.com/GhostInHex/deadmon`, not the
-   `neathack/deadmon` placeholder in `deploy/README.md` and the app's nav.
-
-Section 9's claim that every forecast month was independently reconstructed was
-made by cfo.ai checking itself, so the forecast was **re-derived here from the
-stated assumptions**, separately. All 18 published outcomes — three scenarios ×
-revenue, cash and 12-month totals — reproduce within rounding, worst delta ₹0.50
-on a figure of ₹1,494,359. The per-account contribution matches exactly
-(₹449 − ₹20 − ₹13.47 = ₹415.53).
-
-That check confirms the arithmetic is internally consistent. It does **not**
-validate the assumptions: the growth rates, churn, ₹25,000 opening cash and 3%
-fee are Ari's estimates, and no customer has been interviewed.
