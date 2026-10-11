@@ -66,3 +66,10 @@ and re-running the same crawl leaves two sources and one verdict each.
 Validation: `py -m pytest -q` → **62 passed**. `py tools/check_docs.py` → ok.
 Commit: `e45a3d2`.
 
+**2026-10-11 — adjusted by ticket 06.** `earliest_credible_close()` and
+`cards()` were removed from this module: the earliest credible close is the
+*card's* reading of its sources (ADR-0009), so it belongs to the dashboard, and
+this module now returns rows through `source_rows()` instead. Ticket 05's tests
+never asserted either, so the change is behaviour-preserving for them; ticket
+06's comments carry the reasoning.
+
