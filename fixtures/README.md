@@ -144,3 +144,38 @@ binaries stay out of the tree).
 
 **Record a fixture before writing any adapter**, and record it as the known-good version.
 Do not edit these files to add data — they are the record of what the platform served.
+
+## Slice 2 corpora — five more crawlers (recorded 2026-10-12)
+
+One page per platform, recorded live with a browser user-agent, ~2 seconds
+apart, never edited. None of these pages serves a tz-aware registration
+close, so every record verifies `unverified` except GenAI.works' featured
+card — that is the platforms' limitation, stated per row, not an adapter
+gap. Mode is mapped only where the page states it outright.
+
+| File | Source | Recorded | Purpose |
+|---|---|---|---|
+| `hackerrank/contests.html` | `GET www.hackerrank.com/contests` | 2026-10-12 | 11 contests (2 promoted, 1 active, 8 archived); reg strings carry no year or zone, mode unstated |
+| `hackathon-com/index.html` | `GET hackathon.com` (upcoming grid on the homepage) | 2026-10-12 | 4 events with Online mode; start/end day-month, no year or zone |
+| `lablab/event.html` | `GET lablab.ai/event` | 2026-10-12 | 24 events from the page's JSON-LD catalogue; card badges give Online ×8 / Hybrid ×3 / On-site ×1; build windows, no year or zone |
+| `mlh/events-2026.html` | `GET mlh.io/seasons/2026/events` | 2026-10-12 | 24 past-season events from the embedded catalogue; physical ×21 / digital ×3; event bounds are not registration closes |
+| `genai-works/index.html` | `GET hackathon.genai.works` | 2026-10-12 | 1 featured event; rail close year-qualified by the same card's window (`Oct 22, 23:59 UTC`); mode unstated |
+
+Mode mappings, documented where they are judgment calls: hackathon.com
+Online/Virtual → `online`, Hybrid → `hybrid`; lablab On-site → `offline`
+(venue-only); MLH physical → `offline`, digital → `online`. HackerRank and
+GenAI.works state no per-event mode, so mode stays absent.
+
+## Measured dead ends — no adapter without a data path (2026-10-12)
+
+Each URL below was fetched with a browser user-agent and returned the
+stated shape. These are measured verdicts, not assumptions; re-probe
+before writing an adapter, and record the fixture first if one appears.
+
+| Platform | Probe | Result |
+|---|---|---|
+| Devpost `devpost.com/hackathons` | GET | **403** to a scripted request (matches the 2026-10-11 probe) — needs a real browser or rate-limit clearance |
+| Hack2skill `hack2skill.com/hackathons` | GET | shell only ("Hack2skill", no listings) — client-rendered grid |
+| HackerEarth `hackerearth.com/challenges/` | GET | shell only (a bare count, no event titles or dates) — client-rendered grid |
+| DoraHacks `dorahacks.io`, `dorahacks.io/hackathons` | GET | homepage is a marketing shell with no listings; `/hackathons` is **404** — listing URL not discoverable statically |
+| Devfolio | recorded 2026-10-10 | no usable data path (see `devfolio/` above) |
