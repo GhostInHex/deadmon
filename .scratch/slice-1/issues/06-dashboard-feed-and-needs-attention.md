@@ -8,8 +8,8 @@ own URL, stated date and verdict.
 **Blocked by:** 01 (the schema contract). Rendered from rows conforming to the
 contract and seeded in tests; the seam against real crawl output is proven in 08.
 
-**Status:** claimed
-**Triage:** ready-for-agent
+**Status:** resolved
+**Triage:** done
 
 - [x] Live listings appear in the feed as fact; unverified ones appear greyed in a separate needs-attention group; closed ones appear in neither
 - [x] A card shows the earliest credible registration close across its sources, with each source's own stated date and verdict beneath it
@@ -58,5 +58,5 @@ as badges, so a growing greyed group reads as "this platform is failing"
    sources rather than a listing row.
 
 Validation: `py -m pytest -q` → **93 passed**. `py tools/check_docs.py` → ok.
-Commit: `__SHA_06__`.
+Commit: `b5277b0`.
 
