@@ -144,7 +144,9 @@ def render_page(view: View, *, title: str = "deadmon") -> str:
             '<html lang="en">',
             "<head>",
             '<meta charset="utf-8">',
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
             f"<title>{html.escape(title)}</title>",
+            _FONTS,
             "<style>",
             _CSS,
             "</style>",
@@ -165,7 +167,10 @@ def render_trace(reference: str, trace=None, *, sink_dir: Path | None = None) ->
     """The detail page one dashboard link opens."""
     directory = Path(sink_dir) if sink_dir else DEFAULT_SINK_DIR
     stored = trace if trace is not None else TraceClient.load(reference, sink_dir=directory)
-    body = [f"<h1>Trace <code>{html.escape(reference)}</code></h1>", '<p><a href="/">&larr; dashboard</a></p>']
+    body = [
+            f"<h1>Trace <code>{html.escape(reference)}</code></h1>",
+            '<p class="trace-back"><a href="/">&larr; dashboard</a></p>',
+        ]
     if stored is None:
         body.append("<p>No trace document is stored for this run.</p>")
     else:
@@ -191,7 +196,9 @@ def render_trace(reference: str, trace=None, *, sink_dir: Path | None = None) ->
             '<html lang="en">',
             "<head>",
             '<meta charset="utf-8">',
+            '<meta name="viewport" content="width=device-width, initial-scale=1">',
             "<title>trace</title>",
+            _FONTS,
             "<style>",
             _CSS,
             "</style>",
@@ -333,20 +340,201 @@ def _duration(started_at, finished_at) -> str:
     return f"{max((finish - start).total_seconds(), 0.0):.2f}s"
 
 
+_FONTS = (
+    '<link rel="preconnect" href="https://fonts.googleapis.com">'
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+    '<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1'
+    "&family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap\" rel=\"stylesheet\">"
+)
+
 _CSS = """
-body { font: 16px/1.5 system-ui, sans-serif; margin: 2rem auto; max-width: 56rem; color: #111 }
-h1 { font-size: 1.6rem } h2 { font-size: 1.1rem }
-section { margin: 1.5rem 0 }
-.card { border: 1px solid #d7d7dc; border-radius: .5rem; margin: .5rem 0; padding: .75rem .9rem }
-.card.greyed { background: #f4f4f6; border-color: #dcdce1 }
-.close { margin: .2rem 0 .5rem } .stated, .verified { color: #5b5b66; font-size: .85rem }
-.sources { list-style: none; margin: 0; padding: 0 }
-.source { display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline; margin: .25rem 0 }
-.source a { word-break: break-all }
-.badge { border-radius: 999px; font-size: .78rem; font-weight: 600; padding: .1rem .55rem }
-.badge.live { background: #dcf5e3; color: #14612f }
-.badge.unverified { background: #eceaf3; color: #4b4364 }
-.badge.closed { background: #e8e8ea; color: #55555e }
-.empty { color: #72726f } code { word-break: break-all }
-table { border-collapse: collapse } td, th { padding: .3rem .8rem .3rem 0; text-align: left }
+/* V7 Go tokens (docs/design-system-reference/tokens.css), inlined so the
+   dashboard stays one self-contained server-rendered page with no asset
+   fetch. Kept verbatim: design.md rule 1 - no raw hex below this block. */
+:root {
+  --color-ink: #292929;
+  --color-ink-deep: #171717;
+  --color-paper: #ffffff;
+  --color-paper-warm: #f7f6f5;
+  --color-rule: #e4e2e0;
+  --color-rule-strong: #d1cfce;
+  --color-signal: #ff683d;
+  --color-signal-deep: #ec580a;
+  --color-signal-wash: #fff1eb;
+  --color-mono: #737373;
+  --color-ink-muted: #6b6b6b;
+  --color-ink-inverse: #ffffff;
+  --webfont-display: 'Instrument Serif', Georgia, serif;
+  --webfont-body: 'Inter', system-ui, sans-serif;
+  --webfont-mono: 'DM Mono', ui-monospace, monospace;
+  --text-2xs: 0.6875rem;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.5rem;
+  --tracking-mono: 0.08em;
+  --tracking-display: -0.02em;
+  --spacing-2: 0.5rem;
+  --spacing-3: 0.75rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.5rem;
+  --spacing-6: 2rem;
+  --spacing-7: 3rem;
+  --spacing-8: 4rem;
+  --radius-sm: 4px;
+  --radius-pill: 999px;
+  --container-content: 75rem;
+  --opacity-faint: 0.4;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0 auto;
+  max-width: var(--container-content);
+  padding: var(--spacing-6) var(--spacing-5) var(--spacing-9);
+  font-family: var(--webfont-body);
+  font-size: var(--text-md);
+  line-height: 1.625;
+  color: var(--color-ink);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-family: var(--webfont-display);
+  font-size: var(--text-2xl);
+  line-height: 1.286;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink-deep);
+  margin: 0;
+}
+
+.summary {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--color-mono);
+  padding-bottom: var(--spacing-5);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+/* Hairlines over boxed cards (design.md rule 3). */
+section { margin-top: var(--spacing-8); }
+
+h2 {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--color-mono);
+  padding-bottom: var(--spacing-3);
+  border-bottom: 1px solid var(--color-rule);
+  margin: 0 0 var(--spacing-3);
+}
+
+.card {
+  padding: var(--spacing-4) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.card h2 {
+  font-family: var(--webfont-body);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-ink-deep);
+  border: 0;
+  padding: 0;
+  margin: 0 0 var(--spacing-1);
+}
+
+/* Unverified stays visible, not hidden (ADR-0007) - muted, never removed. */
+.card.greyed { opacity: var(--opacity-faint); }
+.card.greyed:hover { opacity: 1; }
+
+.close {
+  margin: 0 0 var(--spacing-3);
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+}
+
+.sources { list-style: none; margin: 0; padding: 0; }
+
+.source {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2) var(--spacing-4);
+  align-items: baseline;
+  margin: var(--spacing-2) 0;
+}
+
+.source a {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  word-break: break-all;
+}
+.source a:hover { color: var(--color-signal); }
+
+.stated, .verified {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-xs);
+  color: var(--color-mono);
+}
+
+/* Mono uppercase pill, signal-wash ground, signal-deep text (design.md). */
+.badge {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-signal-wash);
+  color: var(--color-signal-deep);
+}
+
+/* The other two verdicts stay neutral - signal is scarce (design.md rule 2). */
+.badge.unverified { background: var(--color-paper-warm); color: var(--color-ink-muted); }
+.badge.closed { background: var(--color-paper-warm); color: var(--color-mono); }
+
+.empty { color: var(--color-mono); font-size: var(--text-sm); }
+code { font-family: var(--webfont-mono); word-break: break-all; }
+
+table { border-collapse: collapse; width: 100%; }
+
+th {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  text-align: left;
+  color: var(--color-mono);
+  padding: var(--spacing-2) var(--spacing-4) var(--spacing-2) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+td {
+  font-size: var(--text-sm);
+  padding: var(--spacing-3) var(--spacing-4) var(--spacing-3) 0;
+  border-bottom: 1px solid var(--color-rule);
+  color: var(--color-ink-muted);
+}
+
+td a { color: var(--color-ink-muted); word-break: break-all; }
+td a:hover { color: var(--color-signal); }
+
+.trace-back {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  padding-bottom: var(--spacing-5);
+}
 """

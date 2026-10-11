@@ -1,0 +1,504 @@
+/* ============================================================================
+   V7 Go — components
+   Consumes tokens.css. No raw hex in this file.
+   ========================================================================= */
+
+/* ---- Type primitives ------------------------------------------------------ */
+
+.eyebrow {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono);
+  line-height: 14px;
+  text-transform: uppercase;
+  color: var(--color-mono);
+}
+
+.eyebrow--signal {
+  color: var(--color-signal);
+}
+
+/* Display headline. Split into sibling spans — see design.md "rich text is
+   flattened" note. Never nest a <span> for color inside a heading. */
+.display {
+  font-family: var(--webfont-display);
+  font-size: var(--text-4xl);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink-deep);
+  margin: 0;
+}
+
+.display__line {
+  display: block;
+}
+
+.display__accent {
+  color: var(--color-signal);
+  font-style: italic;
+}
+
+.display--sm {
+  font-size: var(--text-2xl);
+  line-height: var(--leading-heading);
+}
+
+.lead {
+  font-family: var(--webfont-body);
+  font-size: var(--text-lg);
+  line-height: 30px;
+  color: var(--color-ink-muted);
+  max-width: var(--container-prose);
+  margin: 0;
+}
+
+.body {
+  font-family: var(--webfont-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.mono-label {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  line-height: 14px;
+  color: var(--color-mono);
+}
+
+.spec {
+  font-family: var(--webfont-body);
+  font-size: var(--text-xs);
+  line-height: 16px;
+  color: var(--color-mono);
+}
+
+/* ---- Buttons -------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--webfont-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  line-height: 18px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-signal);
+  outline-offset: 2px;
+}
+
+/* Hero variant is larger than the component-library default. */
+.btn--lg {
+  font-size: 15px;
+  padding: 15px 30px;
+}
+
+.btn--primary {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+.btn--primary:hover {
+  background: var(--color-ink-deep);
+}
+
+.btn--accent {
+  background: var(--color-signal);
+  color: var(--color-ink-inverse);
+}
+
+.btn--accent:hover {
+  background: var(--color-signal-deep);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-rule-strong);
+}
+
+.btn--outline:hover {
+  border-color: var(--color-ink);
+}
+
+.btn__glyph {
+  flex-shrink: 0;
+  width: 0;
+  height: 0;
+  border-left: 9px solid currentColor;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* ---- Badge ---------------------------------------------------------------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 14px;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--color-signal-wash);
+  color: var(--color-signal-deep);
+}
+
+.badge__dot {
+  flex-shrink: 0;
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--color-signal);
+}
+
+/* ---- Stats ---------------------------------------------------------------- */
+
+.stat-strip {
+  display: flex;
+  width: 100%;
+  border-top: 1px solid var(--color-rule);
+}
+
+.stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--spacing-6) 40px var(--spacing-7);
+}
+
+.stat:first-child {
+  padding-left: var(--spacing-8);
+}
+
+.stat:last-child {
+  padding-right: var(--spacing-8);
+}
+
+.stat__divider {
+  width: 1px;
+  background: var(--color-rule);
+}
+
+.stat__figure {
+  font-family: var(--webfont-body);
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 48px;
+  letter-spacing: -0.03em;
+  color: var(--color-ink-deep);
+  margin: 0;
+}
+
+/* Exactly one figure per strip may take the accent. */
+.stat__figure--signal {
+  color: var(--color-signal);
+}
+
+.stat__label {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: var(--tracking-mono);
+  line-height: 14px;
+  text-transform: uppercase;
+  color: var(--color-mono);
+}
+
+/* ---- Page ----------------------------------------------------------------- */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--color-paper);
+  /* Paper's export sets overflow-wrap: anywhere on the root. Do not copy that:
+     it breaks words mid-character on the display headline at narrow widths.
+     Long words should wrap as words; only break a word if it cannot fit. */
+  overflow-wrap: normal;
+}
+
+/* ---- Nav ------------------------------------------------------------------ */
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+  width: 100%;
+  height: 76px;
+  padding: 0 var(--spacing-8);
+  border-bottom: 1px solid var(--color-rule);
+  background: var(--color-paper);
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav__mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: var(--color-signal);
+  border-radius: var(--radius-sm);
+}
+
+.nav__mark-inner {
+  width: 11px;
+  height: 11px;
+  background: var(--color-paper);
+  border-radius: 2px;
+}
+
+.nav__wordmark {
+  font-family: var(--webfont-body);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink-deep);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.nav__link {
+  font-family: var(--webfont-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.nav__link:hover {
+  color: var(--color-signal);
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ---- Hero ----------------------------------------------------------------- */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-6);
+  width: 100%;
+  padding: var(--spacing-9) var(--spacing-8) 0;
+}
+
+.hero__lead {
+  text-align: center;
+}
+
+.hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: var(--spacing-2);
+}
+
+/* ---- Design-system docs layout -------------------------------------------- */
+
+.ds {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  width: 100%;
+  max-width: var(--container-content);
+  padding: var(--spacing-8);
+}
+
+.ds__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.ds__row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.ds__swatches {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  height: 132px;
+}
+
+.swatch {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px;
+  border-radius: var(--radius-md);
+}
+
+.swatch__name {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  line-height: 14px;
+  color: var(--color-ink);
+}
+
+.swatch__hex {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  line-height: 14px;
+  color: var(--color-mono);
+}
+
+/* Label-on-dark variants for the ink and signal swatches. */
+.swatch--dark .swatch__name {
+  color: var(--color-paper);
+}
+
+.swatch--dark .swatch__hex {
+  color: var(--color-on-dark-label);
+}
+
+.swatch--signal .swatch__name {
+  color: var(--color-ink-inverse);
+}
+
+.swatch--signal .swatch__hex {
+  color: var(--color-on-signal-label);
+}
+
+.swatch--bordered {
+  border: 1px solid var(--color-rule);
+}
+
+/* ---- Spacing ramp ---------------------------------------------------------
+   Bars are proportional to their token value, unlike the Paper artboard where
+   the bars were resized to fit the frame. --spacing-11 is capped at 160px so
+   the strip stays readable; the ramp is monotonic by construction.
+   ------------------------------------------------------------------------- */
+
+.ramp {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-2);
+}
+
+.ramp__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex: 1 1 0;
+}
+
+.ramp__bar {
+  width: 100%;
+  flex-shrink: 0;
+  background: var(--color-ink);
+}
+
+.ramp__bar--pill {
+  background: var(--color-signal);
+  border-radius: var(--radius-pill);
+}
+
+.ramp__label {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-2xs);
+  line-height: 14px;
+  color: var(--color-mono);
+}
+
+/* ---- Responsive ----------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .nav__links {
+    display: none;
+  }
+
+  .hero {
+    padding: var(--spacing-7) var(--spacing-5) 0;
+  }
+
+  .display {
+    font-size: var(--text-3xl);
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  .lead {
+    font-size: var(--text-md);
+    text-align: center;
+  }
+
+  .hero__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .stat-strip {
+    flex-wrap: wrap;
+  }
+
+  .stat,
+  .stat:first-child,
+  .stat:last-child {
+    flex: 1 1 50%;
+    padding: var(--spacing-5);
+  }
+
+  .stat__divider {
+    display: none;
+  }
+
+  .stat__figure {
+    font-size: var(--text-2xl);
+    line-height: 34px;
+  }
+
+  .ds {
+    padding: var(--spacing-5);
+  }
+
+  .ds__swatches {
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .swatch {
+    flex: 1 1 45%;
+    min-height: 96px;
+  }
+}
