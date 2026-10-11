@@ -4,6 +4,7 @@ const LINKS = [
   { href: '/dashboard', label: 'Dashboard' },
   { href: '/#how', label: 'How it works' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/judges', label: 'Judges' },
   { href: '/#evidence', label: 'Evidence' },
 ];
 
@@ -52,7 +53,7 @@ export function Footer() {
   return (
     <footer className="foot">
       <p className="foot__inner">
-        deadmon &mdash; built for #neatHack. Crawl, verify, store, trace.
+        deadmon &mdash; built for #neatHack. Crawl, verify, store, trace. <Link href="/judges">For judges</Link>.
       </p>
     </footer>
   );

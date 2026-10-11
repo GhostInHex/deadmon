@@ -32,6 +32,7 @@ from .dashboard import (
     view_as_json,
 )
 from .storage import Store
+from .receipts import DEFAULT_RECEIPT_DIR, build_receipt, emit_receipt
 from .tracing import TraceClient, shutdown, trace_client
 from .verification import verify_crawl
 
@@ -65,6 +66,7 @@ def crawl_one_fixture(
     store: Store,
     now: datetime | None = None,
     sink_dir: Path = DEFAULT_SINK_DIR,
+    receipt_dir: Path = DEFAULT_RECEIPT_DIR,
 ) -> CrawlOutcome:
     """Run one crawler against one recorded fixture, end to end, offline."""
     checked_at = now if now is not None else datetime.now(timezone.utc)
@@ -101,6 +103,25 @@ def crawl_one_fixture(
         closed_found=closed_found,
         trace_ref=reference,
     )
+    # Countable proof: one numbered hashed receipt per crawl run, always
+    # local JSON. A receipt sink that cannot be written must not fail the
+    # run — the crawl is the fact, the receipt is its evidence.
+    try:
+        emit_receipt(
+            build_receipt(
+                run_id=run_id,
+                crawler=scraper.name,
+                candidates=len(candidates),
+                live=live_found,
+                closed=closed_found,
+                unverified=unverified_found,
+                trace=reference,
+                backend=client.trace.backend,
+            ),
+            receipt_dir,
+        )
+    except Exception:
+        pass
     return CrawlOutcome(
         crawler=scraper.name,
         run_id=run_id,
@@ -129,15 +150,24 @@ def crawl_corpus(
     sink_dir: Path = DEFAULT_SINK_DIR,
     now: datetime | None = None,
     scraper=None,
+    receipt_dir: Path | None = None,
 ) -> list[CrawlOutcome]:
     """Run the crawler over the recorded corpus. One run per fixture."""
     adapter = scraper if scraper is not None else UnstopScraper()
     outcomes: list[CrawlOutcome] = []
     store = Store(db_path).open()
+    receipts = DEFAULT_RECEIPT_DIR if receipt_dir is None else receipt_dir
     try:
         for fixture in fixtures_in(fixture_dir):
             outcomes.append(
-                crawl_one_fixture(adapter, fixture, store=store, now=now, sink_dir=sink_dir)
+                crawl_one_fixture(
+                    adapter,
+                    fixture,
+                    store=store,
+                    now=now,
+                    sink_dir=sink_dir,
+                    receipt_dir=receipts,
+                )
             )
     finally:
         store.close()
@@ -150,6 +180,7 @@ def crawl_all(
     sink_dir: Path = DEFAULT_SINK_DIR,
     now: datetime | None = None,
     fixture_dirs: dict[str, Path] | None = None,
+    receipt_dir: Path | None = None,
 ) -> list[CrawlOutcome]:
     """Run every registered crawler over its recorded corpus.
 
@@ -161,13 +192,19 @@ def crawl_all(
     overrides = fixture_dirs or {}
     outcomes: list[CrawlOutcome] = []
     store = Store(db_path).open()
+    receipts = DEFAULT_RECEIPT_DIR if receipt_dir is None else receipt_dir
     try:
         for name, scraper_cls, corpus_dir in CRAWLERS:
             directory = overrides.get(name, corpus_dir)
             for fixture in fixtures_in(directory):
                 outcomes.append(
                     crawl_one_fixture(
-                        scraper_cls(), fixture, store=store, now=now, sink_dir=sink_dir
+                        scraper_cls(),
+                        fixture,
+                        store=store,
+                        now=now,
+                        sink_dir=sink_dir,
+                        receipt_dir=receipts,
                     )
                 )
     finally:
@@ -249,6 +286,8 @@ def main(argv=None) -> int:
     parser.add_argument("--db", type=Path, default=DEFAULT_DB, help="SQLite database path")
     parser.add_argument("--traces", type=Path, default=DEFAULT_SINK_DIR,
                         help="directory holding trace documents")
+    parser.add_argument("--receipts", type=Path, default=DEFAULT_RECEIPT_DIR,
+                        help="directory holding numbered receipt JSON")
     parser.add_argument("--port", type=int, default=8765, help="dashboard port")
     parser.add_argument("--host", default="127.0.0.1", help="dashboard bind address")
     parser.add_argument("--as-of", default=None,
@@ -280,7 +319,7 @@ def _run(args, now) -> int:
     if args.reset:
         # Runs are append-only by design; this is the explicit opt-out, used by
         # the demo so a fresh run is the whole story.
-        for path in (args.db, *args.traces.glob("*.json")):
+        for path in (args.db, *args.traces.glob("*.json"), *args.receipts.glob("*.json")):
             if path.exists():
                 path.unlink()
 
@@ -289,6 +328,7 @@ def _run(args, now) -> int:
         sink_dir=args.traces,
         now=now,
         fixture_dirs={"unstop": args.fixtures},
+        receipt_dir=args.receipts,
     )
     for outcome in outcomes:
         print(
