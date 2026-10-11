@@ -6,13 +6,13 @@
    design.md usage rule 1.
    ========================================================================= */
 
-.page {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  background: var(--color-paper);
-  overflow-wrap: normal;
-}
+/* ---- Skip link ------------------------------------------------------------
+
+   Off-viewport until focused: the nav is repeated chrome on all three
+   routes, so this is the first tab stop and jumps straight to the content
+   landmark.
+
+   -------------------------------------------------------------------------- */
 
 .skip {
   position: fixed;
