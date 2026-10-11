@@ -22,6 +22,7 @@ from pathlib import Path
 import sys
 import urllib.parse
 
+from .adapters import CRAWLERS
 from .adapters.unstop import UnstopScraper
 from .dashboard import (
     build_view,
@@ -114,7 +115,11 @@ def crawl_one_fixture(
 
 def fixtures_in(directory: Path) -> list[Path]:
     """Every recorded fixture in the corpus, in a stable order."""
-    return sorted(p for p in Path(directory).glob("*.json") if p.is_file())
+    return sorted(
+        p
+        for p in Path(directory).iterdir()
+        if p.is_file() and p.suffix.lower() in {".json", ".html"}
+    )
 
 
 def crawl_corpus(
@@ -134,6 +139,37 @@ def crawl_corpus(
             outcomes.append(
                 crawl_one_fixture(adapter, fixture, store=store, now=now, sink_dir=sink_dir)
             )
+    finally:
+        store.close()
+    return outcomes
+
+
+def crawl_all(
+    *,
+    db_path: Path = DEFAULT_DB,
+    sink_dir: Path = DEFAULT_SINK_DIR,
+    now: datetime | None = None,
+    fixture_dirs: dict[str, Path] | None = None,
+) -> list[CrawlOutcome]:
+    """Run every registered crawler over its recorded corpus.
+
+    One run per fixture per crawler; the store is shared so the dashboard
+    sees every platform. `fixture_dirs` overrides a crawler's corpus
+    directory by name — that is how `--fixtures` keeps pointing at Unstop.
+    Platform names live in `adapters.CRAWLERS`, never here.
+    """
+    overrides = fixture_dirs or {}
+    outcomes: list[CrawlOutcome] = []
+    store = Store(db_path).open()
+    try:
+        for name, scraper_cls, corpus_dir in CRAWLERS:
+            directory = overrides.get(name, corpus_dir)
+            for fixture in fixtures_in(directory):
+                outcomes.append(
+                    crawl_one_fixture(
+                        scraper_cls(), fixture, store=store, now=now, sink_dir=sink_dir
+                    )
+                )
     finally:
         store.close()
     return outcomes
@@ -204,10 +240,12 @@ def serve(dashboard: Dashboard, *, host: str = "127.0.0.1", port: int = 8765) ->
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         prog="deadmon.crawl",
-        description="Crawl Unstop against the recorded fixtures and serve the dashboard.",
+        description="Crawl every registered platform against the recorded fixtures "
+                    "and serve the dashboard.",
     )
     parser.add_argument("--fixtures", type=Path, default=DEFAULT_FIXTURE_DIR,
-                        help="directory of recorded fixtures to replay")
+                        help="Unstop fixture directory to replay; the other crawlers "
+                             "use their recorded corpora")
     parser.add_argument("--db", type=Path, default=DEFAULT_DB, help="SQLite database path")
     parser.add_argument("--traces", type=Path, default=DEFAULT_SINK_DIR,
                         help="directory holding trace documents")
@@ -246,8 +284,11 @@ def _run(args, now) -> int:
             if path.exists():
                 path.unlink()
 
-    outcomes = crawl_corpus(
-        fixture_dir=args.fixtures, db_path=args.db, sink_dir=args.traces, now=now
+    outcomes = crawl_all(
+        db_path=args.db,
+        sink_dir=args.traces,
+        now=now,
+        fixture_dirs={"unstop": args.fixtures},
     )
     for outcome in outcomes:
         print(
