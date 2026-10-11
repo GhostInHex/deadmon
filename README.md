@@ -18,6 +18,7 @@ docs/
   LLM_ACCESS.md     shared LiteLLM gateway: base URL, models, key + $20 budget
 src/deadmon/       the pipeline: adapters, verification, storage, tracing, dashboard, crawl
 tests/             pytest suite — deterministic, no network (fixtures/ is the corpus)
+deploy/            systemd unit + install notes for running it on one instance
 ```
 
 **Slice 1 — one platform, end to end.** The Unstop crawler replays its recorded
@@ -26,12 +27,33 @@ run, and renders live listings as cards with verdict badges (`live` /
 `unverified` / `closed`) on one server-rendered page.
 
 ```bash
-py -m deadmon.crawl            # crawl the recorded corpus, then serve http://127.0.0.1:8765/
-py -m deadmon.crawl --reset --no-serve   # crawl only, printing one line per crawl run
+pip install -e ".[test]"
+
+deadmon-crawl                          # crawl the corpus, then serve http://127.0.0.1:8080/
+deadmon-crawl --reset --no-serve       # crawl only, printing one line per crawl run
 ```
+
+`python -m deadmon.crawl` works too, but only after `pip install` — the package
+lives under `src/` and is not importable from a bare checkout.
+
+> **Use 8080, not 8765.** 8765 falls inside a Windows reserved port range
+> (8700–8799) and the server dies with `WinError 10013` on a Windows dev
+> machine. 8080 is safe on both.
 
 Dedupe across platforms, eligibility filtering, alerts and the scheduler are
 Slices 2 and 3.
+
+## Deploy
+
+One instance, one service — see [`deploy/README.md`](deploy/README.md).
+
+```bash
+sudo cp deploy/deadmon.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now deadmon
+```
+
+Set `NEATLOGS_API_KEY` in `/etc/deadmon/env` to trace runs to neatlogs; without
+it, traces fall back to a local JSON sink and the dashboard links still resolve.
 
 ## Docs
 
@@ -50,4 +72,7 @@ Slices 2 and 3.
 
 ## Status
 
-Documentation and planning stage for neatHack (Oct 10–12, 2026). Build order: `docs/PLAN.md` → slices 1–7.
+Slice 1 is complete and deployable: the Unstop crawl runs end to end against the
+recorded corpus, 109 tests pass with no network, and the dashboard renders live
+listings with verdict badges. Next is Slice 2 (more platforms, dedupe,
+eligibility) per `docs/PLAN.md`.
