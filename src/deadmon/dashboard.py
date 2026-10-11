@@ -421,6 +421,7 @@ _CSS = """
   --color-rule-strong: #d1cfce;
   --color-signal: #ff683d;
   --color-signal-deep: #ec580a;
+  --color-signal-ink: #b8420a;
   --color-signal-wash: #fff1eb;
   --color-mono: #737373;
   --color-ink-muted: #6b6b6b;
@@ -557,12 +558,18 @@ h2 {
   padding: 2px 8px;
   border-radius: var(--radius-pill);
   background: var(--color-signal-wash);
-  color: var(--color-signal-deep);
+  /* signal-ink, not signal-deep: the deep step is the hover value and
+     measures 3.19:1 on this ground. ink clears AA at 4.98:1. */
+  color: var(--color-signal-ink);
 }
 
-/* The other two verdicts stay neutral - signal is scarce (design.md rule 2). */
-.badge.unverified { background: var(--color-paper-warm); color: var(--color-ink-muted); }
-.badge.closed { background: var(--color-paper-warm); color: var(--color-mono); }
+/* The other two verdicts stay neutral - signal is scarce (design.md rule 2).
+   Both on ink-muted rather than mono: mono clears AA on white (4.74:1) but
+   measures 4.39:1 on the paper-warm ground these badges sit on. */
+.badge.unverified, .badge.closed {
+  background: var(--color-paper-warm);
+  color: var(--color-ink-muted);
+}
 
 .empty { color: var(--color-mono); font-size: var(--text-sm); }
 code { font-family: var(--webfont-mono); word-break: break-all; }
