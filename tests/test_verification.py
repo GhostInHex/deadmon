@@ -132,7 +132,7 @@ def test_the_recorded_healthy_page_verifies_live():
 
 def test_an_unverified_verdict_is_re_verified_on_the_next_crawl():
     """Never cached as fact, never promoted without a fresh check."""
-    first = verify(candidate(FUTURE, mode=None), now=NOW)
+    first = verify(candidate(FUTURE, mode=None), now=NOW, verified_at=NOW)
     assert first.verdict == UNVERIFIED
     second = verify(candidate(FUTURE), now=NOW, verified_at=NOW + timedelta(minutes=1))
     assert second.verdict == LIVE
