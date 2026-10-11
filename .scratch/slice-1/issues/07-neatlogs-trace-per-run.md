@@ -6,8 +6,8 @@ many listings, and what it cost.
 
 **Blocked by:** 01 (the crawl-run table that stores the trace reference).
 
-**Status:** claimed
-**Triage:** ready-for-agent
+**Status:** resolved
+**Triage:** done
 
 - [x] Every crawl run produces one trace, stored with the run and linked from the dashboard
 - [x] Spans cover each platform and each pipeline stage
@@ -63,5 +63,5 @@ placeholder; nothing in the test suite imports neatlogs or sets a key.
    01's schema) and `listings_found` never counts an unverified record.
 
 Validation: `py -m pytest -q` → **74 passed**. `py tools/check_docs.py` → ok.
-Commit: `__SHA_07__`.
+Commit: `f55c160`.
 
