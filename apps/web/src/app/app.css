@@ -605,7 +605,14 @@
 }
 
 .note strong { color: var(--color-ink-deep); }
-.note code { font-family: var(--webfont-mono); font-size: var(--text-sm); }
+/* Copy-paste commands and URLs carry long unbreakable tokens. Every other
+   inline content type here breaks (source a, table td a); code did not, so
+   a 35-char URL or a full --as-of flag escaped the content column at 320px. */
+.table code, .note code {
+  font-family: var(--webfont-mono);
+  font-size: var(--text-sm);
+  word-break: break-all;
+}
 
 /* ---- Footer --------------------------------------------------------------- */
 
