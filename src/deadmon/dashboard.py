@@ -516,9 +516,13 @@ h2 {
   margin: 0 0 var(--spacing-1);
 }
 
-/* Unverified stays visible, not hidden (ADR-0007) - muted, never removed. */
-.card.greyed { opacity: var(--opacity-faint); }
-.card.greyed:hover { opacity: 1; }
+/* Unverified stays visible, not hidden (ADR-0007) - muted, never removed.
+   The de-emphasis is carried by colour, never by opacity: --opacity-faint is
+   decoration-only per design.md's contrast floor, and at 0.4 over white the
+   close line measures 1.74:1 and the source meta 1.69:1. hover-to-read is
+   also unreachable by keyboard and touch, so it is gone. ink-muted on white
+   is 5.33:1 and the group still reads as the quieter one. */
+.card.greyed h2 { color: var(--color-ink-muted); }
 
 .close {
   margin: 0 0 var(--spacing-3);
