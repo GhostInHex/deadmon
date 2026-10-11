@@ -59,7 +59,7 @@ export default function JudgesPage() {
           <p className="mono-label">Rubric map</p>
           <h2 className="band__title">Every claim, its weight, its proof.</h2>
           <table className="table">
-            <thead><tr><th>claim</th><th>criterion</th><th>weight</th><th>verify</th></tr></thead>
+            <thead><tr><th scope="col">claim</th><th scope="col">criterion</th><th scope="col">weight</th><th scope="col">verify</th></tr></thead>
             <tbody>
               {ROWS.map((r) => (
                 <tr key={r.c.slice(0, 24)}><td>{r.c}</td><td>{r.k}</td><td>{r.w}</td><td><code>{r.v}</code></td></tr>
@@ -73,7 +73,7 @@ export default function JudgesPage() {
           <p className="mono-label">Trace pair</p>
           <h2 className="band__title">v1 naive vs v2 verified.</h2>
           <table className="table">
-            <thead><tr><th>metric</th><th>v1 naive</th><th>v2 measured</th></tr></thead>
+            <thead><tr><th scope="col">metric</th><th scope="col">v1 naive</th><th scope="col">v2 measured</th></tr></thead>
             <tbody>
               {PAIR.map((r) => (
                 <tr key={r.m}><td>{r.m}</td><td>{r.a}</td><td>{r.b}</td></tr>
@@ -88,7 +88,7 @@ export default function JudgesPage() {
           <p className="mono-label">Receipts</p>
           <h2 className="band__title">4 runs, 4 documents, 1 hash check.</h2>
           <table className="table">
-            <thead><tr><th>crawl run</th><th>verdicts</th><th>trace</th></tr></thead>
+            <thead><tr><th scope="col">crawl run</th><th scope="col">verdicts</th><th scope="col">trace</th></tr></thead>
             <tbody>
               <tr><td>Unstop crawler, open</td><td>25 live</td><td>1 per run</td></tr>
               <tr><td>Unstop crawler, closed</td><td>24 closed</td><td>1 per run</td></tr>

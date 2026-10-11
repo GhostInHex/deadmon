@@ -45,12 +45,12 @@ function RunTable({ runs }: { runs: Run[] }) {
     <table className="table">
       <thead>
         <tr>
-          <th>crawler</th>
-          <th>status</th>
-          <th>live</th>
-          <th>closed</th>
-          <th>duration</th>
-          <th>trace</th>
+          <th scope="col">crawler</th>
+          <th scope="col">status</th>
+          <th scope="col">live</th>
+          <th scope="col">closed</th>
+          <th scope="col">duration</th>
+          <th scope="col">trace</th>
         </tr>
       </thead>
       <tbody>
