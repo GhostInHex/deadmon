@@ -81,11 +81,14 @@ export default async function DashboardPage() {
   const feed = await getFeed();
 
   return (
-    <main className="page">
+    <>
       <Nav />
 
-      <div className="dash">
-        <header className="dash__head">
+      {/* main holds the content only: nav and footer are repeated chrome and
+          must not sit inside the landmark. */}
+      <main id="main">
+        <div className="dash">
+          <header className="dash__head">
           <h1 className="display" style={{ fontSize: 'var(--text-2xl)', lineHeight: 'var(--leading-heading)' }}>
             deadmon
           </h1>
@@ -147,8 +150,9 @@ export default async function DashboardPage() {
           )}
         </section>
       </div>
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 }

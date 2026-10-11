@@ -14,14 +14,17 @@ export default async function Home() {
   const runs = feed ? String(counts.runs) : '—';
 
   return (
-    <main className="page">
+    <>
       <Nav />
 
-      <div className="hero">
-        <span className="badge">
-          <span className="badge__dot" />
-          Deadline verification for hackathons
-        </span>
+      {/* main holds the content only: nav and footer are repeated chrome and
+          must not sit inside the landmark. */}
+      <main id="main">
+        <div className="hero">
+          <span className="badge">
+            <span className="badge__dot" />
+            Deadline verification for hackathons
+          </span>
 
         {/* Two-tone headline as sibling lines, never a nested colored span. */}
         <h1 className="display">
@@ -134,8 +137,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 }

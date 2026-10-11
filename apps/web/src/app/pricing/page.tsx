@@ -76,14 +76,17 @@ const ECONOMICS = [
 
 export default function PricingPage() {
   return (
-    <main className="page">
+    <>
       <Nav />
 
-      <div className="hero">
-        <span className="badge">
-          <span className="badge__dot" />
-          Pricing
-        </span>
+      {/* main holds the content only: nav and footer are repeated chrome and
+          must not sit inside the landmark. */}
+      <main id="main">
+        <div className="hero">
+          <span className="badge">
+            <span className="badge__dot" />
+            Pricing
+          </span>
         <h1 className="display">
           <span className="display__line">Verification you</span>
           <span className="display__line display__accent">can audit.</span>
@@ -186,8 +189,9 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer />
-    </main>
+    </>
   );
 }
