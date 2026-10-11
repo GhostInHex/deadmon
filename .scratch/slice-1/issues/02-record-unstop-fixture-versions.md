@@ -17,7 +17,7 @@ work with no code dependency.
 - [x] Each new fixture is a new version added beside the old one; nothing is overwritten
 - [x] `fixtures/README.md` gains a provenance row per new file: source URL, record date, and the verdict state it exercises
 - [x] Where a state cannot be recorded live — a timeout or a hard block is not something a server will hand you as a file — that fact is written into `fixtures/README.md` and the state is covered by a declared test double instead
-- [ ] A test double is named as a double wherever it appears, so no test result is mistaken for recorded evidence
+- [x] A test double is named as a double wherever it appears, so no test result is mistaken for recorded evidence
 
 ## Comments
 
@@ -62,3 +62,11 @@ the final criterion above stays open.
    fixtures exactly as to the healthy one.
 
 _Recording done out-of-band by a subagent (no Orca Run/Dispatch provenance)._
+
+**2026-10-11 — final criterion closed by ticket 04.** The prescribed declared
+double exists at `fixtures/unstop/hackathons-unverified.json` and names itself as
+a double in three places: the filename, its own `_double.kind` banner
+(`"test double, not a recording"`), and the `fixtures/README.md` provenance row
+whose Source column reads `test double, not a recording`. The test that exercises
+it is `tests/test_verification.py::test_the_declared_double_fixture_verifies_unverified`.
+Ticket 04's comments carry the full note; the healthy fixture above is untouched.

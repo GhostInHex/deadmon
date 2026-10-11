@@ -10,8 +10,8 @@ contract, not on the recorded fixtures — transport-level and unusable-date
 cases are declared test doubles here, and 02's recorded versions strengthen the
 corpus afterwards rather than blocking this ticket.
 
-**Status:** claimed
-**Triage:** ready-for-agent
+**Status:** resolved
+**Triage:** done
 
 - [x] A verdict is live only when the candidate's source responds, its registration close parses to a real future date in a known timezone, and a mode is present
 - [x] A verdict is unverified when the source is unreachable, blocked or rate-limited, or when the date is unusable
@@ -70,5 +70,5 @@ Comments separately.
    its verdict and its `verified_at`.
 
 Validation: `py -m pytest -q` → **44 passed**. `py tools/check_docs.py` → ok.
-Commit: `__SHA_04__`.
+Commit: `7a530b8`.
 
