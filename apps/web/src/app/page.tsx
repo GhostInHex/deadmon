@@ -25,8 +25,8 @@ export default async function Home() {
 
         {/* Two-tone headline as sibling lines, never a nested colored span. */}
         <h1 className="display">
-          <span className="display__line">Missed deadlines.</span>
-          <span className="display__line display__accent">Never again.</span>
+          <span className="display__line">Deadlines that stay true.</span>
+          <span className="display__line display__accent">Literally.</span>
         </h1>
 
         <div className="hero__lead">
@@ -62,10 +62,81 @@ export default async function Home() {
           <p className="stat__figure">{runs}</p>
           <p className="stat__label">Traced runs</p>
         </div>
-        <div className="stat__divider" aria-hidden="true" />
-        <div className="stat">
-          <p className="stat__figure stat__figure--signal">0</p>
-          <p className="stat__label">Network calls</p>
+      </section>
+
+      <section className="band" id="compare">
+        <div className="band__inner">
+          <p className="mono-label">Deadlines, not docs</p>
+          <h2 className="band__title">Proves a deadline every day.</h2>
+          <p className="lead">
+            firstrun proves a doc once. deadmon proves every deadline every day:
+            a daily full crawl plus a deadline sweep, and when a crawler breaks
+            it heals with a sandbox-validated proposal then backfills the gap.
+          </p>
+
+          <table className="table" aria-label="deadmon vs firstrun vs Copilot">
+            <thead>
+              <tr>
+                <th scope="col">Claim</th>
+                <th scope="col">deadmon</th>
+                <th scope="col">firstrun</th>
+                <th scope="col">Copilot</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>What it proves</td>
+                <td>Proves a deadline every day — full crawl plus deadline sweep</td>
+                <td>Proves a doc once</td>
+                <td>Answers once, proves nothing</td>
+              </tr>
+              <tr>
+                <td>When a platform breaks</td>
+                <td>Crawler heals: proposal, sandbox check, backfill</td>
+                <td>Manual repair</td>
+                <td>Manual repair</td>
+              </tr>
+              <tr>
+                <td>Blocked pages</td>
+                <td>Verdict unverified, kept visible in needs attention</td>
+                <td>Known limit, silently dropped</td>
+                <td>Silent guess or drop</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="band band--warm" id="cost">
+        <div className="band__inner">
+          <p className="mono-label">Cost</p>
+          <h2 className="band__title">$0.00 per crawl, stdlib-only.</h2>
+          <p className="lead">
+            The current crawl path calls no model. firstrun reports $0.018 per
+            run; deadmon adds no inference cost per crawl run.
+          </p>
+
+          <div className="costlist">
+            <div className="cost">
+              <p className="stat__figure stat__figure--signal">$0.00</p>
+              <p className="stat__label">Modelled cost of a crawl</p>
+              <p className="cost__note">
+                Modelled, not measured: stdlib-only path calls no model, so a
+                normal run adds no inference cost. Hosting and maintenance
+                reserves are still carried in the plan. Tiers are a modelled
+                draft from <code>docs/business-plan.md</code>, not traction.
+              </p>
+            </div>
+            <div className="cost">
+              <p className="stat__figure">$0.018</p>
+              <p className="stat__label">firstrun reported cost per run</p>
+              <p className="cost__note">
+                His packaged figure, shown for scale. See{' '}
+                <Link href="/pricing">pricing</Link> for the full modelled
+                tiers.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -120,7 +191,7 @@ export default async function Home() {
           <h2 className="band__title">Every run is a trace.</h2>
           <p className="lead">
             Each crawl run produces one trace with per-stage spans, linked from
-            the run history. When a platform changes its layout, the agent
+            the run history. When a platform changes its layout, the crawler
             diagnoses the break from the failing run and repairs its own
             adapter.
           </p>

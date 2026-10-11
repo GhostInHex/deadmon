@@ -35,6 +35,8 @@ tracing = ["neatlogs>=1.4.26; python_version<'3.14'"]
 [project.scripts]
 # `deadmon-crawl` on PATH, so the deploy unit does not depend on PYTHONPATH.
 deadmon-crawl = "deadmon.crawl:main"
+# `deadmon-receipt-check` verifies numbered receipts: an edited receipt fails.
+deadmon-receipt-check = "deadmon.receipts:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

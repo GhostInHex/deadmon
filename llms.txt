@@ -1,0 +1,44 @@
+# deadmon — llms.txt
+
+> One fetch to drive deadmon. For the full builder doc, read `agent.md`. Vocabulary: `GLOSSARY.md` wins over older docs. Corpus rules: `fixtures/README.md`.
+
+## One-liner
+
+deadmon watches hackathon platforms so a student developer never misses a registration close: the Scout runs a daily full crawl plus a frequent deadline sweep, each crawler verifies its sources, and every card carries one verdict.
+
+## Verdicts (exactly three, per source)
+
+- `live` — page up, registration close parses to a real future date in a known timezone, mode present. Enters the feed.
+- `unverified` — indeterminate: unreachable, blocked, rate-limited, or the date is unusable. Never asserted, never deleted, re-verified next crawl.
+- `closed` — confirmed over: registration passed or the event cancelled. Terminal; keeps its row, leaves the feed.
+
+Fail closed: when verification cannot establish a registration close, the verdict is `unverified`. No inference, no carried-forward date.
+
+## Feed vs needs attention
+
+The dashboard has two groups: the feed holds every card with a live source; needs attention holds every card currently `unverified`, greyed but visible. A `closed`-only card appears in neither. `/judges` is a marketing-evidence route, not a third group.
+
+## Routes
+
+| Route | Serves |
+|---|---|
+| `/` | landing: `Deadlines that stay true. Literally.` plus comparison and cost banner |
+| `/dashboard` | feed + needs attention + crawl-run history with trace links |
+| `/pricing` | tiers, modelled not measured |
+| `/api/feed` | JSON view model: `feed`, `needs_attention`, `needs_attention_by_crawler`, `runs` |
+| `/runs.json` | JSON crawl-run history with `trace_ref` per run |
+| `/trace/<ref>` | one crawl run's trace document |
+
+Python owns every fact (`src/deadmon/`); the Next.js app (`apps/web/`) only types and fetches — see `apps/web/src/lib/api.ts`.
+
+## Verify commands
+
+```bash
+pip install -e ".[test]"
+py -m pytest -q                                        # offline; recorded fixtures are the corpus
+deadmon-crawl --reset --no-serve --port 8080 --as-of 2026-10-11T00:00:00+00:00
+curl http://127.0.0.1:8080/api/feed
+curl http://127.0.0.1:8080/runs.json
+```
+
+Preflight plus error codes plus the fail-closed contract: `agent.md`. Heal loop (break → proposal → sandbox validation → commit → backfill): `skills/deadmon/SKILL.md`, copyable into `.claude/skills/`. One subscriber holds the profile; tables are plural from the first commit (ADR-0006).
