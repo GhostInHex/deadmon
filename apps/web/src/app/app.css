@@ -267,7 +267,13 @@
   margin: 0;
 }
 
-.stat__figure--signal { color: var(--color-signal-deep); }
+/* Deliberately the accent hue, not a darker step. This is a 44px figure, so
+   the large-text bar is 3:1 and signal measures 2.88:1 on white / 2.67:1 on
+   the warm ground. components.css:211 and design.md:152 both prescribe
+   --color-signal here and design.md's stated contrast floor covers text below
+   16px only, so this is a recorded miss against a value the source of record
+   picks on purpose. Reported, not repainted. See interface-review.md. */
+.stat__figure--signal { color: var(--color-signal); }
 
 .stat__label {
   font-family: var(--webfont-mono);
@@ -516,8 +522,6 @@
   color: var(--color-ink-deep);
   margin: 0;
 }
-
-.tier__amount--signal { color: var(--color-signal-deep); }
 
 .tier__unit {
   font-family: var(--webfont-mono);
