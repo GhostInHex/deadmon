@@ -222,9 +222,14 @@ class Store:
 
     # -- read back --------------------------------------------------------
 
-    def cards(self) -> list[dict]:
-        """One card per hackathon: a view over its sources (ADR-0010)."""
-        sources = self.connection().execute(
+    def source_rows(self, crawler: str | None = None) -> list[sqlite3.Row]:
+        """Every stored source joined to its hackathon.
+
+        Storage returns rows and nothing more: the ADR-0009 choice of an
+        earliest credible close is a *view* concern and lives with the
+        dashboard.
+        """
+        rows = self.connection().execute(
             """
             SELECT s.id, s.crawler, s.source_url, s.title AS source_title,
                    s.registration_close, s.mode, s.verdict, s.verified_at,
@@ -233,21 +238,9 @@ class Store:
              ORDER BY h.id, s.id
             """
         ).fetchall()
-        cards: dict[int, dict] = {}
-        for row in sources:
-            card = cards.setdefault(
-                row["hackathon_id"],
-                {
-                    "hackathon_id": row["hackathon_id"],
-                    "title": row["hackathon_title"],
-                    "sources": [],
-                },
-            )
-            card["sources"].append(dict(row))
-        for card in cards.values():
-            card["earliest_credible_close"] = earliest_credible_close(card["sources"])
-            card["verdicts"] = {source["verdict"] for source in card["sources"]}
-        return list(cards.values())
+        if crawler is not None:
+            rows = [row for row in rows if row["crawler"] == crawler]
+        return rows
 
     # -- subscribers and profiles (empty at this stage, ADR-0006) ----------
 
@@ -269,21 +262,6 @@ class Store:
             profile_id = cursor.lastrowid
         self.connection().commit()
         return profile_id
-
-
-def earliest_credible_close(sources) -> str | None:
-    """The earliest date read from a source that verified and parsed (ADR-0009).
-
-    A closed source's date is evidence it was credible once but is not a live
-    claim now, so only `live` sources contribute. No live source means no
-    credible date — never a fallback.
-    """
-    closes = [
-        source["registration_close"]
-        for source in sources
-        if source["verdict"] == "live" and source["registration_close"] is not None
-    ]
-    return min(closes) if closes else None
 
 
 def _iso(value) -> str | None:
