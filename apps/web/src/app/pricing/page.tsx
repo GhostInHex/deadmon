@@ -3,8 +3,75 @@ import { Nav, Footer } from '@/components/Nav';
 export const metadata = {
   title: 'deadmon — pricing',
   description:
-    'deadmon pricing: verification you can audit, at near-zero marginal cost.',
+    'deadmon pricing: Free, Community at ₹449 and Pro at ₹99. Modelled with cfo.ai Ari; assumptions are editable hypotheses, not traction.',
 };
+
+// Figures below come from docs/business-plan.md (cfo.ai Ari, 12 Oct 2026).
+// They are a modelled draft, not observed performance.
+const TIERS = [
+  {
+    name: 'Free',
+    amount: '₹0',
+    unit: 'forever',
+    blurb: 'One alert profile and the full dashboard. No card, no trial clock.',
+    items: [
+      'All platform crawls, daily',
+      'Verification with a visible verdict per source',
+      'Run history with one trace per crawl',
+    ],
+    cta: { label: 'Start free', href: '/dashboard' },
+  },
+  {
+    name: 'Community',
+    amount: '₹449',
+    unit: '/mo',
+    blurb: 'A shared profile for a dev club or cohort, billed to the club admin.',
+    items: [
+      'Everything in Free',
+      'Shared profile per subscriber (ADR-0006)',
+      'Weekly digest instead of per-user alerts',
+      'Heal log: every adapter repair, with its diff',
+    ],
+    cta: { label: 'Join the pilot', href: '/dashboard' },
+    featured: true,
+  },
+  {
+    name: 'Pro',
+    amount: '₹99',
+    unit: '/mo',
+    blurb: 'More profiles and exports. Modelled as a later experiment, not a launch tier.',
+    items: [
+      'Everything in Community',
+      'Additional alert profiles',
+      'Digest and feed exports',
+    ],
+    cta: { label: 'Read the plan', href: '/#evidence' },
+  },
+];
+
+const ECONOMICS = [
+  {
+    figure: '₹415.53',
+    label: 'Contribution per club',
+    note: '₹449 price less ₹20 delivery reserve and a 3% payment fee, before shared overhead and founder pay.',
+  },
+  {
+    figure: '~9',
+    label: 'Clubs to cover fixed costs',
+    note: 'Nine Community accounts cover the ₹3,500 monthly fixed costs alone. That is not company breakeven.',
+  },
+  {
+    figure: '₹0.00',
+    signal: true,
+    label: 'Marginal cost of a crawl',
+    note: 'One free-tier instance, shared across every account. No inference is called during a normal crawl.',
+  },
+  {
+    figure: '₹-182k',
+    label: 'Downside cash, Sep 2028',
+    note: 'Slower sales plus ₹10,000/month founder pay exhausts ₹25,000 of starting cash in November 2026.',
+  },
+];
 
 export default function PricingPage() {
   return (
@@ -30,65 +97,33 @@ export default function PricingPage() {
         </div>
       </div>
 
-      {/* TIER PRICES ARE NOT SET. Every figure below is a placeholder. */}
       <section className="tiers" aria-label="Plans">
-        <article className="tier">
-          <p className="mono-label">Solo</p>
-          <p className="tier__price">
-            <span className="tier__unset">&mdash;</span>
-            <span className="tier__unit">/mo</span>
-          </p>
-          <p className="tier__blurb">
-            One profile, every platform, alerts on the deadlines you pick.
-          </p>
-          <ul className="tier__list">
-            <li>All platform crawls, daily</li>
-            <li>Verification with a visible verdict per source</li>
-            <li>Telegram alerts at 7d / 3d / 24h</li>
-            <li>Run history with one trace per crawl</li>
-          </ul>
-          <span className="badge badge--neutral">price pending</span>
-        </article>
-
-        <article className="tier tier--feature">
-          <p className="mono-label">Club</p>
-          <p className="tier__price">
-            <span className="tier__unset">&mdash;</span>
-            <span className="tier__unit">/mo</span>
-          </p>
-          <p className="tier__blurb">
-            A shared feed for a dev club or cohort, with per-member eligibility
-            filtering.
-          </p>
-          <ul className="tier__list">
-            <li>Everything in Solo</li>
-            <li>Shared profile per subscriber (ADR-0006)</li>
-            <li>Weekly digest instead of per-user spam</li>
-            <li>Heal log: every adapter repair, with its diff</li>
-          </ul>
-          <span className="badge badge--neutral">price pending</span>
-        </article>
-
-        <article className="tier">
-          <p className="mono-label">Self-hosted</p>
-          <p className="tier__price">
-            <span className="tier__amount tier__amount--signal">$0</span>
-            <span className="tier__unit">to start</span>
-          </p>
-          <p className="tier__blurb">
-            Run it on one instance you control. The pipeline is stdlib-only by
-            design.
-          </p>
-          <ul className="tier__list">
-            <li>Full source, MIT</li>
-            <li>Your own AWS allowance or any t3.micro</li>
-            <li>Traces to your own neatlogs project</li>
-            <li>No inference cost unless you enable self-heal</li>
-          </ul>
-          <a className="btn btn--outline" href="/dashboard">
-            Read the deploy notes
-          </a>
-        </article>
+        {TIERS.map((tier) => (
+          <article
+            className={tier.featured ? 'tier tier--feature' : 'tier'}
+            key={tier.name}
+          >
+            <p className="mono-label">{tier.name}</p>
+            <p className="tier__price">
+              <span className="tier__amount">{tier.amount}</span>
+              <span className="tier__unit">{tier.unit}</span>
+            </p>
+            <p className="tier__blurb">{tier.blurb}</p>
+            <ul className="tier__list">
+              {tier.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+            <a
+              className={
+                tier.featured ? 'btn btn--primary tier__cta' : 'btn btn--outline tier__cta'
+              }
+              href={tier.cta.href}
+            >
+              {tier.cta.label}
+            </a>
+          </article>
+        ))}
       </section>
 
       <section className="band">
@@ -102,38 +137,19 @@ export default function PricingPage() {
           </p>
 
           <div className="costlist">
-            <div className="cost">
-              <p className="stat__figure">$0.00</p>
-              <p className="stat__label">Crawl + verify + store + render</p>
-              <p className="cost__note">
-                One t3.micro inside the free tier. No database, queue or cache
-                service.
-              </p>
-            </div>
-            <div className="cost">
-              <p className="stat__figure">$0.00</p>
-              <p className="stat__label">Trace per crawl run</p>
-              <p className="cost__note">
-                Traced to neatlogs on the free project tier; local JSON sink
-                otherwise.
-              </p>
-            </div>
-            <div className="cost">
-              <p className="stat__figure stat__figure--signal">$0.00</p>
-              <p className="stat__label">Steady-state inference</p>
-              <p className="cost__note">
-                No model is called during a normal crawl. Token and cost are
-                recorded as 0 by fact, not omitted.
-              </p>
-            </div>
-            <div className="cost">
-              <p className="stat__figure">$20</p>
-              <p className="stat__label">Shared LLM budget, 30 days</p>
-              <p className="cost__note">
-                Team-wide hackathon allowance, the ceiling for self-heal
-                proposals during the event.
-              </p>
-            </div>
+            {ECONOMICS.map((item) => (
+              <div className="cost" key={item.label}>
+                <p
+                  className={
+                    item.signal ? 'stat__figure stat__figure--signal' : 'stat__figure'
+                  }
+                >
+                  {item.figure}
+                </p>
+                <p className="stat__label">{item.label}</p>
+                <p className="cost__note">{item.note}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -144,22 +160,27 @@ export default function PricingPage() {
           <h2 className="band__title">Read this before you judge the numbers.</h2>
           <div className="note">
             <p>
-              <strong>The cost figures above are measured from this repo.</strong>{' '}
-              They come from running the pipeline and reading the run history,
-              and they are the numbers I can defend.
+              <strong>This is a modelled plan, not a result.</strong> The tiers
+              and forecasts were produced by <strong>cfo.ai Ari</strong> on 12
+              October 2026 and are saved verbatim in{' '}
+              <code>docs/business-plan.md</code>. No customer has been
+              interviewed and no money has changed hands.
             </p>
             <p>
-              <strong>The tier prices are not set.</strong> They are shown as
-              &ldquo;&mdash;&rdquo; because choosing them is a business decision, not
-              a rendering one. Nothing on this page has been produced by cfo.ai
-              &mdash; Ari was not available to generate it, and inventing pricing
-              or revenue would misrepresent the work.
+              <strong>The arithmetic was re-derived independently.</strong> All 18
+              published outcomes &mdash; three scenarios &times; revenue, cash and
+              12-month totals &mdash; reproduce from the stated assumptions
+              within rounding, worst delta ₹0.50 on ₹1,494,359. That check
+              proves the model is internally consistent. It does not make the
+              assumptions true.
             </p>
             <p>
-              <strong>Runway is therefore not stated.</strong> Runway needs a
-              price, a conversion assumption and a cost-per-user figure, none of
-              which exist yet. See <code>docs/business-plan.md</code> once those
-              are supplied.
+              <strong>The assumptions are the weak part.</strong> Growth rates,
+              churn, ₹25,000 opening cash and the 3% payment fee are estimates.
+              Ari&rsquo;s own recommendation is three paid club pilots before
+              investing in Pro, and honest caution about one: <em>unpaid founder
+              time is the hidden subsidy, and &ldquo;free inference&rdquo; does not
+              mean a free business.</em>
             </p>
           </div>
         </div>

@@ -26,7 +26,11 @@ export function Nav() {
       </div>
 
       <div className="nav__actions">
-        <a className="nav__link" href="https://github.com/neathack/deadmon">
+        <a
+          className="nav__link"
+          href="https://github.com/GhostInHex/deadmon"
+          rel="noopener noreferrer"
+        >
           GitHub
         </a>
         <Link className="btn btn--primary btn--lg" href="/dashboard">

@@ -30,6 +30,9 @@ Environment=PYTHONUNBUFFERED=1
 ExecStart=/opt/deadmon/venv/bin/deadmon-crawl --reset --host 0.0.0.0 --port 8080 \
           --db /var/lib/deadmon/deadmon.db --traces /var/lib/deadmon/traces
 
+# /api/feed is what the Vercel-hosted Next.js app reads. Read-only, so a
+# wildcard CORS origin is safe here; the app has no accounts (ADR-0020).
+
 Restart=on-failure
 RestartSec=5
 
