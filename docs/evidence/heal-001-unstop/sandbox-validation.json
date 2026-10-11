@@ -1,0 +1,10 @@
+{
+ "recorded": "2026-10-12",
+ "target": "known-good fixture fixtures/unstop/hackathons-open.json (untouched)",
+ "known_good_candidates": 25,
+ "proposal_candidates": 25,
+ "required_fields_populated": true,
+ "registration_close_parseable": true,
+ "proposal_live": 25,
+ "result": "pass — comparable count, fields populated, dates parseable"
+}

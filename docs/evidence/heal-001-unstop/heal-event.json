@@ -1,0 +1,57 @@
+{
+ "heal": "heal-001",
+ "crawler": "unstop",
+ "recorded": "2026-10-12",
+ "evidence": {
+  "snapshot": {
+   "file": "fixtures/unstop-heal/hackathons-open.v2-changed-layout.json",
+   "note": "constructed break-demo snapshot, not a recording: Unstop did not change its layout overnight"
+  },
+  "watchdog": {
+   "crawler": "unstop",
+   "run_ids": [
+    2,
+    3
+   ],
+   "trace_ref": "local://20337544fd2348ffaeb998513b2271ae"
+  }
+ },
+ "baseline": {
+  "unstop_crawler": {
+   "recent_live_yield": 25,
+   "status": "baseline set — a sudden zero is a regression"
+  },
+  "mlh": {
+   "recent_live_yield": 0,
+   "status": "no baseline history — off-season quiet is steady state, not a break"
+  }
+ },
+ "break": {
+  "candidates_before": 25,
+  "candidates_after": 0
+ },
+ "proposal": {
+  "scope": "allowlist only: selectors and extraction rules (ADR-0018)",
+  "change": "read records under data.results as well as data.data",
+  "commit": "none — the break is staged, so the proposal stays a demo double in tests/test_heal_proof.py; the real adapter is unchanged"
+ },
+ "sandbox_validation": {
+  "known_good_candidates": 25,
+  "proposal_candidates": 25,
+  "result": "pass — comparable count, fields populated, dates parseable"
+ },
+ "second_clean_crawl": {
+  "run_id": 4,
+  "live": 25,
+  "trace": "local://dcbba740241d46cf873bf16f999bf565"
+ },
+ "backfill": {
+  "run_id": 5,
+  "live": 25,
+  "trace": "local://2a1a44704d0b4cb699318808bd802b34"
+ },
+ "mlh_steady_state": {
+  "watchdog_breaks": 0,
+  "result": "silence — off-season zero with no baseline history is steady state"
+ }
+}

@@ -1,0 +1,14 @@
+{
+ "recorded": "2026-10-12",
+ "as_of": "2026-10-11T00:00:00+00:00",
+ "crawlers": {
+  "unstop": {
+   "recent_live_yield": 25,
+   "status": "baseline set — a sudden zero is a regression"
+  },
+  "mlh": {
+   "recent_live_yield": 0,
+   "status": "no baseline history — off-season quiet is steady state, not a break"
+  }
+ }
+}

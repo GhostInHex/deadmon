@@ -1,0 +1,30 @@
+{
+ "recorded": "2026-10-12",
+ "demo": "Unstop yields 25, then 0 overnight",
+ "snapshot": {
+  "file": "fixtures/unstop-heal/hackathons-open.v2-changed-layout.json",
+  "note": "constructed break-demo snapshot, not a recording: Unstop did not change its layout overnight"
+ },
+ "candidates_before": 25,
+ "candidates_after": 0,
+ "runs": [
+  {
+   "run_id": 2,
+   "candidates": 0,
+   "trace": "local://bac3cd914db24f38a50ad83475b41f89"
+  },
+  {
+   "run_id": 3,
+   "candidates": 0,
+   "trace": "local://20337544fd2348ffaeb998513b2271ae"
+  }
+ ],
+ "watchdog": {
+  "crawler": "unstop",
+  "run_ids": [
+   2,
+   3
+  ],
+  "trace_ref": "local://20337544fd2348ffaeb998513b2271ae"
+ }
+}

@@ -1,0 +1,58 @@
+{
+ "crawler": "unstop",
+ "reference": "local://dcbba740241d46cf873bf16f999bf565",
+ "backend": "local",
+ "spans": [
+  {
+   "name": "fetch",
+   "attributes": {
+    "stage": "fetch",
+    "platform": "unstop"
+   },
+   "started_at": "2026-10-11T22:11:19.077486+00:00",
+   "ended_at": "2026-10-11T22:11:19.077752+00:00",
+   "duration_ms": 0.243,
+   "events": []
+  },
+  {
+   "name": "extract",
+   "attributes": {
+    "stage": "extract",
+    "platform": "unstop",
+    "candidates": 25
+   },
+   "started_at": "2026-10-11T22:11:19.077773+00:00",
+   "ended_at": "2026-10-11T22:11:19.080192+00:00",
+   "duration_ms": 2.419,
+   "events": []
+  },
+  {
+   "name": "verify",
+   "attributes": {
+    "stage": "verify",
+    "platform": "unstop",
+    "live": 25,
+    "unverified": 0,
+    "closed": 0
+   },
+   "started_at": "2026-10-11T22:11:19.080204+00:00",
+   "ended_at": "2026-10-11T22:11:19.080289+00:00",
+   "duration_ms": 0.083,
+   "events": []
+  },
+  {
+   "name": "store",
+   "attributes": {
+    "stage": "store",
+    "platform": "unstop"
+   },
+   "started_at": "2026-10-11T22:11:19.080295+00:00",
+   "ended_at": "2026-10-11T22:11:19.137151+00:00",
+   "duration_ms": 56.876,
+   "events": []
+  }
+ ],
+ "token_usage": 0,
+ "cost_usd": 0.0,
+ "error": null
+}

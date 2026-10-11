@@ -1,0 +1,15 @@
+{
+ "recorded": "2026-10-12",
+ "scope": "allowlist only: selectors and extraction rules (ADR-0018)",
+ "change": "read records under data.results as well as data.data",
+ "touches": [
+  "src/deadmon/adapters/unstop.py::extract"
+ ],
+ "does_not_touch": [
+  "verification",
+  "dedupe",
+  "alerts",
+  "any other adapter"
+ ],
+ "commit": "none — the break is staged, so the proposal stays a demo double in tests/test_heal_proof.py; the real adapter is unchanged"
+}

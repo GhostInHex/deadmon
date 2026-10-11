@@ -1,0 +1,8 @@
+{
+ "recorded": "2026-10-12",
+ "run_id": 4,
+ "candidates": 25,
+ "live": 25,
+ "trace": "local://dcbba740241d46cf873bf16f999bf565",
+ "receipt": "receipts/receipt-0004.json"
+}

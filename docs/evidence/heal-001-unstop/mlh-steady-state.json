@@ -1,0 +1,16 @@
+{
+ "recorded": "2026-10-12",
+ "rule": "a break is a regression against a baseline (ADR-0011)",
+ "mlh_rows": [
+  {
+   "id": 1,
+   "crawler": "mlh",
+   "status": "success",
+   "finished_at": "2026-10-11T00:00:00+00:00",
+   "listings_found": 0,
+   "trace_ref": "local://steady"
+  }
+ ],
+ "watchdog_breaks": 0,
+ "result": "silence — off-season zero with no baseline history is steady state"
+}

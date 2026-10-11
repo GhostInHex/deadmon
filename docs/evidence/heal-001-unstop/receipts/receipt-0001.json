@@ -1,0 +1,12 @@
+{
+ "receipt": 1,
+ "run_id": 1,
+ "crawler": "unstop",
+ "candidates": 25,
+ "live": 25,
+ "closed": 0,
+ "unverified": 0,
+ "trace": "local://48f406d8f9044ddc9f401a8da6a1d517",
+ "backend": "local",
+ "hash": "f3c8b1d137fe3f35a9ba5b642768a43951395b49b3579035211425981919076d"
+}

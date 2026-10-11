@@ -145,6 +145,20 @@ binaries stay out of the tree).
 **Record a fixture before writing any adapter**, and record it as the known-good version.
 Do not edit these files to add data — they are the record of what the platform served.
 
+## `unstop-heal/` — the staged break snapshot (heal-001, 2026-10-12)
+
+| File | Source | Recorded | Purpose |
+|---|---|---|---|
+| `hackathons-open.v2-changed-layout.json` | **constructed, not a recording** — built 2026-10-12 from `hackathons-open.json` (unmodified): the same 25 records moved from `data.data` to `data.results`, leaving `data.data` empty; a `_snapshot` banner inside the file names its provenance | 2026-10-12 | the Unstop 25-to-0 overnight regression: HTTP 200, zero candidates with the current adapter |
+
+It lives beside the corpus, not in it: `fixtures/unstop/` still holds exactly
+the four files the crawl tests assert, and `hackathons-open.json` is untouched —
+the known-good baseline the proposal must still reproduce (ADR-0015). Every other
+row in this README holds a live URL or a declared double. This one holds neither:
+Unstop did not change its layout overnight, so the break is staged and the file
+says so wherever it is opened. The proposal it heals stays a demo double for the
+same reason — the real adapter never changes for a staged break.
+
 ## Slice 2 corpora — five more crawlers (recorded 2026-10-12)
 
 One page per platform, recorded live with a browser user-agent, ~2 seconds
