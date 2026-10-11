@@ -23,19 +23,89 @@ def sink(tmp_path):
     return tmp_path / "traces"
 
 
+@pytest.fixture
+def offline_neatlogs():
+    """Pin the SDK to a keyed-but-offline configuration.
+
+    Export is disabled so the suite stays offline (conftest forbids the
+    network), and deadmon's own `_initialised` guard is cleared so each test
+    re-runs init against the SDK. The key is a placeholder: nothing is
+    exported, so it is never sent anywhere.
+    """
+    neatlogs = pytest.importorskip("neatlogs")
+    real_init = neatlogs.init
+
+    def _init_offline(*args, **kwargs):
+        kwargs["disable_export"] = True
+        return real_init(*args, **kwargs)
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setenv("NEATLOGS_API_KEY", "placeholder-key-not-a-real-one")
+        patch.setattr("deadmon.tracing._initialised", False, raising=False)
+        patch.setattr(neatlogs, "init", _init_offline)
+        try:
+            yield neatlogs
+        finally:
+            patch.setattr(neatlogs, "init", real_init)
+
+
 def test_every_crawl_run_produces_one_trace(sink):
-    client = trace_client("unstop", sink_dir=sink)
-    client.start()
-    with client.span("crawl", platform="unstop"):
+    # The local sink is chosen only when the key is unset, so pin that: a shell
+    # that exports NEATLOGS_API_KEY would otherwise flip this to the neatlogs
+    # sink. `test_the_neatlogs_sink_is_used_when_the_package_and_key_are_there`
+    # covers the other half.
+    with pytest.MonkeyPatch.context() as patch:
+        patch.delenv("NEATLOGS_API_KEY", raising=False)
+        client = trace_client("unstop", sink_dir=sink)
+        client.start()
+        with client.span("crawl", platform="unstop"):
+            pass
+        reference = client.close_and_link()
+
+        assert reference
+        assert reference.startswith("local://")
+        stored = TraceClient.load(reference, sink_dir=sink)
+        assert stored is not None
+        assert stored.crawler == "unstop"
+        assert stored.backend == LOCAL
+
+
+def test_the_neatlogs_sink_is_used_when_the_package_and_key_are_there(sink, offline_neatlogs):
+    """The other half: keyed + importable, and the reference is a trace id.
+
+    The span tree, the span kinds and the reference are all built before the
+    exporter is reached, so this covers the wiring without touching the network.
+    """
+    client = trace_client("unstop", sink_dir=sink).start()
+    with client.span("fetch", stage="fetch", platform="unstop"):
+        pass
+    with client.span("extract", stage="extract", platform="unstop"):
         pass
     reference = client.close_and_link()
 
-    assert reference
-    assert reference.startswith("local://")
-    stored = TraceClient.load(reference, sink_dir=sink)
-    assert stored is not None
-    assert stored.crawler == "unstop"
-    assert stored.backend == LOCAL
+    assert client.trace.backend == NEATLOGS
+    assert client.trace.error is None, client.trace.error
+    assert reference.startswith("neatlogs://")
+    # one trace per run: the reference is the exported trace id
+    assert len(reference.split("://", 1)[1]) == 32
+    # and the local document is still written, so /trace/<ref> resolves
+    assert TraceClient.load(reference, sink_dir=sink) is not None
+
+
+def test_each_crawl_run_gets_its_own_trace_not_a_nested_one(sink, offline_neatlogs):
+    """Regression: consecutive runs must not share a trace id.
+
+    `crawl_corpus` opens one client per fixture without closing the previous
+    one, so an inherited ambient span would make run two a child of run one.
+    """
+    first = trace_client("unstop", sink_dir=sink).start()
+    second = trace_client("unstop", sink_dir=sink).start()
+    first_ref = first.close_and_link()
+    second_ref = second.close_and_link()
+
+    assert first_ref != second_ref
+    assert first_ref.startswith("neatlogs://")
+    assert second_ref.startswith("neatlogs://")
 
 
 def test_spans_cover_each_platform_and_stage(sink):
