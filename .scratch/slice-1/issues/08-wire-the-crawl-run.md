@@ -8,8 +8,8 @@ because every module it wires has already been proven against its own seam.
 
 **Blocked by:** 03, 04, 05, 07.
 
-**Status:** claimed
-**Triage:** ready-for-agent
+**Status:** resolved
+**Triage:** done
 
 - [x] One command runs the Unstop crawler end to end against the recorded fixture, with no network access
 - [x] The run produces at least one live listing rendered as a card in the feed, plus one verdict of each of the other two kinds where the fixture set supports it
@@ -85,5 +85,5 @@ Validation: `py -m pytest -q` → **109 passed** (8 from 01, 16 from 03, 20 from
 04, 18 from 05, 12 from 07, 19 from 06, 16 from 08). `py tools/check_docs.py` →
 ok (45 terms). The server was verified over a real socket: `GET /` → 200 with
 the two groups and the badges, `GET /runs.json` → 200 with 4 runs, `GET
-/trace/<ref>` → 200 with the span table. Commits: `__SHA_08__`.
+/trace/<ref>` → 200 with the span table. Commit: `6d3b216`.
 
