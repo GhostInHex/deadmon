@@ -117,7 +117,7 @@ export default async function DashboardPage() {
 
         <section>
           <h2 className="section__title">
-            Feed <span>{feed ? feed.feed.length : 0}</span>
+            Feed <span>{feed ? feed.feed.length : '—'}</span>
           </h2>
           {feed && feed.feed.length > 0 ? (
             feed.feed.map((card) => <CardRow card={card} key={card.title} />)
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
 
         <section>
           <h2 className="section__title">
-            Needs attention <span>{feed ? feed.needs_attention.length : 0}</span>
+            Needs attention <span>{feed ? feed.needs_attention.length : '—'}</span>
           </h2>
           {feed && feed.needs_attention.length > 0 ? (
             feed.needs_attention.map((card) => (
@@ -141,7 +141,7 @@ export default async function DashboardPage() {
 
         <section>
           <h2 className="section__title">
-            Run history <span>{feed ? feed.runs.length : 0}</span>
+            Run history <span>{feed ? feed.runs.length : '—'}</span>
           </h2>
           {feed && feed.runs.length > 0 ? (
             <RunTable runs={feed.runs} />
