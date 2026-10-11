@@ -27,6 +27,11 @@ from datetime import datetime
 from .candidate import Candidate
 from .verdict import CLOSED, LIVE, UNVERIFIED, Listing, now_utc
 
+# Where the payload came from. A verdict may rest on a recording; it may not
+# claim the web was checked when nothing fetched it.
+REPLAYED = "replayed"
+LIVE = "live"
+
 
 @dataclass(frozen=True)
 class VerificationResult:
@@ -48,10 +53,21 @@ def verify(
     candidate: Candidate,
     *,
     source_responds: bool = True,
+    provenance: str = REPLAYED,
     now: datetime | None = None,
     verified_at: datetime | None = None,
 ) -> VerificationResult:
-    """Produce exactly one verdict for one candidate."""
+    """Produce exactly one verdict for one candidate.
+
+    `source_responds` means *the fetch tier returned a payload for this
+    candidate*. It says nothing about freshness, which is what `provenance`
+    records: `REPLAYED` for a recorded fixture, `LIVE` for a payload fetched now.
+
+    The distinction matters because "the payload said the date is in the future"
+    is a fact about the payload. "The page is still up" is a claim about the
+    web, and a replay cannot support it. The verdict reasons below say which one
+    was actually established.
+    """
     clock = now if now is not None else now_utc()
     checked_at = verified_at if verified_at is not None else now_utc()
 
@@ -68,7 +84,14 @@ def verify(
         return _result(listing, CLOSED, "registration has passed")
     if candidate.mode is None:
         return _result(listing, UNVERIFIED, "page stated no mode")
-    return _result(listing, LIVE, "page up, deadline future, mode present")
+    if provenance == LIVE:
+        return _result(listing, LIVE, "source responded, deadline future, mode present")
+    return _result(
+        listing,
+        LIVE,
+        "recorded payload replayed: deadline future, mode present. "
+        "Not a live source check.",
+    )
 
 
 def verify_crawl(
@@ -76,16 +99,27 @@ def verify_crawl(
     *,
     now: datetime | None = None,
     source_responds=None,
+    provenance: str = REPLAYED,
     verified_at: datetime | None = None,
 ) -> list[VerificationResult]:
     """Verify a whole candidate set. Every candidate gets exactly one verdict.
 
     A candidate is never dropped here: an unreachable source yields
     `unverified`, not silence.
+
+    Defaults to `provenance=REPLAYED`, so the crawl's default reason cannot
+    read as a live check. Slice 1 has no live transport; when one lands it
+    passes `provenance=LIVE` explicitly.
     """
     responds = source_responds or (lambda _candidate: True)
     return [
-        verify(candidate, source_responds=responds(candidate), now=now, verified_at=verified_at)
+        verify(
+            candidate,
+            source_responds=responds(candidate),
+            provenance=provenance,
+            now=now,
+            verified_at=verified_at,
+        )
         for candidate in candidates
     ]
 

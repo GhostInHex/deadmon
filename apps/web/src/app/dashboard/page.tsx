@@ -100,6 +100,9 @@ export default async function DashboardPage() {
               <span className="badge badge--neutral">
                 {Object.keys(feed.needs_attention_by_crawler).join(', ') || 'no crawler'}
               </span>
+              {/* Slice 1 replays recorded fixtures. Say so on the page rather
+                  than letting a verdict imply a live source check. */}
+              <span className="badge badge--neutral">recorded fixtures · not live</span>
             </div>
           ) : (
             <p className="empty">

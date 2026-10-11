@@ -24,10 +24,11 @@ Environment=DEADMON_DB=/var/lib/deadmon/deadmon.db
 Environment=DEADMON_TRACES=/var/lib/deadmon/traces
 Environment=PYTHONUNBUFFERED=1
 
-# --reset on every start: a demo that boots into yesterday's run history tells a
-# worse story than one that starts clean. Runs are append-only within a process
-# (ADR / ticket 05); --reset is the explicit opt-out for a fresh boot.
-ExecStart=/opt/deadmon/venv/bin/deadmon-crawl --reset --host 0.0.0.0 --port 8080 \
+# --reset is deliberately NOT here. A durable service that wipes its history on
+# every boot is a demo, not a deployment: run rows are append-only (ticket 05)
+# and that history is the evidence the dashboard exists to show. To record a
+# fresh demo, run `deadmon-crawl --reset --no-serve` first, then start the unit.
+ExecStart=/opt/deadmon/venv/bin/deadmon-crawl --host 0.0.0.0 --port 8080 \
           --db /var/lib/deadmon/deadmon.db --traces /var/lib/deadmon/traces
 
 # /api/feed is what the Vercel-hosted Next.js app reads. Read-only, so a

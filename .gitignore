@@ -29,8 +29,12 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
+# Root-anchored. Bare `lib/` matches ANY directory named lib at any depth, and
+# silently swallowed apps/web/src/lib/ - the API client the dashboard imports.
+# The file existed on disk so local builds passed while a clean checkout could
+# not resolve the import. Found by the cfo.ai repository reassessment.
+/lib/
+/lib64/
 parts/
 sdist/
 var/

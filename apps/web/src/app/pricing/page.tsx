@@ -39,11 +39,12 @@ const TIERS = [
     name: 'Pro',
     amount: '₹99',
     unit: '/mo',
-    blurb: 'More profiles and exports. Modelled as a later experiment, not a launch tier.',
+    blurb: 'For an individual, not a club. Additional personal profiles and exports.',
     items: [
-      'Everything in Community',
-      'Additional alert profiles',
+      'One alert profile and the full dashboard',
+      'Additional personal profiles',
       'Digest and feed exports',
+      'Not the club package — that is Community',
     ],
     cta: { label: 'Read the plan', href: '/#evidence' },
   },
@@ -63,8 +64,8 @@ const ECONOMICS = [
   {
     figure: '₹0.00',
     signal: true,
-    label: 'Marginal cost of a crawl',
-    note: 'One free-tier instance, shared across every account. No inference is called during a normal crawl.',
+    label: 'Modelled cost of a crawl',
+    note: 'The current crawl path calls no model, so a normal run adds no inference cost. Hosting and maintenance reserves are still carried in the plan — this is not a measured zero.',
   },
   {
     figure: '₹-182k',
@@ -89,10 +90,10 @@ export default function PricingPage() {
         </h1>
         <div className="hero__lead">
           <p className="lead">
-            deadmon&rsquo;s cost is dominated by inference, not hosting. Crawling,
-            storage and the dashboard run inside one free-tier instance; the
-            agent&rsquo;s fix proposals are the only line item that scales with
-            usage.
+            The forecast assumes hosting and inference costs stay modest while
+            crawling is shared across every account. Both are estimates. No
+            production crawl has been measured, and the plan below keeps its
+            hosting and crawl/AI reserves rather than assuming they are zero.
           </p>
         </div>
       </div>
@@ -131,9 +132,9 @@ export default function PricingPage() {
           <p className="mono-label">Unit economics</p>
           <h2 className="band__title">What a run actually costs.</h2>
           <p className="lead">
-            These are measured from this repository, not estimated. Hosted cost
-            is zero on free tier; inference is the only variable line, and it is
-            only incurred when the agent proposes a fix.
+            Modelled by cfo.ai Ari from stated assumptions. They are projections,
+            not measured costs: the current code path calls no model, but no
+            production crawl, repair or maintenance effort has been measured yet.
           </p>
 
           <div className="costlist">

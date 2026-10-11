@@ -72,7 +72,22 @@ it, traces fall back to a local JSON sink and the dashboard links still resolve.
 
 ## Status
 
-Slice 1 is complete and deployable: the Unstop crawl runs end to end against the
-recorded corpus, 109 tests pass with no network, and the dashboard renders live
-listings with verdict badges. Next is Slice 2 (more platforms, dedupe,
-eligibility) per `docs/PLAN.md`.
+Slice 1 is complete: the Unstop crawl runs end to end against the recorded
+corpus, and the dashboard renders live listings with verdict badges.
+
+```bash
+py -m pytest -q     # 114 passed
+```
+
+The count depends on one optional dependency: **114** with `neatlogs`
+installed, **112 passed, 2 skipped** without it. Two tests `importorskip` when
+the package is absent — the key is not what changes the count. Both paths run
+offline, with no network access.
+
+> **The crawl reads recorded fixtures, not the live web.** Slice 1's input is
+> the versioned corpus in `fixtures/`, which is what makes the suite offline and
+> the demo reproducible. A verdict here reflects a recorded payload, not a
+> source that was fetched a minute ago. Live collection and scheduled refresh
+> are not implemented.
+
+Next is Slice 2 (more platforms, dedupe, eligibility) per `docs/PLAN.md`.

@@ -10,7 +10,13 @@ from datetime import datetime, timedelta, timezone
 from deadmon.adapters.unstop import UnstopScraper
 from deadmon.candidate import make_candidate
 from deadmon.verdict import CLOSED, LIVE, UNVERIFIED, VERDICTS
-from deadmon.verification import VerificationResult, verify, verify_crawl
+from deadmon.verification import (
+    LIVE,
+    REPLAYED,
+    VerificationResult,
+    verify,
+    verify_crawl,
+)
 
 from tests.conftest import (
     CLOSED_FIXTURE,
@@ -181,3 +187,31 @@ def test_reachable_payload_replayed_offline():
     payload = KNOWN_GOOD_FIXTURE.read_bytes()
     results = verify_crawl(UnstopScraper().extract(payload), now=NOW)
     assert {r.verdict for r in results} == {LIVE}
+
+
+def test_a_replayed_payload_never_claims_the_page_is_up():
+    """Fail-closed honesty: the reason may not assert a live check.
+
+    Found by the cfo.ai reassessment: the reason used to read "page up,
+    deadline future, mode present" while nothing had fetched a page. Slice 1
+    replays recordings, so the verdict may rest on the payload but must not
+    claim the web was verified.
+    """
+    result = verify(candidate(FUTURE), now=NOW)
+    assert result.verdict == LIVE
+    assert "not a live source check" in result.reason.lower()
+    assert "page up" not in result.reason.lower()
+
+
+def test_live_provenance_is_the_only_thing_that_may_claim_a_response():
+    replayed = verify(candidate(FUTURE), now=NOW, provenance=REPLAYED)
+    fetched = verify(candidate(FUTURE), now=NOW, provenance=LIVE)
+    assert replayed.verdict == fetched.verdict == LIVE
+    assert replayed.reason != fetched.reason
+    assert "source responded" in fetched.reason.lower()
+    assert "source responded" not in replayed.reason.lower()
+
+
+def test_verify_crawl_defaults_to_replayed_not_live():
+    candidates = [candidate(FUTURE)]
+    assert "not a live source check" in verify_crawl(candidates, now=NOW)[0].reason.lower()
