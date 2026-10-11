@@ -599,6 +599,20 @@
   color: var(--color-mono);
 }
 
+/* ---- Contrast floors ------------------------------------------------------
+   --color-mono clears AA on the white ground only (4.74:1). Measured on the
+   two tinted grounds deadmon actually paints: 4.39:1 on --color-paper-warm
+   and 4.30:1 on --color-signal-wash. Any label or unit that lands on a
+   tinted ground switches to --color-ink-muted (4.94:1 / 4.83:1) rather than
+   darkening the token itself, which would collide with ink-muted.
+   -------------------------------------------------------------------------- */
+
+.band--warm .mono-label,
+.tier--feature .mono-label,
+.tier--feature .tier__unit {
+  color: var(--color-ink-muted);
+}
+
 /* ---- Narrow --------------------------------------------------------------- */
 
 @media (max-width: 768px) {
