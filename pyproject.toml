@@ -11,9 +11,23 @@ dependencies = []
 
 [project.optional-dependencies]
 test = ["pytest>=8"]
+# Optional: when present AND NEATLOGS_API_KEY is set, every crawl run is traced to
+# neatlogs instead of the local JSON sink. Never required - tracing must not be
+# able to break a crawl run, so tracing.py degrades to local when it is absent.
+tracing = ["neatlogs"]
+
+[project.scripts]
+# `deadmon-crawl` on PATH, so the deploy unit does not depend on PYTHONPATH.
+deadmon-crawl = "deadmon.crawl:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+# The versioned DDL travels inside the package: storage.py reads it from
+# Path(__file__).parent, so a wheel built without these files cannot open a
+# database at all.
+deadmon = ["schema/*.sql"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
