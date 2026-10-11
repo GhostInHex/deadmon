@@ -38,8 +38,12 @@ const COMMANDS = [
 ];
 export default function JudgesPage() {
   return (
-    <main className="page">
+    <>
       <Nav />
+
+      {/* main holds the content only: nav and footer are repeated chrome and
+          must not sit inside the landmark. */}
+      <main id="main">
       <div className="hero">
         <span className="badge"><span className="badge__dot" />For judges</span>
         <h1 className="display">
@@ -105,7 +109,9 @@ export default function JudgesPage() {
           </div>
         </div>
       </section>
+      </main>
+
       <Footer />
-    </main>
+    </>
   );
 }
