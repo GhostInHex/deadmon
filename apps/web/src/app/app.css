@@ -395,9 +395,12 @@
   color: var(--color-ink-muted);
 }
 
-/* Unverified stays visible, not hidden (ADR-0007). */
-.card--greyed { opacity: var(--opacity-faint); }
-.card--greyed:hover { opacity: 1; }
+/* Unverified stays visible, not hidden (ADR-0007).
+   De-emphasis is carried by colour, never by opacity: --opacity-faint is
+   decoration-only per design.md's contrast floor, and at 0.4 over white the
+   close line measures 1.74:1 and the source meta 1.69:1. ink-muted on white
+   is 5.33:1, so the group still reads as the quieter one. */
+.card--greyed .card__title { color: var(--color-ink-muted); }
 
 .sources { list-style: none; margin: 0; padding: 0; }
 
