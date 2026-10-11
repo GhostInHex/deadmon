@@ -125,13 +125,16 @@ body {
 [data-theme='dark'] {
   --color-paper: #121212;
   --color-paper-warm: #1c1c1c;
-  --color-ink: #edeae6;        /* was the GROUND, now it is the TEXT */
+  --color-ink: #edeae6;        -- was the GROUND, now it is the TEXT
   --color-ink-deep: #ffffff;
   --color-ink-muted: #a8a29a;
-  --color-rule: #2e2e2e;      /* lightens instead of darkening */
+  --color-rule: #2e2e2e;       -- lightens instead of darkening
   --color-rule-strong: #3d3d3d;
-  --color-signal: #ff8a63;    /* lightened for legibility on dark */
+  --color-signal: #ff8a63;     -- lightened for legibility on dark
   --color-signal-deep: #ffa07d;
   --color-signal-wash: #2a1a14;
 }
+
+Do not nest block comments inside this block: the first inner close marker
+ends the outer comment early and PostCSS parses the rest as declarations.
 */
