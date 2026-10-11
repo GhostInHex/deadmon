@@ -640,6 +640,7 @@
 
 .band--warm .mono-label,
 .band--warm .stat__label,
+.band--warm .table th,
 .tier--feature .mono-label,
 .tier--feature .tier__unit {
   color: var(--color-ink-muted);
