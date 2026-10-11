@@ -1,0 +1,572 @@
+{
+  "baseline": "unstop-extraction-known-good",
+  "fixture": "fixtures/unstop/hackathons-open.json",
+  "crawler": "unstop",
+  "recorded": "2026-10-11",
+  "note": "Extraction output for the known-good fixture (ticket 03, ADR-0015). The count and populated-field sets are the targets the adapter is validated against; fixture bytes stay untouched.",
+  "count": 25,
+  "required_fields_populated": {
+    "title": 25,
+    "source_url": 25,
+    "registration_close": 25,
+    "mode": 25
+  },
+  "modes": [
+    "hybrid",
+    "offline",
+    "online"
+  ],
+  "candidates": [
+    {
+      "title": "HACK ATTACK — 8-Hour Inter-College Hackathon ",
+      "source_url": "https://unstop.com/hackathons/hack-attack-8-hour-inter-college-hackathon-amc-engineering-college-amcec-bengaluru-1766831",
+      "mode": "offline",
+      "prize_summary": "",
+      "team_size_rule": "1-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-05T18:30:00+00:00",
+      "registration_close": "2026-10-13T09:32:23+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "The Outpost",
+      "source_url": "https://unstop.com/hackathons/the-outpost-frontend-arena-1766381",
+      "mode": "online",
+      "prize_summary": "",
+      "team_size_rule": "1 participant",
+      "eligibility_rules": [
+        "All"
+      ],
+      "registration_open": "2026-10-10T05:30:00+00:00",
+      "registration_close": "2026-10-29T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "CognitionNext '26",
+      "source_url": "https://unstop.com/hackathons/cognext-agent-force-vjti-mumbai-1765869",
+      "mode": "hybrid",
+      "prize_summary": "",
+      "team_size_rule": "1-2 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-08T18:30:00+00:00",
+      "registration_close": "2026-10-21T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Sphinx 26",
+      "source_url": "https://unstop.com/hackathons/sphinx-26-hackerss-unity-1767767",
+      "mode": "offline",
+      "prize_summary": "",
+      "team_size_rule": "1-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-07T18:30:00+00:00",
+      "registration_close": "2026-10-28T06:31:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Blitz'26 - Technical Coding",
+      "source_url": "https://unstop.com/hackathons/blitz26-technical-coding-mookambigai-college-of-engineering-1768744",
+      "mode": "online",
+      "prize_summary": "",
+      "team_size_rule": "1 participant",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Undergraduate"
+      ],
+      "registration_open": "2026-10-09T18:30:00+00:00",
+      "registration_close": "2026-10-23T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Threws Odyssey 2026",
+      "source_url": "https://unstop.com/hackathons/threws-odyssey-2026-threws-the-research-world-1766434",
+      "mode": "online",
+      "prize_summary": "Total Prize Pool: ₹150,000",
+      "team_size_rule": "1-4 participants",
+      "eligibility_rules": [
+        "Experienced Professionals",
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Fresher",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-05T18:30:00+00:00",
+      "registration_close": "2026-10-30T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Ideathon",
+      "source_url": "https://unstop.com/hackathons/ideathon-ram-lal-anand-college-university-of-delhi-1768697",
+      "mode": "offline",
+      "prize_summary": "1st Rank: ₹1,500; 2nd Rank: ₹1,000; 3rd Rank: ₹750",
+      "team_size_rule": "1-2 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-09T18:30:00+00:00",
+      "registration_close": "2026-10-12T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "NexHack 3.0 — Build What's Next",
+      "source_url": "https://unstop.com/hackathons/nexhack-30-build-whats-next-nexhack-30-build-whats-next-nexhack-1768863",
+      "mode": "online",
+      "prize_summary": "",
+      "team_size_rule": "1-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-10T18:30:00+00:00",
+      "registration_close": "2026-10-24T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Cascade’26 — Flagship Hackathon",
+      "source_url": "https://unstop.com/hackathons/cascade26-flagship-hackathon-tantrafiesta26-iiitn-1766233",
+      "mode": "hybrid",
+      "prize_summary": "All Winners: ₹200,000 — Prize pool up to ₹2,00,000, including cash prizes and goodies across four themes, the Side Quest, and the Best Women in Tech Team Award.",
+      "team_size_rule": "3-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "School Students",
+        "Fresher",
+        "Management",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-10T18:30:00+00:00",
+      "registration_close": "2026-10-19T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "ChronoForge",
+      "source_url": "https://unstop.com/hackathons/chronoforge-nitk-surathkal-1768719",
+      "mode": "hybrid",
+      "prize_summary": "Winner - Overall Hackathon: ₹12,000; Runner Up - Overall Hackathon: ₹8,000; Winner - Agentic AI Track: ₹8,000; Runner Up - Agentic AI: ₹5,000; Winner - Cyber Security Track: ₹8,000; Runner Up - Cyber Security Track: ₹5,000; Goodies: ₹4,000",
+      "team_size_rule": "2-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Undergraduate"
+      ],
+      "registration_open": "2026-10-10T18:30:00+00:00",
+      "registration_close": "2026-10-18T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "CODE RED — Competitive Programming Contest",
+      "source_url": "https://unstop.com/hackathons/code-red-competitive-programming-contest-xordium-50-birla-institute-of-technology-bit-mesra-patna-campus-1768869",
+      "mode": "online",
+      "prize_summary": "",
+      "team_size_rule": "1 participant",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-09T18:30:00+00:00",
+      "registration_close": "2026-10-24T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Blackout CTF",
+      "source_url": "https://unstop.com/hackathons/blackout-ctf-nexploit-1768853",
+      "mode": "online",
+      "prize_summary": "1st Rank: Physical Trophy + Certificate + Nexploit Badges; 2nd Rank: Physical Certificate + Nexploit Badges; 3rd Rank: Digital Certificate + Nexploit Badges; Other Participants: Certificate of Participation",
+      "team_size_rule": "1-4 participants",
+      "eligibility_rules": [
+        "All"
+      ],
+      "registration_open": "2026-10-09T18:30:00+00:00",
+      "registration_close": "2026-10-24T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "CodersInPune Hackathon - HackWIthPune",
+      "source_url": "https://unstop.com/hackathons/codersinpune-hackathon-hackwithpune-1768758",
+      "mode": "online",
+      "prize_summary": "1st Rank: 2000$ prize pool | Paid internship and Incubation opportunities; 2nd Rank: 2000$ prize pool | Paid internship and Incubation opportunities; 3rd Rank: 2000$ prize pool | Paid internship and Incubation opportunities; All participants: .xyz domain | Verified Certificate | 600$ credits",
+      "team_size_rule": "1-4 participants",
+      "eligibility_rules": [
+        "All"
+      ],
+      "registration_open": "2026-10-06T18:30:00+00:00",
+      "registration_close": "2026-11-04T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Startupathon Founders League",
+      "source_url": "https://unstop.com/hackathons/startupathon-founders-league-persist-ventures-1766843",
+      "mode": "online",
+      "prize_summary": "Winner: ₹25,000 — 10% equity, monthly stipend & a full startup stack.; 1st runner up: Interview for a role at Persist Ventures + fast-track into the next Founders League.; 2nd Runner Up: Interview for a role at Persist Ventures + fast-track into the next Founders League.",
+      "team_size_rule": "1 participant",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-09T02:30:00+00:00",
+      "registration_close": "2026-10-30T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Hack@BVP 8.0",
+      "source_url": "https://unstop.com/hackathons/hack-at-bvp-80-bharati-vidyapeeths-college-of-engineering-1768545",
+      "mode": "hybrid",
+      "prize_summary": "Prize Pool (Cash + Goodies): 30 LAKHS+",
+      "team_size_rule": "2-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-09T16:30:00+00:00",
+      "registration_close": "2026-10-16T13:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Code Auction",
+      "source_url": "https://unstop.com/hackathons/code-auction-guru-tegh-bahadur-4th-centenary-engineering-college-delhi-1768506",
+      "mode": "offline",
+      "prize_summary": "1st Rank: Trophy and Goodies; 2nd Rank: Trophy and Goodies; 3rd Rank: Trophy and Goodies",
+      "team_size_rule": "2-4 participants",
+      "eligibility_rules": [
+        "All"
+      ],
+      "registration_open": "2026-10-08T18:30:00+00:00",
+      "registration_close": "2026-10-20T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Kritical Hacks 2026",
+      "source_url": "https://unstop.com/hackathons/kritical-hacks-2026-igdtuw-delhi-1760989",
+      "mode": "offline",
+      "prize_summary": "Total Prize Pool: ₹175,000",
+      "team_size_rule": "2-5 participants",
+      "eligibility_rules": [
+        "Experienced Professionals",
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Fresher",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-09-23T18:30:00+00:00",
+      "registration_close": "2026-10-17T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "CRAFTCON 2K26",
+      "source_url": "https://unstop.com/hackathons/craftcon-2k26-desh-bhagat-university-1767851",
+      "mode": "offline",
+      "prize_summary": "1: ₹30,000; 2: ₹20,000; 3: ₹10,000",
+      "team_size_rule": "2-6 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-07T18:30:00+00:00",
+      "registration_close": "2026-10-19T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Stem for Impact 24hrs Hackathon",
+      "source_url": "https://unstop.com/hackathons/stem-for-impact-24hrs-hackathon-presidency-university-pu-bangalore-1763829",
+      "mode": "offline",
+      "prize_summary": "Champion: ₹20,000; Runner-Up: ₹15,000; Second Runner-Up: ₹10,000",
+      "team_size_rule": "5 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate"
+      ],
+      "registration_open": "2026-10-07T18:30:00+00:00",
+      "registration_close": "2026-10-31T18:30:44+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "D3COY",
+      "source_url": "https://unstop.com/hackathons/d3coy-shri-vile-parle-kelavani-mandals-dwarkadas-j-sanghvi-college-of-engineering-djsce-mumbai-1767673",
+      "mode": "offline",
+      "prize_summary": "1st Rank: ₹75,000 — Cash + Inkind; 2nd Rank: ₹60,000 — Cash + Inkind; 3rd Rank: ₹50,000 — Cash + Inkind; Top 15 Teams: 80% Off on Crypto Forensic Technology Training Program; All Participants: 50% Off on Crypto Forensic Technology Training Program",
+      "team_size_rule": "2-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Undergraduate",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-09T18:30:00+00:00",
+      "registration_close": "2026-10-25T14:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Ecclesia 2026",
+      "source_url": "https://unstop.com/hackathons/ecclesia-2026-assam-down-town-university-1768309",
+      "mode": "offline",
+      "prize_summary": "prize pool: ₹20,000; Certificate For Finalists: Certificate",
+      "team_size_rule": "2-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-08T18:30:00+00:00",
+      "registration_close": "2026-10-26T18:30:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Nexora'26",
+      "source_url": "https://unstop.com/hackathons/nexora26-c-abdul-hakeem-college-of-engineering-and-technology-cahcet-veppur-tamil-nadu-1765539",
+      "mode": "offline",
+      "prize_summary": "",
+      "team_size_rule": "1-3 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-03T18:30:00+00:00",
+      "registration_close": "2026-10-12T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Designathon",
+      "source_url": "https://unstop.com/hackathons/designathon-tantrafiesta26-iiitn-1767529",
+      "mode": "hybrid",
+      "prize_summary": "Winner: ₹20,000; !st Runner- Up: ₹12,000; 2nd Runner -Up: ₹8,000; Participants: Certificate",
+      "team_size_rule": "2-4 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate",
+        "Management",
+        "Medical",
+        "Law",
+        "Arts, Commerce, Sciences & Others"
+      ],
+      "registration_open": "2026-10-10T06:30:00+00:00",
+      "registration_close": "2026-10-19T18:29:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "Keep Alive ’26",
+      "source_url": "https://unstop.com/hackathons/keep-alive-26-iiitn-1766226",
+      "mode": "hybrid",
+      "prize_summary": "Winner: ₹12,000 — Cash prize, merit certificates and goodies; 1st Runner-up: ₹7,000 — Cash prize, merit certificates and goodies; 2nd Runner-up: ₹4,000 — Cash prize, merit certificates and goodies; Sharpest RCA Award: ₹2,000 — Highest total root-cause accuracy across all 10 finale incidents, among teams outside the top 3; All finalists: Certificate of participation and goodies for every finalist present at the finale",
+      "team_size_rule": "3 participants",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Postgraduate",
+        "Undergraduate"
+      ],
+      "registration_open": "2026-10-08T20:30:00+00:00",
+      "registration_close": "2026-10-18T17:59:00+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    },
+    {
+      "title": "FlashCode",
+      "source_url": "https://unstop.com/hackathons/flashcode-tantrafiesta26-iiitn-1765827",
+      "mode": "offline",
+      "prize_summary": "1: ₹4,000; 2: ₹3,000; 3: ₹2,000",
+      "team_size_rule": "1 participant",
+      "eligibility_rules": [
+        "Engineering Students",
+        "Undergraduate"
+      ],
+      "registration_open": "2026-10-09T18:30:00+00:00",
+      "registration_close": "2026-10-26T05:30:10+00:00",
+      "optional_present": [
+        "eligibility_rules",
+        "prize_summary",
+        "registration_open",
+        "team_size_rule"
+      ]
+    }
+  ]
+}
