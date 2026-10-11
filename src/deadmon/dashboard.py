@@ -300,7 +300,7 @@ def _summary(view: View) -> str:
 def _feed(view: View) -> str:
     cards = [
         "<article class='card'>"
-        "<h2>%s</h2>"
+        "<h3>%s</h3>"
         "<p class='close'>registration close <time>%s</time></p>%s</article>"
         % (
             html.escape(card.title),
@@ -317,7 +317,7 @@ def _feed(view: View) -> str:
 def _needs_attention(view: View) -> str:
     cards = [
         "<article class='card greyed'>"
-        "<h2>%s</h2>"
+        "<h3>%s</h3>"
         "<p class='close'>no credible registration close &middot; unverified</p>%s</article>"
         % (html.escape(card.title), _sources(card))
         for card in view.needs_attention
@@ -504,7 +504,7 @@ h2 {
   border-bottom: 1px solid var(--color-rule);
 }
 
-.card h2 {
+.card h3 {
   font-family: var(--webfont-body);
   font-size: var(--text-lg);
   font-weight: 500;
@@ -522,7 +522,7 @@ h2 {
    close line measures 1.74:1 and the source meta 1.69:1. hover-to-read is
    also unreachable by keyboard and touch, so it is gone. ink-muted on white
    is 5.33:1 and the group still reads as the quieter one. */
-.card.greyed h2 { color: var(--color-ink-muted); }
+.card.greyed h3 { color: var(--color-ink-muted); }
 
 .close {
   margin: 0 0 var(--spacing-3);
