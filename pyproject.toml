@@ -7,6 +7,8 @@ name = "deadmon"
 version = "0.1.0"
 description = "deadmon watches hackathon platforms so a student developer never misses a registration deadline."
 requires-python = ">=3.11"
+# The pipeline has no third-party dependencies. Everything it needs is stdlib,
+# which is what keeps a free-tier instance cheap and the test suite offline.
 dependencies = []
 
 [project.optional-dependencies]
@@ -14,7 +16,21 @@ test = ["pytest>=8"]
 # Optional: when present AND NEATLOGS_API_KEY is set, every crawl run is traced to
 # neatlogs instead of the local JSON sink. Never required - tracing must not be
 # able to break a crawl run, so tracing.py degrades to local when it is absent.
-tracing = ["neatlogs"]
+#
+# The floor is 1.4.26, not a bare "neatlogs": tracing.py calls
+# init(api_key=, endpoint=, workflow_name=), and every older SDK's init() takes
+# only (api_key, tags, debug). Installing one raises TypeError inside the try
+# block, which the fail-safe swallows into a silent fall back to the local sink -
+# the crawl looks fine and every trace is local. Pinning the floor turns a quiet
+# misconfiguration into an install error.
+#
+# The marker matters as much as the floor. neatlogs >= 1.2.0 declares
+# Requires-Python >=3.10,<3.14, so on 3.13/3.14 pip cannot see any version above
+# 1.1.8 and would resolve straight back to the broken one. Restricting the extra
+# to <3.14 means an unsupported interpreter installs no tracing at all - which is
+# visible - instead of a plausible-looking broken one. deadmon itself runs on any
+# 3.11+; only the optional sink is bounded.
+tracing = ["neatlogs>=1.4.26; python_version<'3.14'"]
 
 [project.scripts]
 # `deadmon-crawl` on PATH, so the deploy unit does not depend on PYTHONPATH.

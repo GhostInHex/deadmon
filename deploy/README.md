@@ -44,12 +44,30 @@ sudo sh -c 'echo "NEATLOGS_API_KEY=..." >> /etc/deadmon/env'
 Install the optional extra to actually reach neatlogs:
 
 ```bash
-sudo /opt/deadmon/venv/bin/pip install 'neatlogs'   # or: pip install '/opt/deadmon[tracing]'
+sudo /opt/deadmon/venv/bin/pip install '/opt/deadmon[tracing]'
 ```
+
+> **Do not `pip install neatlogs` unpinned.** The `tracing` extra carries a
+> `>=1.4.26` floor for a reason. An older SDK's `init()` takes only
+> `(api_key, tags, debug)`, so `tracing.py`'s call with `endpoint=` and
+> `workflow_name=` raises `TypeError` inside the try block. The fail-safe
+> swallows it and falls back to the local sink, so **the crawl looks completely
+> healthy while every trace stays local** - and the log line to look for is
+> `neatlogs unavailable`. Check it is really tracing:
+>
+> ```bash
+> sudo journalctl -u deadmon | grep -c 'neatlogs unavailable'   # want 0
+> curl -s localhost:8080/runs.json | grep -o 'neatlogs://' | head -1
+> ```
 
 `tracing.py` only picks that sink when the package imports **and** the key is
 set, and it swallows any failure - a broken tracing service must never take a
-crawl run down with it (ticket 07).
+crawl run down with it (ticket 07). That property is correct and is why this
+misconfiguration hides so well.
+
+The SDK supports Python `>=3.10,<3.14`, so the venv must not be a 3.14
+interpreter; on 3.14 the install fails and tracing silently stays local.
+Check with `/opt/deadmon/venv/bin/python -c "import sys; print(sys.version)"`.
 
 ### The service
 
