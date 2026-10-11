@@ -1,0 +1,777 @@
+{
+ "_double": {
+  "kind": "test double, not a recording",
+  "prescribed_by": ".scratch/slice-1/issues/02-record-unstop-fixture-versions.md",
+  "built_by": ".scratch/slice-1/issues/04-verification-verdict.md",
+  "recorded_source": "fixtures/unstop/hackathons-open.json (recorded 2026-10-11, unmodified)",
+  "what_was_changed": "end_date and regnRequirements.end_regn_dt / start_regn_dt set to \"TBA\" so the registration close is unusable; every other field is the recorded value",
+  "exercises": "the unverified verdict (ADR-0002) - indeterminate, never asserted as fact",
+  "created": "2026-10-11"
+ },
+ "data": {
+  "current_page": 1,
+  "data": [
+   {
+    "id": 1766831,
+    "public_url": "hackathons/hack-attack-8-hour-inter-college-hackathon-amc-engineering-college-amcec-bengaluru-1766831",
+    "title": "HACK ATTACK — 8-Hour Inter-College Hackathon ",
+    "organization_id": 106663,
+    "type": "hackathons",
+    "subtype": "online_coding_challenge",
+    "regn_open": 1,
+    "updated_at": "2026-10-10T23:35:54+05:30",
+    "region": "offline",
+    "visibility": "public",
+    "details": "<p><strong>HACK ATTACK &mdash; 8-Hour Inter-College Hackathon</strong></p>\n<p><strong>AMC Engineering College presents HACK ATTACK &mdash; an 8-Hour Inter-College Hackathon</strong> where students come together to build, collaborate, innovate, and create impactful technology solutions to real-world problems.</p>\n<p>Participants will get the opportunity to work on problem statements revealed on the day of the hackathon and develop working prototypes within a limited time frame.</p>\n<p><strong>Event Details</strong></p>\n<ul>\n<li><strong>Date:</strong> 15 October 2026</li>\n<li><strong>Reporting Time:</strong> 8:30 AM</li>\n<li><strong>Duration:</strong> 8 Hours</li>\n<li><strong>Venue:</strong> AMC Engineering College, Bengaluru</li>\n<li><strong>Event Type:</strong> Inter-College Hackathon</li>\n<li><strong>Participation:</strong> Open to students from all departments/specializations</li>\n<li><strong>Prize Pool:</strong> ₹20,000</li>\n</ul>\n<p><strong>Tracks</strong></p>\n<p>Participants can build solutions under any one of the following three tracks:</p>\n<p><strong>1. AI &amp; ML</strong></p>\n<p>Build intelligent solutions that address real-world problems using Artificial Intelligence, Machine Learning, Generative AI, Computer Vision, NLP, or related technologies.</p>\n<p><strong>2. Web &amp; App Development</strong></p>\n<p>Create useful and impactful web or mobile applications that solve practical problems and improve user experiences.</p>\n<p><strong>3. Sustainability &amp; Social Impact</strong></p>\n<p>Develop technology-driven solutions that contribute towards sustainability, accessibility, community welfare, or meaningful social impact.</p>\n<p><strong>Team Formation &amp; Eligibility</strong></p>\n<ul>\n<li>The hackathon is open to <strong>college/university students</strong>.</li>\n<li>Students from <strong>any academic specialization or department</strong> can participate.</li>\n<li><strong>Inter-college teams are allowed.</strong></li>\n<li><strong>Inter-specialization/inter-department teams are allowed.</strong></li>\n<li>Teams can consist of <strong>2&ndash;4 members</strong>.</li>\n<li>A participant can be part of <strong>only one team</strong>.</li>\n<li>Teams must register with accurate participant and college details.</li>\n<li>All team members must carry a valid college/student ID for verification.</li>\n</ul>\n<p>Problem Statements &amp; Format</p>\n<ul>\n<li>Problem statements will be <strong>revealed on the day of the hackathon</strong>.</li>\n<li>Teams will select a problem statement aligned with one of the available tracks.</li>\n<li>Participants will have <strong>8 hours</strong> to ideate, develop, test, and present their solution.</li>\n<li>The primary objective is to produce a <strong>working prototype/MVP</strong> that demonstrates the proposed solution.</li>\n<li>Teams are expected to explain the problem, their approach, implementation, and impact during the final presentation/demo.</li>\n<li>The number and details of problem statements will be announced at the beginning of the hackathon.</li>\n</ul>\n<p><strong>Hackathon Schedule</strong></p>\n<p><strong>8:30 AM &mdash; Reporting &amp; Registration Verification</strong><br /><strong>Hackathon Briefing &mdash; Problem Statements &amp; Guidelines Revealed</strong><br /><strong>Development Phase &mdash; 8 Hours</strong><br /><strong>Final Submission &amp; Demo &mdash; At the end of the hackathon</strong></p>\n<p>The exact submission and presentation instructions will be communicated to participants during the event.</p>\n<p><strong>Rules</strong></p>\n<ol start=\"1\">\n<li>Each team must consist of <strong>2&ndash;4 participants</strong>.</li>\n<li>Participants must register through the official registration process.</li>\n<li>Participants can be part of <strong>only one team</strong>.</li>\n<li>Teams may use technologies, frameworks, libraries, APIs, and development tools relevant to their solution, subject to the hackathon guidelines.</li>\n<li>The solution should primarily be developed during the hackathon. Pre-existing libraries, frameworks, boilerplate code, and development tools may be used, but submitting an already-built project as the final solution is not permitted.</li>\n<li><strong>Plagiarism or direct copying of another team's solution will result in disqualification.</strong></li>\n<li>Teams must submit their project within the specified deadline.</li>\n<li>Teams must be able to demonstrate their working solution to the judging panel.</li>\n<li>Teams are responsible for bringing their own laptops and required development equipment.</li>\n<li>Participants must follow the instructions provided by the organizers and mentors throughout the event.</li>\n<li>Any form of misconduct, cheating, harassment, or disruption of the event may result in disqualification.</li>\n<li>The organizers reserve the right to disqualify teams that violate the rules or provide misleading information during registration.</li>\n<li>The decision of the judging panel and organizing committee will be <strong>final and binding</strong>.</li>\n</ol>\n<p><strong>Judging Criteria</strong></p>\n<p>Projects may be evaluated based on:</p>\n<ul>\n<li><strong>Innovation &amp; Originality</strong></li>\n<li><strong>Problem Understanding</strong></li>\n<li><strong>Technical Implementation</strong></li>\n<li><strong>Functionality &amp; Working Prototype</strong></li>\n<li><strong>Real-World Impact</strong></li>\n<li><strong>Feasibility &amp; Scalability</strong></li>\n<li><strong>Presentation &amp; Demonstration</strong></li>\n</ul>\n<p><strong>What Participants Get</strong></p>\n<ul>\n<li>Opportunity to compete in an <strong>inter-college hackathon</strong></li>\n<li><strong>₹20,000 prize pool</strong></li>\n<li>Mentorship and guidance from industry experts</li>\n<li>Networking with fellow developers and innovators</li>\n<li>Opportunity to showcase technical and problem-solving skills</li>\n<li>Certificates for participants</li>\n<li>Prizes and goodies for winning teams</li>\n</ul>\n<p><strong>Title Sponsor</strong></p>\n<p><strong>Connect2future &mdash; Unlock the Power of Connectivity</strong></p>\n<p>The event is supported by Connect2future, helping bring together students, technology, innovation, and real-world problem solving.</p>\n<p><strong>Important Note</strong></p>\n<ul>\n<li>Participants are requested to report by <strong>8:30 AM on 15 October 2026</strong> at <strong>AMC Engineering College, Bengaluru</strong>. Further instructions regarding problem statements, submissions, judging, and presentations will be provided at the venue.</li>\n</ul>\n<p><strong>️Registration &amp; Slots</strong><br /><br />https://docs.google.com/forms/d/e/1FAIpQLSf92WHyYsMyQbhx5F4RBeknR_F1EFHMsqR5AGvq2XI0JKd1tA/viewform?usp=publish-editor</p>\n<ul>\n<li><strong>Limited team slots available</strong> due to venue and event capacity.</li>\n<li><strong>Early-bird registrations are FREE for the first few teams.</strong></li>\n<li>Once the free early-bird slots are filled, registration may be subject to the applicable registration fee.</li>\n<li>Registrations will be accepted on a <strong>first-come, first-served basis</strong>.</li>\n<li>Participants are encouraged to register early to secure their spot.</li>\n</ul>",
+    "short_id": "CYjOgdk",
+    "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/150x150/uploadedManual-6ac506d203399_cs-ai.jpeg",
+    "organisation": {
+     "id": 106663,
+     "name": "AMC Engineering College (AMCEC), Bengaluru",
+     "public_url": "c/amc-engineering-college-amcec-bengaluru-placement-interview-competitions-articles-videos-106663",
+     "logoUrl": "https://d8it4huxumps7.cloudfront.net/images/partners/partners75/66d1b94decb01_download__3_.png",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/images/partners/partners125/66d1b94decb01_download__3_.png",
+     "show_evaluator_login_link": false,
+     "official_email_domains": null,
+     "tier": null
+    },
+    "seo_url": "https://unstop.com/hackathons/hack-attack-8-hour-inter-college-hackathon-amc-engineering-college-amcec-bengaluru-1766831",
+    "status": "LIVE",
+    "tags": [],
+    "thumb": null,
+    "isPaid": true,
+    "festival": null,
+    "prizes": [],
+    "address_with_country_logo": {
+     "id": 1861272,
+     "address": "AMC ENGINEERING COLLEGE",
+     "city": "Bangalore",
+     "state": "Karnataka",
+     "country": {
+      "id": 94,
+      "name": "India",
+      "alpha_2": "in",
+      "alpha_3": "ind",
+      "iso": "IN",
+      "iso3": "IND",
+      "numcode": 356,
+      "phonecode": "+91   ",
+      "logos": {
+       "very_small": "https://d8it4huxumps7.cloudfront.net/images/flags/16x16/in.png",
+       "small": "https://d8it4huxumps7.cloudfront.net/images/flags/24x24/in.png",
+       "medium": "https://d8it4huxumps7.cloudfront.net/images/flags/32x32/in.png",
+       "large": "https://d8it4huxumps7.cloudfront.net/images/flags/48x48/in.png",
+       "xlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/64x64/in.png",
+       "xxlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/128x128/in.png"
+      }
+     },
+     "zip": null,
+     "lat": null,
+     "lng": null,
+     "addressable_id": 1766831,
+     "addressable_type": "App\\Model\\Opportunity",
+     "created_at": "2026-10-06T20:01:56+05:30",
+     "updated_at": "2026-10-10T23:35:13+05:30",
+     "deleted_at": null,
+     "address_title": "event_location",
+     "city_id": 57933,
+     "sort_order": 1,
+     "state_code": null,
+     "country_code": null
+    },
+    "short_url": "https://unstop.com/o/CYjOgdk",
+    "workfunction": [
+     {
+      "id": 2004,
+      "name": "Software Development",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 2004,
+       "id": 6508649,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 2107,
+      "name": "AI Engineering",
+      "description": "",
+      "created_at": "2026-04-09T00:17:10+05:30",
+      "updated_at": "2026-04-09T00:17:10+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 2107,
+       "id": 6508650,
+       "ai_generated": true
+      }
+     }
+    ],
+    "assignedTag": {
+     "tag": null
+    },
+    "opportunity_config": {
+     "id": 1461115,
+     "opportunity_id": 1766831,
+     "banner_config": "{\"color\":\"color-bg5\",\"text\":\"HACK ATTACK \\u2014 8-Hour Inter-College Hackathon | AMC Engineering College\",\"type\":6,\"banner_data\":[7]}",
+     "show_registrations_count": 1,
+     "show_impressions": 1,
+     "show_team_size": 1,
+     "show_region": 1
+    },
+    "payment_services": [
+     {
+      "id": 738841,
+      "amount": 100,
+      "required": 1,
+      "entity_id": 1766831,
+      "entity_type": "App\\Model\\Opportunity"
+     }
+    ],
+    "filters": [
+     {
+      "id": 422,
+      "name": "Engineering Students",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "engineering",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/engineering.svg"
+     },
+     {
+      "id": 424,
+      "name": "Postgraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "postgraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/postgraduate.svg"
+     },
+     {
+      "id": 426,
+      "name": "Undergraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "undergraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/undergraduate.svg"
+     },
+     {
+      "id": 4022,
+      "name": "Management",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4023,
+      "name": "Medical",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4024,
+      "name": "Law",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4025,
+      "name": "Arts, Commerce, Sciences & Others",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     }
+    ],
+    "required_skills": [
+     {
+      "id": 1373,
+      "skill": "Problem Solving",
+      "skill_name": "Problem Solving",
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 1373,
+       "id": 6508644,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647511,
+      "skill": "Teamwork and Collaboration",
+      "skill_name": "Teamwork and Collaboration",
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 647511,
+       "id": 6508645,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645880,
+      "skill": "Creativity",
+      "skill_name": "Creativity",
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 645880,
+       "id": 6508646,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645580,
+      "skill": "Artificial Intelligence (AI)",
+      "skill_name": "Artificial Intelligence (AI)",
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 645580,
+       "id": 6508647,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647066,
+      "skill": "Public Speaking and Presentation Skills",
+      "skill_name": "Public Speaking and Presentation Skills",
+      "pivot": {
+       "entity_id": 1766831,
+       "subject_id": 647066,
+       "id": 6508648,
+       "ai_generated": true
+      }
+     }
+    ],
+    "locations": [],
+    "end_date": "TBA",
+    "approved_date": "2026-10-10 23:35:54 GMT+0530",
+    "viewsCount": 457,
+    "registerCount": 2,
+    "regnRequirements": {
+     "opportunity_id": 1766831,
+     "start_regn_dt": "TBA",
+     "end_regn_dt": "TBA",
+     "show_deadline": 1,
+     "min_team_size": 1,
+     "max_team_size": 4,
+     "work_location_type": "city",
+     "eligibility": "{\"sector\":[\"students\"],\"engineering\":[],\"bSchools\":[],\"arts\":[],\"medicine\":[],\"law\":[],\"others\":[\"all\"],\"experience\":[\"all\"],\"studentPassoutYearsSelected\":[\"all\"],\"fresherPassoutYearsSelected\":[\"all\"],\"schoolFilteredClasses\":[\"all\"],\"minMarks\":{\"high_school_perc\":0,\"high_school_cgpa\":0},\"locations\":[],\"location_type\":\"all\",\"professionalEligibility\":null,\"fresherEligibility\":null}",
+     "reg_status": "STARTED",
+     "remainingDaysArray": {
+      "durations": 2,
+      "text": " days left"
+     },
+     "remain_days": "2 days left",
+     "remaining_time": 219056
+    }
+   },
+   {
+    "id": 1766381,
+    "public_url": "hackathons/the-outpost-frontend-arena-1766381",
+    "title": "The Outpost",
+    "organization_id": 1992104,
+    "type": "hackathons",
+    "subtype": "online_coding_challenge",
+    "regn_open": 1,
+    "updated_at": "2026-10-11T00:16:50+05:30",
+    "region": "online",
+    "visibility": "public",
+    "details": "<h1>THE OUTPOST</h1>\n<h3>6-Hour Frontend Hackathon</h3>\n<p><strong>One Problem. One Builder. Six Hours.</strong></p>\n<h2>REGISTER NOW</h2>\n<p><strong>Registration Form:<a href=\"https://forms.gle/Vxob2D8VZJ1upsHQ7\"> click here fill</a></strong></p>\n<p><strong>Registration Fee:</strong> ₹30 per participant</p>\n<p><strong>Important Registration Instructions:</strong></p>\n<ul>\n<li>\n<p>Filling out the official registration form is mandatory to be eligible for participation.</p>\n</li>\n<li>\n<p>Participants must complete the ₹30 registration fee payment and submit valid payment details for verification.</p>\n</li>\n<li>\n<p>Only participants whose payments have been successfully verified will be added to the official WhatsApp group.</p>\n</li>\n<li>\n<p>All important announcements, the problem statement, event instructions, deadlines, and submission details will be shared through the official WhatsApp group.</p>\n</li>\n<li>\n<p>Submitting the form alone does not confirm your registration. Confirmation is subject to payment verification.</p>\n</li>\n</ul>\n<h2>About THE OUTPOST</h2>\n<p>Welcome to <strong>THE OUTPOST</strong>, a fast-paced individual frontend hackathon where creativity meets engineering.</p>\n<p>You will receive one problem statement and six hours to transform your ideas into a polished, functional, and responsive digital experience. Showcase your frontend development skills, experiment with modern technologies, and build something remarkable under pressure.</p>\n<h2>Hackathon Details</h2>\n<ul>\n<li>\n<p><strong>Format:</strong> Individual Participation</p>\n</li>\n<li>\n<p><strong>Duration:</strong> 6 Hours</p>\n</li>\n<li>\n<p><strong>Mode:</strong> Online</p>\n</li>\n<li>\n<p><strong>Domain:</strong> Frontend Development</p>\n</li>\n<li>\n<p><strong>Problem Statements:</strong> One</p>\n</li>\n<li>\n<p><strong>Backend Development:</strong> Not Allowed</p>\n</li>\n<li>\n<p><strong>Technology:</strong> Modern Frontend Stack Required</p>\n</li>\n</ul>\n<h2>Technology Requirements</h2>\n<p>Participants must use a modern frontend technology stack such as React, Next.js, Vue, Angular, Svelte, TypeScript, Tailwind CSS, or other modern frontend frameworks and libraries.</p>\n<p>Backend development is not permitted. Your project should demonstrate your own creativity, UI/UX decisions, technical skills, responsiveness, and problem-solving ability.</p>\n<h2>Dynamic Prize Pool</h2>\n<p>The prize pool will increase as registrations grow.</p>\n<ul>\n<li>\n<p><strong>Before 100 registrations:</strong> ₹500 prize pool</p>\n</li>\n<li>\n<p><strong>At 100 registrations:</strong> ₹1,500 prize pool</p>\n</li>\n</ul>\n<p>Further prize pool increases may be announced as additional registration milestones are reached.</p>\n<h2>Your Mission</h2>\n<p>One problem statement. Six hours. One builder.</p>\n<p>Think strategically, design thoughtfully, build independently, and deliver your best frontend experience before time runs out.</p>\n<p><strong>Welcome to THE OUTPOST. Your mission starts with registration.</strong></p>",
+    "short_id": "RpldzkP",
+    "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/150x150/uploadedManual-6ac3dfcc89d26_fa_logo.png",
+    "organisation": {
+     "id": 1992104,
+     "name": "Frontend Arena",
+     "public_url": "c/frontend-arena-1992104",
+     "logoUrl": "https://d8it4huxumps7.cloudfront.net/images/partners/new_organisation_image-RMmMryjk67436215400Wlc48KqEnW.png",
+     "logoUrl2": "https://d8it4huxumps7.cloudfront.net/images/partners/new_organisation_image-RMmMryjk67436215400Wlc48KqEnW.png",
+     "show_evaluator_login_link": false,
+     "official_email_domains": null,
+     "tier": null
+    },
+    "seo_url": "https://unstop.com/hackathons/the-outpost-frontend-arena-1766381",
+    "status": "LIVE",
+    "tags": [],
+    "thumb": null,
+    "isPaid": false,
+    "festival": null,
+    "prizes": [],
+    "address_with_country_logo": {
+     "id": 1860631,
+     "address": "",
+     "city": "",
+     "state": "",
+     "country": null,
+     "zip": null,
+     "lat": null,
+     "lng": null,
+     "addressable_id": 1766381,
+     "addressable_type": "App\\Model\\Opportunity",
+     "created_at": "2026-10-05T23:05:26+05:30",
+     "updated_at": "2026-10-11T00:08:35+05:30",
+     "deleted_at": null,
+     "address_title": "event_location",
+     "city_id": null,
+     "sort_order": 1,
+     "state_code": null,
+     "country_code": null
+    },
+    "short_url": "https://unstop.com/o/RpldzkP",
+    "workfunction": [
+     {
+      "id": 2005,
+      "name": "Frontend Development",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1766381,
+       "subject_id": 2005,
+       "id": 6508844,
+       "ai_generated": true
+      }
+     }
+    ],
+    "assignedTag": {
+     "tag": null
+    },
+    "opportunity_config": {
+     "id": 1460782,
+     "opportunity_id": 1766381,
+     "banner_config": "{\"color\":\"color-bg6\",\"text\":\"THE OUTPOST\",\"type\":1,\"banner_data\":[8]}",
+     "show_registrations_count": 1,
+     "show_impressions": 1,
+     "show_team_size": 1,
+     "show_region": 1
+    },
+    "payment_services": [],
+    "filters": [
+     {
+      "id": 420,
+      "name": "All",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "all",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/all.svg"
+     }
+    ],
+    "required_skills": [
+     {
+      "id": 644778,
+      "skill": "React.js",
+      "skill_name": "React.js",
+      "pivot": {
+       "entity_id": 1766381,
+       "subject_id": 644778,
+       "id": 6508839,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645265,
+      "skill": "TypeScript",
+      "skill_name": "TypeScript",
+      "pivot": {
+       "entity_id": 1766381,
+       "subject_id": 645265,
+       "id": 6508840,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647482,
+      "skill": "Tailwind CSS",
+      "skill_name": "Tailwind CSS",
+      "pivot": {
+       "entity_id": 1766381,
+       "subject_id": 647482,
+       "id": 6508841,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1481,
+      "skill": "UI/UX Design",
+      "skill_name": "UI/UX Design",
+      "pivot": {
+       "entity_id": 1766381,
+       "subject_id": 1481,
+       "id": 6508842,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1373,
+      "skill": "Problem Solving",
+      "skill_name": "Problem Solving",
+      "pivot": {
+       "entity_id": 1766381,
+       "subject_id": 1373,
+       "id": 6508843,
+       "ai_generated": true
+      }
+     }
+    ],
+    "locations": [],
+    "end_date": "TBA",
+    "approved_date": "2026-10-10 23:31:11 GMT+0530",
+    "viewsCount": 1,
+    "registerCount": 13,
+    "regnRequirements": {
+     "opportunity_id": 1766381,
+     "start_regn_dt": "TBA",
+     "end_regn_dt": "TBA",
+     "show_deadline": 1,
+     "min_team_size": 1,
+     "max_team_size": 1,
+     "work_location_type": "city",
+     "eligibility": null,
+     "reg_status": "STARTED",
+     "remainingDaysArray": {
+      "durations": 18,
+      "text": " days left"
+     },
+     "remain_days": "18 days left",
+     "remaining_time": 1633713
+    }
+   },
+   {
+    "id": 1765869,
+    "public_url": "hackathons/cognext-agent-force-vjti-mumbai-1765869",
+    "title": "CognitionNext '26",
+    "organization_id": 1722918,
+    "type": "hackathons",
+    "subtype": "online_coding_challenge",
+    "regn_open": 1,
+    "updated_at": "2026-10-10T22:21:30+05:30",
+    "region": "hybrid",
+    "visibility": "public",
+    "details": "<h1>CognitionNext '26</h1>\n<p><strong>CognitionNext '26</strong> is a two-round hackathon organized by <strong>Cognext AI in collaboration with Technovanza, VJTI</strong>, designed to bring together students passionate about <strong>Artificial Intelligence and Machine Learning</strong>.</p>\n<p>Participants will get an opportunity to showcase their AI expertise, build innovative solutions, compete for a <strong>₹1,00,000 prize pool</strong>, and potentially earn internship opportunities with Cognext AI.</p>\n<h2>Eligibility</h2>\n<ul>\n<li>\n<p>Open to students form <strong>all Engineering Colleges</strong>.</p>\n</li>\n<li>\n<p>Teams can consist of <strong>1&ndash;2 participants</strong>.</p>\n</li>\n<li>\n<p>Each participant can register with only one team.</p>\n</li>\n<li>\n<p>Participants must complete Round 1 to qualify for Round 2.</p>\n</li>\n</ul>\n<h2>Hackathon Theme</h2>\n<p><strong>Artificial Intelligence&nbsp;</strong></p>\n<p>Participants are encouraged to demonstrate their knowledge, projects, technical skills, and innovative applications of AI/ML.</p>\n<h1>Event Structure</h1>\n<h2>Round 1 &ndash; Online Screening Round</h2>\n<p><strong>Dates:</strong> 18th October 2026 &ndash; 21st October 2026<br /><strong>Mode:</strong> Online</p>\n<p>Round 1 will be a screening round based on participants' <strong>work, achievements, and contributions in Artificial Intelligence and Machine Learning</strong>.</p>\n<p>Participants will be required to submit:</p>\n<ul>\n<li>\n<p>A summary highlighting their significant work, achievements, and contributions in AI/ML.</p>\n</li>\n<li>\n<p>Their <strong>GitHub profile link</strong>.</p>\n</li>\n<li>\n<p>Links to relevant projects, repositories, deployed applications, research work, or other proof of work.</p>\n</li>\n</ul>\n<p>Participants are strongly encouraged to provide <strong>project links, GitHub repositories, or other relevant evidence</strong> supporting their submissions.</p>\n<p>The number of teams shortlisted for Round 2 will be announced by the organizers.</p>\n<h2>Round 2 &ndash; Offline Hackathon</h2>\n<p><strong>Dates:</strong> 23rd October 2026 &ndash; 24th October 2026<br /><strong>Mode:</strong> Offline<br /><strong>Venue:</strong> Veermata Jijabai Technological Institute (VJTI), Mumbai<br /><strong>Duration:</strong> 12 hours</p>\n<p>Shortlisted teams will participate in the offline hackathon and work on a problem statement based on <strong>Artificial Intelligence and Machine Learning</strong>.</p>\n<p>The <strong>problem statement, submission requirements, judging criteria, and weightages</strong> for Round 2 will be released by the organizers.</p>\n<p>Participants will be required to develop and submit their solution within the specified deadline.</p>\n<h1>Prizes &amp; Opportunities</h1>\n<h3>Total Prize Pool worth: ₹1,00,000</h3>\n<p>Participants can compete for:</p>\n<ul>\n<li>\n<p>Prize Pool</p>\n</li>\n<li>\n<p>Potential internship opportunities with <strong>Cognext AI</strong></p>\n</li>\n<li>\n<p>Certificates</p>\n</li>\n<li>\n<p>Opportunity to showcase AI skills and projects</p>\n</li>\n</ul>\n<p><strong>Internship details:</strong> To be announced by the organizers.</p>\n<h1>Rules &amp; Guidelines</h1>\n<ol start=\"1\">\n<li>\n<p>Teams may consist of <strong>1&ndash;2 participants</strong>.</p>\n</li>\n<li>\n<p>Each participant can register with only one team.</p>\n</li>\n<li>\n<p>Participants must complete Round 1 to qualify for Round 2.</p>\n</li>\n<li>\n<p>Round 1 submissions must include the required AI/ML work summary and GitHub profile.</p>\n</li>\n<li>\n<p>Round 2 teams must submit their final solution within the specified deadline.</p>\n</li>\n<li>\n<p>Plagiarism or submission of another participant's work may lead to disqualification.</p>\n</li>\n<li>\n<p>Participants must follow all instructions issued by the organizing team.</p>\n</li>\n<li>\n<p><strong>AI tools are allowed</strong> in the Round 2, as per the guidelines provided by the organizers.</p>\n</li>\n<li>\n<p>Rules regarding the use of AI tools, APIs, open-source code, and previously developed work will be communicated by the organizers.</p>\n</li>\n<li>\n<p>The decision of the organizing and judging team will be final.</p>\n</li>\n</ol>\n<h1>Registration Details</h1>\n<p><strong>Registration Fee:</strong> Free</p>\n<p><strong>Registration Window:</strong> till 21st October 2026</p>\n<p><strong>Participant Limit:</strong> 1&ndash;2 members per team</p>\n<p><strong>Round 1:</strong> 18th October 2026 &ndash; 21st October 2026</p>\n<p><strong>Round 2:</strong> 23rd October 2026 &ndash; 24th October 2026</p>\n<h1>Important Dates</h1>\n<table style=\"width: 53.775%; height: 109px;\">\n<tbody>\n<tr style=\"height: 18px;\">\n<th style=\"width: 26.7633%; height: 18px;\">Event</th>\n<th style=\"width: 71.3918%; height: 18px;\">Date</th>\n</tr>\n<tr style=\"height: 37px;\">\n<td style=\"width: 26.7633%; height: 37px;\">Registration</td>\n<td style=\"width: 71.3918%; height: 37px;\">till 21st Oct 2026</td>\n</tr>\n<tr style=\"height: 18px;\">\n<td style=\"width: 26.7633%; height: 18px;\">Round 1</td>\n<td style=\"width: 71.3918%; height: 18px;\">18th Oct 2026 &ndash; 21st Oct 2026</td>\n</tr>\n<tr style=\"height: 18px;\">\n<td style=\"width: 26.7633%; height: 18px;\">Round 2</td>\n<td style=\"width: 71.3918%; height: 18px;\">23rd Oct &ndash; 24th Oct 2026</td>\n</tr>\n<tr style=\"height: 18px;\">\n<td style=\"width: 26.7633%; height: 18px;\">Prize Pool</td>\n<td style=\"width: 71.3918%; height: 18px;\">₹1,00,000</td>\n</tr>\n</tbody>\n</table>\n<p><strong>Judging criteria and detailed Round 2 submission requirements will be released along with the problem statement.</strong></p>\n<h1>Why Participate?</h1>\n<ul>\n<li>\n<p>Showcase your <strong>AI/ML projects and technical achievements</strong>.</p>\n</li>\n<li>\n<p>Compete in a <strong>12-hour offline hackathon</strong> at VJTI.</p>\n</li>\n<li>\n<p>Win from a <strong>₹1,00,000 prize pool</strong>.</p>\n</li>\n<li>\n<p>Get an opportunity to connect with <strong>Cognext AI</strong>.</p>\n</li>\n<li>\n<p>Explore potential <strong>internship opportunities</strong>.</p>\n</li>\n<li>\n<p>Earn certificates and gain valuable hackathon experience.</p>\n</li>\n</ul>",
+    "short_id": "CoxgtmJ",
+    "logoUrl2": "https://d8it4huxumps7.cloudfront.net/uploads/images/150x150/uploadedManual-6ac335e8d6134_vjti_logo.png",
+    "organisation": {
+     "id": 1722918,
+     "name": "VJTI Mumbai ",
+     "public_url": "c/vjti-mumbai-recruiter-career-interview-selection-process-job-profile-articles-videos-1722918",
+     "logoUrl": "",
+     "logoUrl2": "",
+     "show_evaluator_login_link": false,
+     "official_email_domains": null,
+     "tier": null
+    },
+    "seo_url": "https://unstop.com/hackathons/cognext-agent-force-vjti-mumbai-1765869",
+    "status": "LIVE",
+    "tags": [],
+    "thumb": null,
+    "isPaid": false,
+    "festival": null,
+    "prizes": [],
+    "address_with_country_logo": {
+     "id": 1859570,
+     "address": "Veermata Jijabai Technological Institute (VJTI), Mumbai",
+     "city": "Mumbai",
+     "state": "Maharashtra",
+     "country": {
+      "id": 94,
+      "name": "India",
+      "alpha_2": "in",
+      "alpha_3": "ind",
+      "iso": "IN",
+      "iso3": "IND",
+      "numcode": 356,
+      "phonecode": "+91   ",
+      "logos": {
+       "very_small": "https://d8it4huxumps7.cloudfront.net/images/flags/16x16/in.png",
+       "small": "https://d8it4huxumps7.cloudfront.net/images/flags/24x24/in.png",
+       "medium": "https://d8it4huxumps7.cloudfront.net/images/flags/32x32/in.png",
+       "large": "https://d8it4huxumps7.cloudfront.net/images/flags/48x48/in.png",
+       "xlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/64x64/in.png",
+       "xxlarge": "https://d8it4huxumps7.cloudfront.net/images/flags/128x128/in.png"
+      }
+     },
+     "zip": null,
+     "lat": null,
+     "lng": null,
+     "addressable_id": 1765869,
+     "addressable_type": "App\\Model\\Opportunity",
+     "created_at": "2026-10-05T11:00:23+05:30",
+     "updated_at": "2026-10-10T21:56:45+05:30",
+     "deleted_at": null,
+     "address_title": "event_location",
+     "city_id": 133024,
+     "sort_order": 1,
+     "state_code": null,
+     "country_code": null
+    },
+    "short_url": "https://unstop.com/o/CoxgtmJ",
+    "workfunction": [
+     {
+      "id": 2176,
+      "name": "Agentic AI Engineer",
+      "description": "",
+      "created_at": "2026-02-06T23:31:46+05:30",
+      "updated_at": "2026-02-06T23:31:46+05:30",
+      "work_function_name": null,
+      "batch_id": 11,
+      "pivot": {
+       "entity_id": 1765869,
+       "subject_id": 2176,
+       "id": 6507581,
+       "ai_generated": true
+      }
+     }
+    ],
+    "assignedTag": {
+     "tag": null
+    },
+    "opportunity_config": {
+     "id": 1460377,
+     "opportunity_id": 1765869,
+     "banner_config": "{\"color\":\"color-bg7\",\"text\":\"Cognext Agent Force\",\"type\":1,\"banner_data\":[8]}",
+     "show_registrations_count": 1,
+     "show_impressions": 1,
+     "show_team_size": 1,
+     "show_region": 1
+    },
+    "payment_services": [],
+    "filters": [
+     {
+      "id": 422,
+      "name": "Engineering Students",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "engineering",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/engineering.svg"
+     },
+     {
+      "id": 424,
+      "name": "Postgraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "postgraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/postgraduate.svg"
+     },
+     {
+      "id": 426,
+      "name": "Undergraduate",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": "undergraduate",
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/undergraduate.svg"
+     },
+     {
+      "id": 4022,
+      "name": "Management",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4023,
+      "name": "Medical",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4024,
+      "name": "Law",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     },
+     {
+      "id": 4025,
+      "name": "Arts, Commerce, Sciences & Others",
+      "type": "eligible",
+      "subtype": null,
+      "file_name": null,
+      "domain_id": 0,
+      "icon_url": "https://d8it4huxumps7.cloudfront.net/images/icons/color_icons/.svg"
+     }
+    ],
+    "required_skills": [
+     {
+      "id": 645580,
+      "skill": "Artificial Intelligence (AI)",
+      "skill_name": "Artificial Intelligence (AI)",
+      "pivot": {
+       "entity_id": 1765869,
+       "subject_id": 645580,
+       "id": 6507576,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 1373,
+      "skill": "Problem Solving",
+      "skill_name": "Problem Solving",
+      "pivot": {
+       "entity_id": 1765869,
+       "subject_id": 1373,
+       "id": 6507577,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 647511,
+      "skill": "Teamwork and Collaboration",
+      "skill_name": "Teamwork and Collaboration",
+      "pivot": {
+       "entity_id": 1765869,
+       "subject_id": 647511,
+       "id": 6507578,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645559,
+      "skill": "API Integration",
+      "skill_name": "API Integration",
+      "pivot": {
+       "entity_id": 1765869,
+       "subject_id": 645559,
+       "id": 6507579,
+       "ai_generated": true
+      }
+     },
+     {
+      "id": 645225,
+      "skill": "Time Management and Organization",
+      "skill_name": "Time Management and Organization",
+      "pivot": {
+       "entity_id": 1765869,
+       "subject_id": 645225,
+       "id": 6507580,
+       "ai_generated": true
+      }
+     }
+    ],
+    "locations": [],
+    "end_date": "TBA",
+    "approved_date": "2026-10-10 21:56:26 GMT+0530",
+    "viewsCount": 1,
+    "registerCount": 6,
+    "regnRequirements": {
+     "opportunity_id": 1765869,
+     "start_regn_dt": "TBA",
+     "end_regn_dt": "TBA",
+     "show_deadline": 1,
+     "min_team_size": 1,
+     "max_team_size": 2,
+     "work_location_type": "city",
+     "eligibility": "{\"sector\":[\"students\"],\"engineering\":[],\"bSchools\":[],\"arts\":[],\"medicine\":[],\"law\":[],\"others\":[\"all\"],\"experience\":[\"all\"],\"studentPassoutYearsSelected\":[\"all\"],\"fresherPassoutYearsSelected\":[\"all\"],\"schoolFilteredClasses\":[\"all\"],\"minMarks\":{\"high_school_perc\":0,\"high_school_cgpa\":0},\"locations\":[],\"location_type\":\"all\",\"professionalEligibility\":null,\"fresherEligibility\":null}",
+     "reg_status": "STARTED",
+     "remainingDaysArray": {
+      "durations": 10,
+      "text": " days left"
+     },
+     "remain_days": "10 days left",
+     "remaining_time": 942582
+    }
+   }
+  ],
+  "first_page_url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=1",
+  "from": 1,
+  "last_page": 1,
+  "last_page_url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=11",
+  "links": [
+   {
+    "url": null,
+    "label": "&laquo; Previous",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=1",
+    "label": "1",
+    "active": true
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=2",
+    "label": "2",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=3",
+    "label": "3",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=4",
+    "label": "4",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=5",
+    "label": "5",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=6",
+    "label": "6",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=7",
+    "label": "7",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=8",
+    "label": "8",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=9",
+    "label": "9",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=10",
+    "label": "10",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=11",
+    "label": "11",
+    "active": false
+   },
+   {
+    "url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=2",
+    "label": "Next &raquo;",
+    "active": false
+   }
+  ],
+  "next_page_url": "https://unstop.com/api/public/opportunity/search-result?&opportunity=hackathons&oppstatus=open&per_page=25&page=2",
+  "path": "https://unstop.com/api/public/opportunity/search-result?",
+  "per_page": 3,
+  "prev_page_url": null,
+  "to": 25,
+  "total": 3
+ }
+}

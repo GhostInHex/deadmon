@@ -8,15 +8,30 @@ The agent part: when a platform changes its layout and a scraper breaks, the Sco
 
 ## Repository contents
 
-This repository currently holds the **project documentation and specs**. Implementation code has been removed.
+Documentation and specs, plus the Slice 1 implementation of the crawl pipeline.
 
 ```
 docs/
   PRD.md           product requirements (Matt Pocock to-spec method)
   PLAN.md          48-hour build plan, slices, evidence checklist, demo script
-  SPONSORS.md      setup guides for neatlogs, Entire, cfo.ai + sponsor links
-  LLM_ACCESS.md    shared LiteLLM gateway: base URL, models, key + $20 budget
+  SPONSORS.md       setup guides for neatlogs, Entire, cfo.ai + sponsor links
+  LLM_ACCESS.md     shared LiteLLM gateway: base URL, models, key + $20 budget
+src/deadmon/       the pipeline: adapters, verification, storage, tracing, dashboard, crawl
+tests/             pytest suite — deterministic, no network (fixtures/ is the corpus)
 ```
+
+**Slice 1 — one platform, end to end.** The Unstop crawler replays its recorded
+fixtures with no network, verifies what it extracted, stores it, traces the crawl
+run, and renders live listings as cards with verdict badges (`live` /
+`unverified` / `closed`) on one server-rendered page.
+
+```bash
+py -m deadmon.crawl            # crawl the recorded corpus, then serve http://127.0.0.1:8765/
+py -m deadmon.crawl --reset --no-serve   # crawl only, printing one line per crawl run
+```
+
+Dedupe across platforms, eligibility filtering, alerts and the scheduler are
+Slices 2 and 3.
 
 ## Docs
 

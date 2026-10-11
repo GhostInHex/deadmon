@@ -83,3 +83,52 @@ a replay with `socket.socket.connect` raising never touches the network.
 **Not in scope, left for later tickets:** `unverified` is a verdict (04), and
 the declared test double `hackathons-unverified.json` named in
 `fixtures/README.md` belongs to 04.
+=======
+**2026-10-11 — resolved.** `src/deadmon/adapters/unstop.py` implements the
+`Scraper` ABC: `fetch(path)` reads a recorded JSON payload (no transport in
+Slice 1) and `extract(payload)` yields candidates. A bare record with no title
+yields nothing. `tests/conftest.py` was added with the wave — it holds the
+fixture paths and an autouse guard that makes any outbound socket call a test
+failure, so "no network in tests" is mechanical rather than a convention.
+
+**Baseline for later validation** (ADR-0015): the known-good fixture yields
+**25 candidates**, all four required fields populated — `title`, `source_url`,
+`registration_close`, `mode` — across 25 records. Modes: 11 offline, 8 online,
+6 hybrid. Prize summary populated on 17, present-and-empty on 8 (the records
+whose `prizes` is `[]`). Every close parsed from `+05:30` and stored UTC.
+
+The other two recorded versions extract the same way: `hackathons-closed.json`
+→ 24 candidates, `hackathons-past.json` → 25. No candidate count is asserted
+against 24-as-a-truncation or 25-from-`per_page`; the number is simply what the
+adapter yields, so ticket 02's traps cannot become a broken test.
+
+**Judgment calls.**
+
+1. **Registration close precedence over everything.** Close comes from
+   `regnRequirements.end_regn_dt`; the test asserts the fixture really separates
+   it from top-level `end_date` on at least one record, otherwise the test would
+   prove nothing.
+2. **`region: 'india'` yields `mode: None`.** One record in
+   `hackathons-past.json` carries a region outside the three modes. The adapter
+   does not guess a mode — `None` means the page did not state one, which fails
+   closed in ticket 04. Verified: only `Devbhoomi Cyber Hackathon` is affected.
+3. **`prize_summary` is a derived string, present even when empty.** Empty is
+   `""`, `has('prize_summary')` is True, and no candidate ever carries a
+   fabricated `₹0`.
+4. **Liveness independence is tested by poisoning a live record** (in memory,
+   never in the file): `status: "CLOSED"`, `regn_open: 0` on a record with a
+   future close extracts exactly as its healthy twin.
+
+Validation: `py -m pytest -q` → **24 passed** (8 contract tests from ticket 01 +
+16 here). `py tools/check_docs.py` → ok (45 terms). Commit: `bbb7fb4`.
+
+**Merge note.** Two independent implementations of this ticket landed on `main`
+(`bbb7fb4`, `crawlers/unstop.py`) and on `ao/deadmon-2/root` (`90b6c16`,
+`adapters/unstop.py`) before the branches met. `adapters/` is kept: the glossary
+makes *adapter* the name for the code behind the scraper interface, and every
+later ticket — verification, storage, dashboard, the crawl run — imports from
+it. `crawlers/` and its test were removed in the merge commit, so the tree holds
+one adapter and one test corpus rather than two that could drift apart. The
+contract-level agreement between them (25 candidates, four required fields
+populated, `india` region yielding mode `None`, prize summary present-but-empty)
+is the useful signal that both readings of the fixture agreed.
