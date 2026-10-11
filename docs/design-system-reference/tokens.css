@@ -14,6 +14,7 @@
   --color-rule-strong: #d1cfce;  /* section dividers, outline buttons */
   --color-signal: #ff683d;       /* PRIMARY ACCENT — one per viewport, never a fill field */
   --color-signal-deep: #ec580a;  /* pressed/hover for signal */
+  --color-signal-ink: #b8420a;   /* text on signal-wash — AA 4.98:1; signal-deep is a hover value and fails the wash at 3.19:1 */
   --color-signal-wash: #fff1eb;  /* tinted accent callout surface */
   --color-mono: #737373;         /* muted mono labels, captions */
   --color-ink-muted: #6b6b6b;    /* secondary body — passes AA on white */

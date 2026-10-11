@@ -164,6 +164,7 @@
 
 /* ---- Badge ---------------------------------------------------------------- */
 
+/* Mono uppercase pill, signal-wash ground, signal-deep text (design.md). */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -175,7 +176,9 @@
   padding: 3px 9px;
   border-radius: var(--radius-pill);
   background: var(--color-signal-wash);
-  color: var(--color-signal-deep);
+  /* signal-ink, not signal-deep: the deep step is the hover value and
+     measures 3.19:1 on the wash. ink clears AA at 4.98:1. */
+  color: var(--color-signal-ink);
   white-space: nowrap;
 }
 
@@ -535,7 +538,8 @@
 /* An unset figure must not read as zero. */
 .tier__unset {
   background: var(--color-signal-wash);
-  color: var(--color-signal-deep);
+  /* Same role as the badge: text sitting on the wash needs the ink step. */
+  color: var(--color-signal-ink);
   padding: 2px 10px;
   border-radius: var(--radius-sm);
 }
