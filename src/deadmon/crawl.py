@@ -23,9 +23,15 @@ import sys
 import urllib.parse
 
 from .adapters.unstop import UnstopScraper
-from .dashboard import build_view, cards_from_rows, render_page, render_trace
+from .dashboard import (
+    build_view,
+    cards_from_rows,
+    render_page,
+    render_trace,
+    view_as_json,
+)
 from .storage import Store
-from .tracing import TraceClient, trace_client
+from .tracing import TraceClient, shutdown, trace_client
 from .verification import verify_crawl
 
 DEFAULT_FIXTURE_DIR = Path("fixtures") / "unstop"
@@ -152,6 +158,9 @@ class Dashboard:
             )
         if route.path in ("/", "/index.html"):
             return 200, render_page(view)
+        # The seam Next.js renders from (ADR-0020). Read-only, same view model.
+        if route.path == "/api/feed":
+            return 200, json.dumps(view_as_json(view), default=str)
         if route.path.startswith("/trace/"):
             reference = urllib.parse.unquote(route.path[len("/trace/"):])
             return 200, render_trace(reference, sink_dir=self.sink_dir)
@@ -166,7 +175,14 @@ def make_handler(dashboard: Dashboard):
             status, body = dashboard.dispatch(self.path)
             payload = body.encode("utf-8")
             self.send_response(status)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
+            if self.path.split("?")[0] in ("/api/feed", "/runs.json"):
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                # The Next.js app is deployed to a different origin (ADR-0020).
+                # Read-only GETs, no credentials, so a wildcard origin is safe
+                # here; this endpoint never mutates anything.
+                self.send_header("Access-Control-Allow-Origin", "*")
+            else:
+                self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(payload)))
             self.end_headers()
             self.wfile.write(payload)
@@ -212,6 +228,17 @@ def main(argv=None) -> int:
         if now.tzinfo is None:
             now = now.replace(tzinfo=timezone.utc)
 
+    # This is the process entry point, so the SDK is drained here and nowhere
+    # else: once for a `--no-serve` crawl that exits immediately, and once more
+    # on Ctrl-C when the dashboard was serving. Per-run spans are batched and
+    # exported by the SDK's own background thread, not by this call.
+    try:
+        return _run(args, now)
+    finally:
+        shutdown()
+
+
+def _run(args, now) -> int:
     if args.reset:
         # Runs are append-only by design; this is the explicit opt-out, used by
         # the demo so a fresh run is the whole story.

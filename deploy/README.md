@@ -1,15 +1,45 @@
 # deadmon deploy notes
 
-One crawl run, then the dashboard, on a single EC2 instance. This is the whole
-deployment: an HTTP server over a local SQLite file, driven by systemd.
+**Two deploys, one seam** ([ADR-0020](../docs/adr/0020-dashboard-moves-to-nextjs.md)):
 
-## Why this shape
+| Piece | Where | What it is |
+|---|---|---|
+| Crawl pipeline + JSON API | EC2 t3.micro | Python, systemd, SQLite. The product. |
+| Dashboard, landing, pricing | Vercel | Next.js/TypeScript, renders the JSON. |
 
-`PLAN.md` says free tiers only. A t3.micro covers it - the crawl replays
+The EC2 instance serves `/api/feed` read-only. Vercel reads it. Nothing else
+crosses the boundary.
+
+## Why two hosts
+
+`PLAN.md` says free tiers only. A t3.micro covers the crawl - it replays
 recorded fixtures with no network, so the instance does almost nothing except
-serve one page. Lambda was rejected because Slice 1's SQLite database and its
+serve JSON. Lambda was rejected because Slice 1's SQLite database and its
 fixtures both want a filesystem that survives between runs, which turns a
 scheduled invocation into a state-management problem rather than a deployment.
+
+Next.js sits on Vercel because that is where Next belongs, and because it keeps
+Node off the instance entirely.
+
+## The web app
+
+```bash
+cd apps/web
+npm install
+cp .env.example .env.local     # then set NEXT_PUBLIC_DEADMON_API
+npm run dev                    # http://127.0.0.1:3000
+npm run build && npm run start # production
+```
+
+`NEXT_PUBLIC_DEADMON_API` is the crawl service's public base URL — the EC2
+address, e.g. `http://your-instance:8080`. It is baked in at build time, so
+changing hosts means a redeploy, not a restart.
+
+With the API unreachable the pages still render: the dashboard says the crawl
+service is not reachable and the landing figures fall back to an em-dash. A dead
+backend reads as "no data yet", never as a broken site.
+
+## Deploy the crawl service
 
 ## Install
 
@@ -82,25 +112,29 @@ sudo journalctl -u deadmon -f
 ## Verify
 
 ```bash
-curl -s localhost:8080/          | grep -c 'card'   # cards in the feed
-curl -s localhost:8080/runs.json | head -c 400      # run history
+# on the instance
+curl -s localhost:8080/api/feed | head -c 300      # the seam Next.js reads
+curl -s localhost:8080/          | grep -c 'card'   # the HTML fallback still renders
 sudo systemctl is-active deadmon                   # active
 ```
 
-The dashboard binds `0.0.0.0:8080`. It is served with no authentication, so
-keep it behind the EC2 security group (see below) or a tunnel - do not expose it
-to `0.0.0.0/0`.
+`/` still serves the server-rendered HTML dashboard. That route is kept on
+purpose: the pipeline stays demonstrable with no Node toolchain and no network,
+which is the safety net if the Vercel side is down on demo day.
 
-## Two things that will bite you
+## Three things that will bite you
 
 **Port 8765 is reserved on Windows** (OS exclusion range 8700-8799), so the
-README's original default dies with `WinError 10013` when you record a demo on
-a dev machine. 8080 is used instead. On Linux 8765 is fine - this only bites the
+original default dies with `WinError 10013` when you record a demo on a dev
+machine. 8080 is used instead. On Linux 8765 is fine - this only bites the
 recording, not the instance.
 
-**The README's command needs no `PYTHONPATH`.** Before the packaging commit it
+**The Python command needs no `PYTHONPATH`.** Before the packaging commit it
 only ran with `PYTHONPATH=src` set by hand. If you see
 `ModuleNotFoundError: No module named 'deadmon'`, the install step was skipped.
+
+**`NEXT_PUBLIC_DEADMON_API` is build-time.** Pointing the app at a different
+instance needs a Vercel redeploy, not a restart.
 
 ## Security group
 
@@ -111,6 +145,9 @@ Outbound: none needed today - the crawl replays recorded fixtures.
 aws ec2 authorize-security-group-ingress --group-id sg-XXXX \
     --protocol tcp --port 8080 --cidr "$(curl -s ifconfig.me)/32"
 ```
+
+The API is read-only and unauthenticated, and the whole app has no accounts
+(Slice 1 runs with exactly one subscriber). Do not expose 8080 to `0.0.0.0/0`.
 
 ## Not yet deployed
 

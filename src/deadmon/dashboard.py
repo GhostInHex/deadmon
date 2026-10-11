@@ -136,8 +136,69 @@ def needs_attention_by_crawler(view: View) -> dict[str, int]:
     return counts
 
 
+def view_as_json(view: View) -> dict:
+    """The same view model, as the JSON Next.js renders (ADR-0020).
+
+    This is the seam between the two runtimes. It is deliberately a plain dict
+    of primitives rather than anything richer: the frontend owns rendering, so
+    the only contract that matters is that a field here always reaches a
+    component, and that a renamed field fails a test here rather than silently
+    rendering an empty feed.
+
+    Dates stay as the stored ISO strings. `format_instant` owns display, and
+    ADR-0013 requires the zone to be visible, so the label travels with the
+    value instead of letting the browser guess a locale.
+    """
+    return {
+        "feed": [_card_as_json(card) for card in view.feed],
+        "needs_attention": [_card_as_json(card) for card in view.needs_attention],
+        "needs_attention_by_crawler": needs_attention_by_crawler(view),
+        "runs": [
+            {
+                "id": _record_field(run, "id"),
+                "crawler": str(_record_field(run, "crawler", "")),
+                "started_at": str(_record_field(run, "started_at", "")),
+                "finished_at": str(_record_field(run, "finished_at", "")),
+                "status": str(_record_field(run, "status", "")),
+                "live_found": _record_field(run, "live_found", 0),
+                "closed_found": _record_field(run, "closed_found", 0),
+                "duration": _duration(
+                    _record_field(run, "started_at"), _record_field(run, "finished_at")
+                ),
+                "trace_ref": _record_field(run, "trace_ref"),
+            }
+            for run in view.runs
+        ],
+    }
+
+
+def _card_as_json(card: Card) -> dict:
+    close = card.earliest_credible_close
+    return {
+        "title": card.title,
+        "earliest_credible_close": close,
+        "earliest_credible_close_display": format_instant(close),
+        "sources": [
+            {
+                "crawler": source.crawler,
+                "source_url": source.source_url,
+                "verdict": source.verdict,
+                "stated_close": source.stated_close,
+                "stated_close_display": format_instant(source.stated_close),
+                "verified_at": source.verified_at,
+                "verified_at_display": format_instant(source.verified_at),
+            }
+            for source in card.sources
+        ],
+    }
+
+
 def render_page(view: View, *, title: str = "deadmon") -> str:
-    """One server-rendered page. Two groups; badges read the verdict word."""
+    """One server-rendered page. Two groups; badges read the verdict word.
+
+    Kept as the offline fallback after ADR-0020 moved the real UI to Next.js:
+    the pipeline must stay demonstrable with no Node toolchain and no network.
+    """
     return "\n".join(
         [
             "<!doctype html>",

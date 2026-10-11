@@ -1,0 +1,137 @@
+/* ============================================================================
+   V7 Go — design tokens
+   Source of record: Paper file 01M4P2QPPSW3J2G6YD5BPP14SA
+   Mirrored in design.md. If these disagree, Paper wins.
+   ========================================================================= */
+
+:root {
+  /* ---- Color ---- */
+  --color-ink: #292929;          /* primary text, warm charcoal — never pure black on white */
+  --color-ink-deep: #171717;     /* headlines, emphasis */
+  --color-paper: #ffffff;        /* primary ground */
+  --color-paper-warm: #f7f6f5;   /* secondary surface, alternating bands */
+  --color-rule: #e4e2e0;         /* hairline borders — prefer over boxed cards */
+  --color-rule-strong: #d1cfce;  /* section dividers, outline buttons */
+  --color-signal: #ff683d;       /* PRIMARY ACCENT — one per viewport, never a fill field */
+  --color-signal-deep: #ec580a;  /* pressed/hover for signal */
+  --color-signal-wash: #fff1eb;  /* tinted accent callout surface */
+  --color-mono: #737373;         /* muted mono labels, captions */
+  --color-ink-muted: #6b6b6b;    /* secondary body — passes AA on white */
+  --color-ink-inverse: #ffffff;  /* text on dark or signal ground */
+
+  /* ---- Label-on-dark (extracted from Paper export) ---- */
+  --color-on-dark-label: rgba(255, 255, 255, 0.72);  /* was #FFFFFFB8 */
+  --color-on-signal-label: rgba(255, 255, 255, 0.78); /* was #FFFFFFC7 */
+
+  /* ---- Type family ---- */
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, monospace;
+
+  /* ---- Type scale ---- */
+  --text-2xs: 0.6875rem;  /* 11px — mono uppercase eyebrows only */
+  --text-xs: 0.75rem;     /* 12px — mono data labels, dense table cells */
+  --text-sm: 0.875rem;    /* 14px — nav links, captions */
+  --text-md: 1rem;        /* 16px — default body */
+  --text-lg: 1.25rem;     /* 20px — lead paragraphs, card titles */
+  --text-xl: 1.75rem;     /* 28px — section headings */
+  --text-2xl: 2.5rem;     /* 40px — sub-headline */
+  --text-3xl: 4rem;       /* 64px — hero headline */
+  --text-4xl: 5.5rem;     /* 88px — display headline, hero only */
+
+  /* ---- Tracking ---- */
+  --tracking-display: -0.02em;
+  --tracking-body: 0em;
+  --tracking-mono: 0.08em;
+
+  /* ---- Leading ---- */
+  --leading-display: 1.14;    /* for --text-4xl */
+  --leading-heading: 1.286;   /* for --text-xl */
+  --leading-body: 1.625;      /* for --text-md — generous, aids readability */
+  --leading-tight: 1.429;     /* for --text-sm */
+
+  /* ---- Spacing ---- */
+  --spacing-1: 0.25rem;  /*  4px */
+  --spacing-2: 0.5rem;   /*  8px */
+  --spacing-3: 0.75rem;  /* 12px */
+  --spacing-4: 1rem;     /* 16px */
+  --spacing-5: 1.5rem;   /* 24px */
+  --spacing-6: 2rem;     /* 32px */
+  --spacing-7: 3rem;     /* 48px */
+  --spacing-8: 4rem;     /* 64px */
+  --spacing-9: 6rem;     /* 96px */
+  --spacing-10: 8rem;    /* 128px */
+  --spacing-11: 10rem;   /* 160px */
+
+  /* ---- Radius ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* ---- Container ---- */
+  --container-content: 75rem;  /* 1200px — 64px gutters at 1440 */
+  --container-prose: 42.5rem;  /*  680px — max measure for body copy */
+
+  /* ---- Opacity ---- */
+  --opacity-muted: 0.72;
+  --opacity-faint: 0.4;
+
+  /* ---- Fonts ---- */
+  --webfont-display: 'Instrument Serif', Georgia, serif;
+  --webfont-body: 'Inter', system-ui, sans-serif;
+  --webfont-mono: 'DM Mono', ui-monospace, monospace;
+}
+
+/* ============================================================================
+   Reset
+   Exported once here instead of boxSizing on every node.
+   ========================================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+}
+
+body {
+  margin: 0;
+  font-family: var(--webfont-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-body);
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+/* ============================================================================
+   Dark mode — NOT YET DESIGNED
+   The three traps a naive inversion gets wrong:
+     1. Ink and paper do not swap roles. --color-ink becomes the ground; body
+        text must move LIGHTER (toward #edeae6), not reuse the ink value.
+     2. --color-signal #ff683d vibrates on near-black; needs a lighter step
+        (toward #ff8a63).
+     3. Rules invert direction: --color-rule darkens on white, so on dark it
+        must lighten.
+   Remap the semantic layer only. Components must not change.
+   ========================================================================= */
+
+/*
+[data-theme='dark'] {
+  --color-paper: #121212;
+  --color-paper-warm: #1c1c1c;
+  --color-ink: #edeae6;        /* was the GROUND, now it is the TEXT */
+  --color-ink-deep: #ffffff;
+  --color-ink-muted: #a8a29a;
+  --color-rule: #2e2e2e;      /* lightens instead of darkening */
+  --color-rule-strong: #3d3d3d;
+  --color-signal: #ff8a63;    /* lightened for legibility on dark */
+  --color-signal-deep: #ffa07d;
+  --color-signal-wash: #2a1a14;
+}
+*/
