@@ -7,8 +7,8 @@ re-asserting a verdict it already holds.
 
 **Blocked by:** 01 (the schema and the verdict model).
 
-**Status:** claimed
-**Triage:** ready-for-agent
+**Status:** resolved
+**Triage:** done
 
 - [x] One crawl run row is recorded per crawler per execution, with start, finish, status, listings found, and its trace reference
 - [x] A live candidate creates one hackathon with one source beneath it, keyed so a second crawl of the same source updates rather than duplicates
@@ -64,5 +64,5 @@ and re-running the same crawl leaves two sources and one verdict each.
    record is not a live listing and never enters any run count (ADR-0007).
 
 Validation: `py -m pytest -q` → **62 passed**. `py tools/check_docs.py` → ok.
-Commit: `__SHA_05__`.
+Commit: `e45a3d2`.
 
