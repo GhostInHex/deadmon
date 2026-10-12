@@ -57,3 +57,23 @@ commit history. Git history is the durable record and is already complete; the
 Entire graph is the extra evidence of how the code was written. This repo's
 build predates session capture, so that evidence starts when capture starts —
 it cannot be backfilled, because the session transcripts were never recorded.
+
+## Update 2026-10-12: capture is live
+
+A Claude Code session (with the `claude-code` agent hooks) registered
+successfully on session start — `entire session current` resolves to the live
+session and `entire doctor` is green. Two things changed versus the broken
+state above:
+
+1. **A session is registered.** The missing piece was never the hooks; it was
+   registration. This session proves the Claude Code `SessionStart` hook fires
+   correctly.
+2. **`commit_linking` set to `always`** in `.entire/settings.json` (local-only;
+   `.entire/` is gitignored). Every commit from a registered session now links
+   without the interactive `[Y]es/[n]o/[a]lways` prompt, which is a failure
+   mode for non-interactive commits.
+
+This commit itself is the first checkpoint candidacy: made from the registered
+session, so `entire checkpoint list` should show one entry afterwards. The 55
+pre-existing commits stay checkpoint-less (no session context was ever
+recorded for them) — expected, not a bug.
