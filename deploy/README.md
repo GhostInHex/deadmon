@@ -35,6 +35,35 @@ npm run build && npm run start # production
 address, e.g. `http://your-instance:8080`. It is baked in at build time, so
 changing hosts means a redeploy, not a restart.
 
+### If you deploy without the app
+
+The crawl service serves its own dashboard at `http://<instance>:8080` — the
+feed, needs-attention, run history and trace links — with no Node runtime and no
+second host. That page is public the moment the security group allows it, so it
+is a usable demo link even when the Vercel side is unavailable or still behind
+Deployment Protection.
+
+## Python version, and why it is pinned
+
+`deploy/install-python.sh` builds the venv on **Python 3.13**, not the
+distro's default. Ubuntu 26.04 ships only Python 3.14, and `neatlogs` declares
+`Requires-Python >=3.10,<3.14`, so a stock `python3 -m venv` succeeds and then
+cannot take the SDK — every crawl run silently falls back to the local trace
+sink while looking perfectly healthy.
+
+The script also installs `uv` to `/usr/local` rather than `~/.local`. Run
+through `sudo`, uv's default puts CPython under `/root/.local/share/uv`, the
+venv's `python` becomes a symlink into `/root`, and the `deadmon` service user
+cannot traverse it — `Permission denied` on every run, despite pip reporting a
+successful install.
+
+Check which you got:
+
+```bash
+/opt/deadmon/venv/bin/python --version        # want 3.13.x
+curl -s localhost:8080/api/feed | grep -o 'neatlogs://' | head -1   # want a hit
+```
+
 With the API unreachable the pages still render: the dashboard says the crawl
 service is not reachable and the landing figures fall back to an em-dash. A dead
 backend reads as "no data yet", never as a broken site.

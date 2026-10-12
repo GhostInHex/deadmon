@@ -28,18 +28,16 @@ else
 fi
 
 echo "==> python + package"
-# 3.11+ required. Ubuntu 24.04 ships 3.12; deadmon needs no third-party deps.
-apt-get update -qq
-apt-get install -y -qq python3-venv
-python3 -m venv "$APP_DIR/venv"
-"$APP_DIR/venv/bin/pip" install --quiet --upgrade pip
-"$APP_DIR/venv/bin/pip" install --quiet "$APP_DIR"
+# Ubuntu 26.04 ships only Python 3.14 and neatlogs requires <3.14, so the venv is
+# built by deploy/install-python.sh rather than `python3 -m venv`. A stock 3.14
+# venv installs fine and then silently traces nothing.
+DEADMON_REPO="$REPO_URL" APP_DIR="$APP_DIR" APP_USER="$APP_USER" \
+  NEATLOGS_API_KEY="${NEATLOGS_API_KEY:-}" \
+  bash <(curl -fsSL "https://raw.githubusercontent.com/GhostInHex/deadmon/main/deploy/install-python.sh")
 
-# Optional: tracing to neatlogs. Pinned floor - see pyproject [tracing].
-# Without it every run traces to the local JSON sink and the dashboard links
-# still resolve, so this is genuinely optional.
+# Optional: tracing to neatlogs. Without it every run traces to the local JSON
+# sink and the dashboard links still resolve, so this is genuinely optional.
 if [ -n "${NEATLOGS_API_KEY:-}" ]; then
-  "$APP_DIR/venv/bin/pip" install --quiet 'neatlogs>=1.4.26; python_version<"3.14"'
   install -o root -g "$APP_USER" -m 0640 /dev/null /etc/deadmon/env
   echo "NEATLOGS_API_KEY=$NEATLOGS_API_KEY" >> /etc/deadmon/env
 fi
