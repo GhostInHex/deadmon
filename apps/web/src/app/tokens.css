@@ -78,6 +78,9 @@
   --opacity-muted: 0.72;
   --opacity-faint: 0.4;
 
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);  /* strong ease-out for UI state changes */
+
   /* ---- Fonts ---- */
   --webfont-display: 'Instrument Serif', Georgia, serif;
   --webfont-body: 'Inter', system-ui, sans-serif;

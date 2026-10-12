@@ -108,12 +108,20 @@ Paste verbatim. Do not hand-rewrite these.
   /* ---- Opacity ---- */
   --opacity-muted: 0.72;
   --opacity-faint: 0.4;
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 ```
 
 **Contrast floor:** text below 16px must clear WCAG AA against its actual background.
 `--opacity-muted` and `--opacity-faint` are for de-emphasis and decoration only — never
 for body copy.
+
+**Motion:** one curve, one place. `--ease-out` is the only easing the system uses; the
+built-in CSS easings are too weak to read as intentional at these durations. UI state
+changes stay under 300ms, and every animated property is named — never `all`. Position
+and transform motion is dropped under `prefers-reduced-motion`; colour transitions stay.
 
 ---
 

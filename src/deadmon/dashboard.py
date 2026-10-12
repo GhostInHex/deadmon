@@ -449,6 +449,7 @@ _CSS = """
   --radius-pill: 999px;
   --container-content: 75rem;
   --opacity-faint: 0.4;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
