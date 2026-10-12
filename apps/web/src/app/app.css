@@ -27,12 +27,14 @@
   font-size: var(--text-sm);
   font-weight: 500;
   text-decoration: none;
+  opacity: 0;
   transform: translateY(-300%);
-  transition: transform 120ms ease;
+  transition: transform 120ms var(--ease-out), opacity 120ms var(--ease-out);
 }
 
 .skip:focus-visible {
   transform: translateY(0);
+  opacity: 1;
 }
 
 /* ---- Nav ------------------------------------------------------------------ */
@@ -96,10 +98,6 @@
   text-decoration: none;
 }
 
-.nav__link:hover {
-  color: var(--color-signal);
-}
-
 .nav__actions {
   display: flex;
   align-items: center;
@@ -121,12 +119,19 @@
   border-radius: var(--radius-pill);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: transform 120ms var(--ease-out), background-color 120ms var(--ease-out), border-color 120ms var(--ease-out);
 }
 
 .btn:focus-visible {
   outline: 2px solid var(--color-signal);
   outline-offset: 2px;
+}
+
+/* Press feedback: 0.97 is the subtle end of the scale, so the button dips
+   rather than lurches. It is the only motion on a button, and the
+   reduced-motion block below drops it. */
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn--lg {
@@ -139,18 +144,10 @@
   color: var(--color-paper);
 }
 
-.btn--primary:hover {
-  background: var(--color-ink-deep);
-}
-
 .btn--outline {
   background: transparent;
   color: var(--color-ink);
   border: 1px solid var(--color-rule-strong);
-}
-
-.btn--outline:hover {
-  border-color: var(--color-ink);
 }
 
 /* ---- Type ----------------------------------------------------------------- */
@@ -445,8 +442,6 @@
   word-break: break-all;
 }
 
-.source a:hover { color: var(--color-signal); }
-
 .source__meta {
   font-family: var(--webfont-mono);
   font-size: var(--text-xs);
@@ -480,7 +475,6 @@
 }
 
 .table td a { color: var(--color-ink-muted); word-break: break-all; }
-.table td a:hover { color: var(--color-signal); }
 
 .empty {
   color: var(--color-mono);
@@ -648,6 +642,41 @@
 .tier--feature .mono-label,
 .tier--feature .tier__unit {
   color: var(--color-ink-muted);
+}
+
+/* ---- Reduced motion --------------------------------------------------------
+   Gentler, not absent: colour transitions that aid comprehension stay,
+   every position/transform change goes. The press dip is the only motion on
+   a button and the skip reveal is the only motion on the page.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .skip {
+    transform: none;
+    transition-property: opacity;
+  }
+
+  .btn {
+    transition-property: background-color, border-color;
+  }
+
+  .btn:active {
+    transform: none;
+  }
+}
+
+/* ---- Touch ----------------------------------------------------------------
+   A coarse pointer fires :hover on tap and leaves it stuck, so a phone that
+   taps "Open the dashboard" keeps the button in its hover colour until
+   something else is tapped. Hover is a fine-pointer affordance.
+   -------------------------------------------------------------------------- */
+
+@media (hover: hover) and (pointer: fine) {
+  .nav__link:hover { color: var(--color-signal); }
+  .btn--primary:hover { background: var(--color-ink-deep); }
+  .btn--outline:hover { border-color: var(--color-ink); }
+  .source a:hover { color: var(--color-signal); }
+  .table td a:hover { color: var(--color-signal); }
 }
 
 /* ---- Narrow --------------------------------------------------------------- */
